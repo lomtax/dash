@@ -40,7 +40,7 @@ NOTE: Building with Qt4 is still supported, however, doing so could result in a 
 
 1. Clone the GitHub tree to get the source code and go into the directory.
 
-        git clone https://github.com/digitalcoinpay/digitalcoin.git
+        git clone https://github.com/lomtax/digitalcoin.git
         cd digitalcoin
 
 2.  Build Digitalcoin Core:
