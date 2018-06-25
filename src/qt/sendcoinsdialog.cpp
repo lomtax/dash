@@ -562,6 +562,8 @@ bool SendCoinsDialog::handlePaymentRequest(const SendCoinsRecipient &rv)
     return true;
 }
 
+extern QLabel *labelBalanceOverview;
+
 void SendCoinsDialog::setBalance(const CAmount& balance, const CAmount& unconfirmedBalance, const CAmount& immatureBalance, const CAmount& anonymizedBalance,
                                  const CAmount& watchBalance, const CAmount& watchUnconfirmedBalance, const CAmount& watchImmatureBalance)
 {
@@ -582,8 +584,10 @@ void SendCoinsDialog::setBalance(const CAmount& balance, const CAmount& unconfir
 	    } else {
 		    bal = balance;
 	    }
-
         ui->labelBalance->setText(BitcoinUnits::formatWithUnit(model->getOptionsModel()->getDisplayUnit(), bal));
+        //labelBalanceOverview->setText(BitcoinUnits::formatWithUnit(model->getOptionsModel()->getDisplayUnit(), bal));
+        labelBalanceOverview->setText("Balance : "+BitcoinUnits::floorHtmlWithUnit(model->getOptionsModel()->getDisplayUnit(), bal, false, BitcoinUnits::separatorAlways));
+
     }
 }
 

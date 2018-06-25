@@ -72,6 +72,7 @@ const std::string BitcoinGUI::DEFAULT_UIPLATFORM =
         "other"
 #endif
         ;
+QLabel *labelBalanceOverview;
 
 const QString BitcoinGUI::DEFAULT_WALLET = "~Default";
 
@@ -124,6 +125,7 @@ BitcoinGUI::BitcoinGUI(const PlatformStyle *platformStyle, const NetworkStyle *n
 {
     /* Open CSS when configured */
     this->setStyleSheet(GUIUtil::loadStyleSheet());
+  //      this->setStyleSheet("background-color: white");
 
     GUIUtil::restoreWindowGeometry("nWindow", QSize(850, 550), this);
 
@@ -191,10 +193,10 @@ BitcoinGUI::BitcoinGUI(const PlatformStyle *platformStyle, const NetworkStyle *n
 
     // Create status bar
     statusBar();
-
+statusBar()->setVisible(false);
     // Disable size grip because it looks ugly and nobody needs it
-    statusBar()->setSizeGripEnabled(false);
-
+ //   statusBar()->setSizeGripEnabled(false);
+/*
     // Status bar notification icons
     QFrame *frameBlocks = new QFrame();
     frameBlocks->setContentsMargins(0,0,0,0);
@@ -222,12 +224,20 @@ BitcoinGUI::BitcoinGUI(const PlatformStyle *platformStyle, const NetworkStyle *n
     frameBlocksLayout->addWidget(labelBlocksIcon);
     frameBlocksLayout->addStretch();
 
-    // Progress bar and label for blocks download
+
+*/
+
+ /*   // Progress bar and label for blocks download
     progressBarLabel = new QLabel();
+    progressBarLabel2 = new QLabel();
     progressBarLabel->setVisible(true);
+    progressBarLabel2->setFixedWidth(200);
+    
+
     progressBar = new GUIUtil::ProgressBar();
     progressBar->setAlignment(Qt::AlignCenter);
     progressBar->setVisible(true);
+    //progressBar->setStyleSheet("spacing:0px");
 
     // Override style sheet for progress bar for styles that have a segmented progress bar,
     // as they make the text unreadable (workaround for issue #1071)
@@ -237,10 +247,11 @@ BitcoinGUI::BitcoinGUI(const PlatformStyle *platformStyle, const NetworkStyle *n
     {
         progressBar->setStyleSheet("QProgressBar { background-color: #F8F8F8; border: 1px solid grey; border-radius: 7px; padding: 1px; text-align: center; } QProgressBar::chunk { background: QLinearGradient(x1: 0, y1: 0, x2: 1, y2: 0, stop: 0 #00CCFF, stop: 1 #33CCFF); border-radius: 7px; margin: 0px; }");
     }
+    statusBar()->addWidget(progressBarLabel2);
 
     statusBar()->addWidget(progressBarLabel);
-    statusBar()->addWidget(progressBar);
-    statusBar()->addPermanentWidget(frameBlocks);
+    statusBar()->addWidget(progressBar);*/
+   // statusBar()->addPermanentWidget(frameBlocks);
 
     // Install event filter to be able to catch status tip events (QEvent::StatusTip)
     this->installEventFilter(this);
@@ -289,6 +300,7 @@ void BitcoinGUI::createActions()
     overviewAction->setStatusTip(tr("Show general overview of wallet"));
     overviewAction->setToolTip(overviewAction->statusTip());
     overviewAction->setCheckable(true);
+    
 #ifdef Q_OS_MAC
     overviewAction->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_1));
 #else
@@ -551,34 +563,201 @@ void BitcoinGUI::createMenuBar()
 
 void BitcoinGUI::createToolBars()
 {
+    int bordersize=225;
 #ifdef ENABLE_WALLET
     if(walletFrame)
     {
+        QLabel * label =new QLabel(this);
+   
+        QPixmap pic(":/icons/light/about");
+        label->setStyleSheet("background-color: black");
+
+        label->setAlignment(Qt::AlignHCenter);
+        label->setPixmap(pic);
+
+        //label->show();
+        
+        QLabel * label2 =new QLabel(this);
+        label2->setText("Balance : XXX DGC");
+        label2->setStyleSheet("background-color: black; font-weight: bold; color: white");
+        label2->setFixedHeight(100);
+        label2->setAlignment(Qt::AlignCenter);
+        labelBalanceOverview=label2;
+
+        QLabel * label0 =new QLabel(this);
+        label0->setText("");
+        label0->setStyleSheet("background-color: black");
+        label0->setFixedHeight(25);
+        label0->setAlignment(Qt::AlignCenter);
+
+  
+        QToolBar *toolbar2 = new QToolBar(tr("Overview bar"));
+        toolbar2->setOrientation(Qt::Vertical);
+
+        toolbar2->addWidget(label0);
+
+        toolbar2->addWidget(label);
+
+        toolbar2->addWidget(label2);
+        toolbar2->setStyleSheet("spacing:0px");
+
+
         QToolBar *toolbar = new QToolBar(tr("Tabs toolbar"));
+
         toolbar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
+        toolbar->setOrientation(Qt::Vertical);
+                
         toolbar->addAction(overviewAction);
         toolbar->addAction(sendCoinsAction);
         toolbar->addAction(receiveCoinsAction);
         toolbar->addAction(historyAction);
+
         QSettings settings;
         if (settings.value("fShowMasternodesTab").toBool())
         {
             toolbar->addAction(masternodeAction);
         }
+       
+
+
+        QToolBar *toolbar3 = new QToolBar(tr("Wallet status"));
+        toolbar3->setOrientation(Qt::Vertical);
+
+       // toolbar3->addWidget(label0);
+
+        toolbar3->setStyleSheet("spacing:0px");
+
+
+/////////////////////////////////////////////////////
+    // Progress bar and label for blocks download
+    progressBarLabel = new QLabel();
+  //  progressBarLabel2 = new QLabel();
+    progressBarLabel->setVisible(true);
+    //progressBarLabel2->setFixedWidth(200);
+    
+
+    progressBar = new GUIUtil::ProgressBar();
+    progressBar->setAlignment(Qt::AlignCenter);
+    progressBar->setVisible(true);
+    //progressBar->setStyleSheet("spacing:0px");
+
+    // Override style sheet for progress bar for styles that have a segmented progress bar,
+    // as they make the text unreadable (workaround for issue #1071)
+    // See https://qt-project.org/doc/qt-4.8/gallery.html
+    QString curStyle = QApplication::style()->metaObject()->className();
+    if(curStyle == "QWindowsStyle" || curStyle == "QWindowsXPStyle")
+    {
+        progressBar->setStyleSheet("QProgressBar { background-color: #F8F8F8; border: 1px solid grey; border-radius: 7px; padding: 1px; text-align: center; } QProgressBar::chunk { background: QLinearGradient(x1: 0, y1: 0, x2: 1, y2: 0, stop: 0 #00CCFF, stop: 1 #33CCFF); border-radius: 7px; margin: 0px; }");
+    }
+  //  toolbar->addWidget(progressBarLabel2);
+       // progressBarLabel->setFixedHeight(50);
+
+    toolbar3->addWidget(progressBarLabel);
+    toolbar3->addWidget(progressBar);
+
+//////////////////////////////////////////////////////////////
+
+
+
+   // Status bar notification icons
+           //QHBoxLayout *frameBlocks = new QHBoxLayout;
+
+    QFrame *frameBlocks = new QFrame();
+  //  frameBlocks->setContentsMargins(0,0,0,0);
+  //  frameBlocks->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Preferred);
+    QHBoxLayout *frameBlocksLayout = new QHBoxLayout(frameBlocks);
+   // frameBlocksLayout->setContentsMargins(3,0,3,0);
+   // frameBlocksLayout->setSpacing(3);
+    unitDisplayControl = new UnitDisplayStatusBarControl(platformStyle);
+    labelEncryptionIcon = new QLabel();
+    labelWalletHDStatusIcon = new QLabel();
+    labelConnectionsIcon = new GUIUtil::ClickableLabel();
+
+    labelBlocksIcon = new GUIUtil::ClickableLabel();
+    if(enableWallet)
+    {
+        //frameBlocksLayout->addStretch();
+                unitDisplayControl->setAlignment(Qt::AlignRight);
+
+        frameBlocksLayout->addWidget(unitDisplayControl);
+        //frameBlocksLayout->addStretch();
+                        labelEncryptionIcon->setAlignment(Qt::AlignRight);
+
+        frameBlocksLayout->addWidget(labelEncryptionIcon);
+                                labelWalletHDStatusIcon->setAlignment(Qt::AlignRight);
+
+        frameBlocksLayout->addWidget(labelWalletHDStatusIcon);
+    }
+    //frameBlocksLayout->addStretch();
+                                    labelConnectionsIcon->setAlignment(Qt::AlignRight);
+
+    frameBlocksLayout->addWidget(labelConnectionsIcon);
+    //frameBlocksLayout->addStretch();
+
+    QHBoxLayout *frameBlocksLayout2 = new QHBoxLayout(frameBlocks);
+                                        labelBlocksIcon->setAlignment(Qt::AlignRight);
+
+frameBlocksLayout2->addWidget(labelBlocksIcon);
+frameBlocksLayout2->setAlignment(Qt::AlignRight);
+    frameBlocksLayout->addLayout(frameBlocksLayout2);
+    //frameBlocksLayout->addStretch();
+
+
+
+    toolbar3->addWidget(frameBlocks);
+    
+
+//////////////////////////////////////////////////////////////////
+
         toolbar->setMovable(false); // remove unused icon in upper left corner
         overviewAction->setChecked(true);
 
         /** Create additional container for toolbar and walletFrame and make it the central widget.
             This is a workaround mostly for toolbar styling on Mac OS but should work fine for every other OSes too.
         */
-        QVBoxLayout *layout = new QVBoxLayout;
-        layout->addWidget(toolbar);
+        QHBoxLayout *layout = new QHBoxLayout;
+
+        QVBoxLayout *layout2 = new QVBoxLayout;
+
+        layout2->addWidget(toolbar2);
+        layout2->addWidget(toolbar);
+
+        /*QLabel * labelempty =new QLabel(this);
+   
+        labelempty->setStyleSheet("background-color: white");
+        layout2->addWidget(labelempty);*/
+
+        layout2->addWidget(toolbar3);
+        
+        layout2->setAlignment(toolbar3,Qt::AlignBottom|Qt::AlignHCenter);
+        layout2->setAlignment(toolbar2,/*Qt::AlignTop|*/Qt::AlignHCenter);
+        layout2->setAlignment(toolbar,Qt::AlignTop|Qt::AlignHCenter);
+       // layout2->setStyleSheet("background-color: black");
+
+         toolbar2->setFixedWidth(bordersize);
+         toolbar->setFixedWidth(bordersize);
+       //  toolbar->setFixedHeight(125);
+
+         toolbar3->setFixedWidth(bordersize);
+
+       // layout2->setFixedWidth(300);
+
+
+
+        layout->addLayout(layout2);
+
         layout->addWidget(walletFrame);
         layout->setSpacing(0);
         layout->setContentsMargins(QMargins());
         QWidget *containerWidget = new QWidget();
+ 
+     //   containerWidget->setStyleSheet("background-color: white");
+        
         containerWidget->setLayout(layout);
+
         setCentralWidget(containerWidget);
+
+
     }
 #endif // ENABLE_WALLET
 }

@@ -90,6 +90,8 @@ private:
     QLabel *labelConnectionsIcon;
     QLabel *labelBlocksIcon;
     QLabel *progressBarLabel;
+    QLabel *progressBarLabel2;
+
     QProgressBar *progressBar;
     QProgressDialog *progressDialog;
 
