@@ -395,6 +395,7 @@ libbitcoin_util_a_SOURCES = \
   uint256.cpp \
   threadinterrupt.cpp \
   util.cpp \
+  masternodeutil.cpp \
   utilmoneystr.cpp \
   utilstrencodings.cpp \
   utiltime.cpp \
