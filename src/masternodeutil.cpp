@@ -51,7 +51,7 @@ void writeDigitalcoinConfFile(std::string  _line)
     fileout = fopen (pathDebug.string().c_str(),"aw");
     std::string  s =std::string ("\n")+_line;
 
-    fprintf(fileout,s.c_str());
+    fprintf(fileout,"%s",s.c_str());
 
     fclose (fileout);
 }
@@ -77,7 +77,7 @@ void writeMasternodeConfFile(std::string  _alias, std::string  _ipport,std::stri
 
     std::string  s =std::string ("\n")+_alias+std::string (" ")+_ipport+std::string (" ")+mnprivkey+std::string (" ")+_output+std::string (" ")+_index;
 
-    fprintf(fileout,s.c_str());
+    fprintf(fileout,"%s",s.c_str());
     fclose (fileout); // must close after opening
 }
 
