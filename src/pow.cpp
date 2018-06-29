@@ -189,16 +189,19 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHead
    int nHeight = pindexLast->nHeight;
    if (TestNet())
    {
-	return 0x1d13ffec;
+	    return 0x1d13ffec;
    }
-   else if (!TestNet() && nHeight < V3_FORK)
+   else
    {
-	return GetNextWorkRequiredV1(pindexLast, pblock, algo);
-   }
-  else if (!TestNet() && nHeight >= V3_FORK)
-   {
-        LogPrintf("Switch to DigiShield");
-        return GetNextWorkRequiredV2(pindexLast, pblock, algo);
+        if (nHeight < V3_FORK)
+        {
+            return GetNextWorkRequiredV1(pindexLast, pblock, algo);
+        }
+        else
+        {
+            LogPrintf("Switch to DigiShield");
+            return GetNextWorkRequiredV2(pindexLast, pblock, algo);
+        }
    }
 
 }

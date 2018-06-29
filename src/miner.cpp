@@ -88,7 +88,7 @@ CBlockTemplate* CreateNewBlock(const CChainParams& chainparams, const CScript& s
         return NULL;
     CBlock *pblock = &pblocktemplate->block; // pointer for convenience
 
-    CBlockIndex* pindexPrev = chainActive.Tip();
+    //CBlockIndex* pindexPrev = chainActive.Tip();
 
 
     // Create coinbase tx
@@ -146,7 +146,7 @@ CBlockTemplate* CreateNewBlock(const CChainParams& chainparams, const CScript& s
         pblocktemplate->vTxSigOps.push_back(-1); // updated at end
         pblock->nVersion = ComputeBlockVersion(pindexPrev, chainparams.GetConsensus(),algo);
        
-        if(pblock->nVersion==NULL)
+        if(pblock->nVersion==0)
             return NULL;
 
         // -regtest only: allow overriding block.nVersion with

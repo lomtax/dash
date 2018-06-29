@@ -927,7 +927,7 @@ UniValue deletemasternode(const UniValue& params, bool fHelp)
     if (fHelp || params.size() != 1)
         throw runtime_error(
             "deletemasternode\n"
-            "\Delete your masternode configuration.\n"
+            "\nDelete your masternode configuration.\n"
         );
 
     RemoveMasternodeConfigs();
