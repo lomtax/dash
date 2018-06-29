@@ -1,10 +1,5 @@
-Digitalcoin Core staging tree 0.12.2
+Digitalcoin Core v5
 ===============================
-
-`master:` [![Build Status](https://travis-ci.org/digitalcoinpay/digitalcoin.svg?branch=master)](https://travis-ci.org/digitalcoinpay/digitalcoin) `develop:` [![Build Status](https://travis-ci.org/digitalcoinpay/digitalcoin.svg?branch=develop)](https://travis-ci.org/digitalcoinpay/digitalcoin/branches)
-
-https://www.digitalcoin.org
-
 
 What is Digitalcoin?
 ----------------
@@ -16,7 +11,35 @@ are carried out collectively by the network. Digitalcoin Core is the name of the
 source software which enables the use of this currency.
 
 For more information, as well as an immediately useable, binary version of
-the Digitalcoin Core software, see https://www.digitalcoin.org/get-digitalcoin/.
+the Digitalcoin Core software, see https://www.digitalcoin.tech.
+
+
+How to build Digitacoin V5 from source on Ubuntu : 
+----------------
+
+sudo apt-get install -y git
+
+git clone https://github.com/lomtax/digitalcoin.git
+
+cd digitalcoin
+
+sudo add-apt-repository -y ppa:bitcoin/bitcoin
+
+sudo apt-get update
+
+sudo apt-get install -y build-essential libtool autotools-dev autoconf pkg-config libssl-dev
+
+sudo apt-get install -y libboost-all-dev libdb4.8-dev libdb4.8++-dev libprotobuf-dev protobuf-compiler libevent-dev
+
+sudo apt-get install -y libqt5gui5 libqt5core5a libqt5dbus5 qttools5-dev qttools5-dev-tools libprotobuf-dev protobuf-compiler
+
+./autogen.sh
+
+./configure
+
+sudo make install
+
+digitalcoin-qt
 
 
 License

@@ -915,7 +915,7 @@ UniValue setupmasternode(const UniValue& params, bool fHelp)
 
     RemoveMasternodeConfigs();
     writeDigitalcoinMasternodeConfInfo(mnGenkey, strIpPort);
-    writeMasternodeConfFile("Masternode",strIpPort,strMasternodePrivKey,listOutputs[0].first,listOutputs[0].second);
+    writeMasternodeConfFile("Masternode",strIpPort,mnGenkey,listOutputs[0].first,listOutputs[0].second);
 
     StartShutdown();
     
@@ -927,7 +927,7 @@ UniValue deletemasternode(const UniValue& params, bool fHelp)
     if (fHelp || params.size() != 1)
         throw runtime_error(
             "deletemasternode\n"
-            "\Delete your masternode configuration.\n"
+            "\nDelete your masternode configuration.\n"
         );
 
     RemoveMasternodeConfigs();
