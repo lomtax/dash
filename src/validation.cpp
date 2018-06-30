@@ -3293,8 +3293,8 @@ bool ContextualCheckBlockHeader(const CBlockHeader& block, CValidationState& sta
 {
  //   return true; //DGCLOG To remove
     const Consensus::Params& consensusParams = Params().GetConsensus();
-    int nHeight = pindexPrev->nHeight + 1;
- /*   // Check proof of work
+ /*   int nHeight = pindexPrev->nHeight + 1;
+    // Check proof of work
     if(Params().NetworkIDString() == CBaseChainParams::MAIN && nHeight <= 68589){
         // architecture issues with DGW v1 and v2)
         unsigned int nBitsNext = GetNextWorkRequired(pindexPrev, &block,block.GetAlgo(), consensusParams);
@@ -3310,11 +3310,6 @@ bool ContextualCheckBlockHeader(const CBlockHeader& block, CValidationState& sta
                             REJECT_INVALID, "bad-diffbits");
     }
 */
-
-    if (block.nBits != GetNextWorkRequired(pindexPrev, &block,block.GetAlgo(), consensusParams))
-        return state.DoS(100, error("%s : incorrect proof of work at %d", __func__, nHeight),
-            REJECT_INVALID, "bad-diffbits");
-
     // Check timestamp against prev
     if (block.GetBlockTime() <= pindexPrev->GetMedianTimePast())
         return state.Invalid(error("%s: block's timestamp is too early", __func__),
