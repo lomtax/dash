@@ -882,7 +882,7 @@ UniValue setupmasternode(const UniValue& params, bool fHelp)
             masternodeFileExist = true;
 
     if(masternodeFileExist==true)
-        return "Error Masternode already exist \n Please delete it (deletemasternode) first if you want to use the Masternode setup tool.";
+        return "Error Masternode already exist \nPlease delete it (deletemasternode) first if you want to use the Masternode setup tool.";
 
     if((strMasternode!="")
         &&(strExternalIp!="")
@@ -890,7 +890,7 @@ UniValue setupmasternode(const UniValue& params, bool fHelp)
         &&(strMasternodePrivKey!="")
         &&(masternodeFileExist==true))
     {
-        return "Error : Looks like you already have a Masternode :) \n\nParameters you have in your digitalcoin.conf file :\n-masternode=%1\n-externalip=%2 \n-masternodeaddr=%3\n-masternodeprivkey=%4\n\nPlease delete it (deletemasternode) first if you want to use the Masternode setup tool.";
+        return "Error : You already have a Masternode :) \n\nParameters you have in your digitalcoin.conf file :\n-masternode=%1\n-externalip=%2 \n-masternodeaddr=%3\n-masternodeprivkey=%4\n\nPlease delete it (deletemasternode) first if you want to use the Masternode setup tool.";
     }
 
     auto listOutputs = checkMasternodeOutputs();
@@ -919,12 +919,12 @@ UniValue setupmasternode(const UniValue& params, bool fHelp)
 
     StartShutdown();
     
-    return "Setup complet, please restart your wallet.";
+    return "Setup complete, please restart your wallet and wait for 1 confirmation on your collateral transaction.";
 }
 
 UniValue deletemasternode(const UniValue& params, bool fHelp)
 {
-    if (fHelp || params.size() != 1)
+    if (fHelp || params.size() != 0)
         throw runtime_error(
             "deletemasternode\n"
             "\nDelete your masternode configuration.\n"

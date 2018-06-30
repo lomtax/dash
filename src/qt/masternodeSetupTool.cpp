@@ -110,10 +110,10 @@ std::string MasternodeSetupTool::checkExternalIp()
 
 void MasternodeSetupTool::makeTransaction(WalletModel * walletModel)
 {
-    CBitcoinAddress mnAddress = GetAccountAddress("Masternode",false);
+    CBitcoinAddress mnAddress = GetAccountAddress("Masternode payment",false);
 
     QString addr = QString::fromStdString(mnAddress.ToString());
-    QString label = "Masternode Collateral Transaction";
+    QString label = "Masternode payment";
     QString msg = "Masternode collateral transaction.";
     
     SendCoinsRecipient recipient(addr, label, MASTERNODE_PRICE * COIN, msg);

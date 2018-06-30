@@ -285,7 +285,7 @@ std::string CMasternode::StateToString(int nStateIn)
         case MASTERNODE_PRE_ENABLED:            return "PRE_ENABLED";
         case MASTERNODE_ENABLED:                return "ENABLED";
         case MASTERNODE_EXPIRED:                return "EXPIRED";
-        case MASTERNODE_OUTPOINT_SPENT:         return "OUTPOINT_SPENT";
+        case MASTERNODE_OUTPOINT_SPENT:         return "COLLATERAL_UNCONFIRMED_OR_SPENT";
         case MASTERNODE_UPDATE_REQUIRED:        return "UPDATE_REQUIRED";
         case MASTERNODE_WATCHDOG_EXPIRED:       return "WATCHDOG_EXPIRED";
         case MASTERNODE_NEW_START_REQUIRED:     return "NEW_START_REQUIRED";
