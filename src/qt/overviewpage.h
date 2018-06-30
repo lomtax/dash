@@ -47,7 +47,6 @@ Q_SIGNALS:
     void outOfSyncWarningClicked();
 
 private:
-    QTimer *timer;
     Ui::OverviewPage *ui;
     ClientModel *clientModel;
     WalletModel *walletModel;
@@ -62,6 +61,7 @@ private:
     bool fShowAdvancedPSUI;
 
     TxViewDelegate *txdelegate;
+    QTimer *timer;
     std::unique_ptr<TransactionFilterProxy> filter;
 
     void SetupTransactionList(int nNumItems);
