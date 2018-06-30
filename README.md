@@ -31,7 +31,7 @@ sudo apt-get install -y build-essential libtool autotools-dev autoconf pkg-confi
 
 sudo apt-get install -y libboost-all-dev libdb4.8-dev libdb4.8++-dev libprotobuf-dev protobuf-compiler libevent-dev
 
-sudo apt-get install -y libqt5gui5 libqt5core5a libqt5dbus5 qttools5-dev qttools5-dev-tools libprotobuf-dev protobuf-compiler
+sudo apt-get install -y libqt5gui5 libqt5core5a libqt5dbus5 qttools5-dev qttools5-dev-tools
 
 ./autogen.sh
 
