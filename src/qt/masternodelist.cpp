@@ -485,7 +485,7 @@ void MasternodeList::on_setupMasternodeButton_clicked()
         &&(strMasternodePrivKey!="")
         &&(masternodeFileExist==true))
     {
-            string st = "Looks like you already have a Masternode :) \n\nParameters you have in your digitalcoin.conf file :\n-masternode=%1\n-externalip=%2 \n-masternodeaddr=%3\n-masternodeprivkey=%4\n\nPlease press \"Remove Masternode\" button first if you want to use the Masternode setup tool.";
+            string st = "You already have a Masternode :) \n\nParameters you have in your digitalcoin.conf file :\n-masternode=%1\n-externalip=%2 \n-masternodeaddr=%3\n-masternodeprivkey=%4\n\nPlease press \"Remove Masternode\" button first if you want to use the Masternode setup tool.";
             //Something went wrong
             QString qs = QString::fromStdString(st).arg(QString::fromStdString(strMasternode)).arg(QString::fromStdString(strExternalIp)).arg(QString::fromStdString(strMasternodeAddr)).arg(QString::fromStdString(strMasternodePrivKey));
             
@@ -554,7 +554,7 @@ void MasternodeList::on_setupMasternodeButton_clicked()
         {
             //Something went wrong
             QMessageBox::information(this, tr("Digitalcoin masternode setup."),
-            tr("Error : Something went wrong with your collateral transaction.\nMaybe you don't aldready have your 10000 DGC required to setup a Masternode..."),
+            tr("Error : Looks like you don't aldready have your 10000 DGC required to setup a Masternode..."),
             QMessageBox::Ok);
             
             return;
@@ -584,7 +584,7 @@ void MasternodeList::on_setupMasternodeButton_clicked()
 
     // Display message box
     QMessageBox::information(this, tr("Digitalcoin masternode setup."),
-    tr("Your Digitalcoin Masternode was successfully created !\n\nYour wallet will be turned off, PLEASE RESTART YOUR WALLET to see your running Masternode under \"My masternodes\" tab."),
+    tr("Your Digitalcoin Masternode was successfully created !\n\nYour wallet will be turned off, PLEASE RESTART YOUR WALLET to see your running Masternode under \"My masternodes\" tab.\nYou also need to wait 1 confirmation on your masternode collateral transaction."),
     QString("Shutdown wallet to setup masternode."));
     
     // Shutdown
