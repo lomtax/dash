@@ -199,7 +199,7 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHead
         }
         else
         {
-            LogPrintf("Switch to DigiShield");
+            //LogPrintf("Switch to DigiShield");
             return GetNextWorkRequiredV2(pindexLast, pblock, algo);
         }
    }
