@@ -3007,8 +3007,8 @@ CBlockIndex* AddToBlockIndex(const CBlockHeader& block)
         pindexNew->pprev = (*miPrev).second;
         pindexNew->nHeight = pindexNew->pprev->nHeight + 1;
 
-        if((pindexNew->nHeight %10000)==0)    
-        LogPrintf("AcceptingBlock : %s \n",pindexNew->ToString());//DGCLOG
+       /* if((pindexNew->nHeight %10000)==0)    
+        LogPrintf("AcceptingBlock : %s \n",pindexNew->ToString());//DGCLOG*/
         pindexNew->BuildSkip();
     }
 //    pindexNew->nChainWork = (pindexNew->pprev ? pindexNew->pprev->nChainWork : 0) + GetBlockProof(*pindexNew);
@@ -3291,10 +3291,10 @@ static bool CheckIndexAgainstCheckpoint(const CBlockIndex* pindexPrev, CValidati
 
 bool ContextualCheckBlockHeader(const CBlockHeader& block, CValidationState& state, CBlockIndex * const pindexPrev)
 {
-    return true; //DGCLOG To remove
+ //   return true; //DGCLOG To remove
     const Consensus::Params& consensusParams = Params().GetConsensus();
     int nHeight = pindexPrev->nHeight + 1;
-    // Check proof of work
+ /*   // Check proof of work
     if(Params().NetworkIDString() == CBaseChainParams::MAIN && nHeight <= 68589){
         // architecture issues with DGW v1 and v2)
         unsigned int nBitsNext = GetNextWorkRequired(pindexPrev, &block,block.GetAlgo(), consensusParams);
@@ -3309,13 +3309,18 @@ bool ContextualCheckBlockHeader(const CBlockHeader& block, CValidationState& sta
             return state.DoS(100, error("%s : incorrect proof of work at %d", __func__, nHeight),
                             REJECT_INVALID, "bad-diffbits");
     }
+*/
+
+    if (block.nBits != GetNextWorkRequired(pindexPrev, &block,block.GetAlgo(), consensusParams))
+        return state.DoS(100, error("%s : incorrect proof of work at %d", __func__, nHeight),
+            REJECT_INVALID, "bad-diffbits");
 
     // Check timestamp against prev
     if (block.GetBlockTime() <= pindexPrev->GetMedianTimePast())
         return state.Invalid(error("%s: block's timestamp is too early", __func__),
-                             REJECT_INVALID, "time-too-old");
+            REJECT_INVALID, "time-too-old");
 
-    // Reject block.nVersion=1 blocks when 95% (75% on testnet) of the network has upgraded:
+  /*  // Reject block.nVersion=1 blocks when 95% (75% on testnet) of the network has upgraded:
     if (block.nVersion < 2 && IsSuperMajority(2, pindexPrev, consensusParams.nMajorityRejectBlockOutdated, consensusParams))
         return state.Invalid(error("%s: rejected nVersion=1 block", __func__),
                              REJECT_OBSOLETE, "bad-version");
@@ -3329,7 +3334,7 @@ bool ContextualCheckBlockHeader(const CBlockHeader& block, CValidationState& sta
     if (block.nVersion < 4 && IsSuperMajority(4, pindexPrev, consensusParams.nMajorityRejectBlockOutdated, consensusParams))
         return state.Invalid(error("%s : rejected nVersion=3 block", __func__),
                              REJECT_OBSOLETE, "bad-version");
-
+*/
     return true;
 }
 
@@ -3445,7 +3450,7 @@ static bool AcceptBlockHeader(const CBlockHeader& block, CValidationState& state
 // Exposed wrapper for AcceptBlockHeader
 bool ProcessNewBlockHeaders(const std::vector<CBlockHeader>& headers, CValidationState& state, const CChainParams& chainparams, CBlockIndex** ppindex)
 {
-    LogPrintf("ProcessNewBlockHeaders() ");
+    //LogPrintf("ProcessNewBlockHeaders() ");
     {
         LOCK(cs_main);
         for (const CBlockHeader& header : headers) {
