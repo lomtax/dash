@@ -554,7 +554,7 @@ void MasternodeList::on_setupMasternodeButton_clicked()
         {
             //Something went wrong
             QMessageBox::information(this, tr("Digitalcoin masternode setup."),
-            tr("Error : Looks like you don't aldready have your 10000 DGC required to setup a Masternode..."),
+            tr("Error : Looks like you don't already have your 10000 DGC required to setup a Masternode..."),
             QMessageBox::Ok);
             
             return;
