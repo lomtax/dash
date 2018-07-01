@@ -3292,7 +3292,7 @@ static bool CheckIndexAgainstCheckpoint(const CBlockIndex* pindexPrev, CValidati
 bool ContextualCheckBlockHeader(const CBlockHeader& block, CValidationState& state, CBlockIndex * const pindexPrev)
 {
  //   return true; //DGCLOG To remove
-    const Consensus::Params& consensusParams = Params().GetConsensus();
+  //  const Consensus::Params& consensusParams = Params().GetConsensus();
  /*   int nHeight = pindexPrev->nHeight + 1;
     // Check proof of work
     if(Params().NetworkIDString() == CBaseChainParams::MAIN && nHeight <= 68589){
