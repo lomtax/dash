@@ -587,6 +587,11 @@ void MasternodeList::on_setupMasternodeButton_clicked()
     tr("Your Digitalcoin Masternode was successfully created !\n\nYour wallet will be turned off, PLEASE RESTART YOUR WALLET to see your running Masternode under \"My masternodes\" tab.\nYou also need to wait 1 confirmation on your masternode collateral transaction."),
     QString("Shutdown wallet to setup masternode."));
     
+    LOCK2(cs_main, pwalletMain->cs_wallet);
+
+   walletMain->ResendWalletTransactionsBefore(GetTime(), g_connman.get());
+
+
     // Shutdown
    StartShutdown();
 }
