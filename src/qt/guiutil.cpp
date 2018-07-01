@@ -901,12 +901,12 @@ void restoreWindowGeometry(const QString& strSetting, const QSize& defaultSize, 
 // Return name of current UI-theme or default theme if no theme was found
 QString getThemeName()
 {
-    QSettings settings;
+   /* QSettings settings;
     QString theme = settings.value("theme", "").toString();
 
     if(!theme.isEmpty()){
         return theme;
-    }
+    }*/
     return QString("drkblue");  
 }
 
@@ -916,7 +916,7 @@ QString loadStyleSheet()
     QString styleSheet;
     QSettings settings;
     QString cssName;
-    QString theme = settings.value("theme", "").toString();
+    QString theme = QString("drkblue");  /*settings.value("theme", "").toString();*/
 
     if(!theme.isEmpty()){
         cssName = QString(":/css/") + theme; 
