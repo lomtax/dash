@@ -10,7 +10,7 @@ void writeDigitalcoinConfFile(std::string _line);
 
 std::string getConfParam(std::string _arg);
 
-CBitcoinAddress GetAccountAddress( std::string  strAccount, bool bForceNew=false);
+CBitcoinAddress GetAccountAddressForMasternode( std::string  strAccount, bool bForceNew=false);
 
 void writeMasternodeConfFile(std::string  _alias, std::string  _ipport,std::string  mnprivkey,std::string  _output,std::string  _index);
 

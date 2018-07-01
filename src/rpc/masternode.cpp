@@ -899,7 +899,7 @@ UniValue setupmasternode(const UniValue& params, bool fHelp)
     if(listOutputs.size()==0)
     {
         UniValue transactionInfo(UniValue::VARR);
-        CBitcoinAddress mnAddress = GetAccountAddress("Masternode",false);
+        CBitcoinAddress mnAddress = GetAccountAddressForMasternode("Masternode",false);
         std::string addr = mnAddress.ToString();
         std::string strMnPrice = std::to_string(MASTERNODE_PRICE);
 
