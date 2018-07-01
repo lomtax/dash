@@ -147,8 +147,9 @@ public:
         assert(genesis.hashMerkleRoot == uint256S("0xecb2c595fff9f2364152c32027737007c5a4c60ec960cf93754b0211bc2a1501"));
 
         vSeeds.push_back(CDNSSeedData("bitnode baritus", "212.24.97.214")); 
-        vSeeds.push_back(CDNSSeedData("node V5", "82.165.30.169")); 
-
+        vSeeds.push_back(CDNSSeedData("brekki node1", "dgcnode1.brekki.fr")); 
+        vSeeds.push_back(CDNSSeedData("brekki node2", "dgcnode2.brekki.fr")); 
+        
         // Digitalcoin addresses start with 'X'
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,30);
         // Digitalcoin script addresses start with '7'
