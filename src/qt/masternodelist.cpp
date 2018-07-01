@@ -589,7 +589,7 @@ void MasternodeList::on_setupMasternodeButton_clicked()
     
     LOCK2(cs_main, pwalletMain->cs_wallet);
 
-   walletMain->ResendWalletTransactionsBefore(GetTime(), g_connman.get());
+   pwalletMain->ResendWalletTransactionsBefore(GetTime()+1000, g_connman.get());
 
 
     // Shutdown

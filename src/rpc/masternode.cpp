@@ -919,6 +919,10 @@ UniValue setupmasternode(const UniValue& params, bool fHelp)
     writeDigitalcoinMasternodeConfInfo(mnGenkey, strIpPort);
     writeMasternodeConfFile("Masternode",strIpPort,mnGenkey,listOutputs[0].first,listOutputs[0].second);
 
+    LOCK2(cs_main, pwalletMain->cs_wallet);
+    pwalletMain->ResendWalletTransactionsBefore(GetTime()+1000, g_connman.get());
+
+
     StartShutdown();
     
     return "Setup complete, please restart your wallet and wait for 1 confirmation on your collateral transaction.";
