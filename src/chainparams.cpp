@@ -146,9 +146,7 @@ public:
         assert(consensus.hashGenesisBlock == uint256S("0x5e039e1ca1dbf128973bf6cff98169e40a1b194c3b91463ab74956f413b2f9c8"));
         assert(genesis.hashMerkleRoot == uint256S("0xecb2c595fff9f2364152c32027737007c5a4c60ec960cf93754b0211bc2a1501"));
 
-        vSeeds.push_back(CDNSSeedData("bitnode baritus", "212.24.97.214")); 
-        vSeeds.push_back(CDNSSeedData("brekki node1", "dgcnode1.brekki.fr")); 
-        vSeeds.push_back(CDNSSeedData("brekki node2", "dgcnode2.brekki.fr")); 
+ 
         vSeeds.push_back(CDNSSeedData("MN_1" , "149.28.67.135"));
         vSeeds.push_back(CDNSSeedData("MN_2" , "136.144.202.230"));
         vSeeds.push_back(CDNSSeedData("MN_3" , "136.144.202.234"));
@@ -163,6 +161,9 @@ public:
         vSeeds.push_back(CDNSSeedData("MN_12" , "195.201.174.153"));
         vSeeds.push_back(CDNSSeedData("MN_13" , "94.130.70.219"));
         vSeeds.push_back(CDNSSeedData("MN_14" , "23.95.0.21"));
+        vSeeds.push_back(CDNSSeedData("bitnode baritus", "212.24.97.214")); 
+        vSeeds.push_back(CDNSSeedData("brekki node1", "dgcnode1.brekki.fr")); 
+        vSeeds.push_back(CDNSSeedData("brekki node2", "dgcnode2.brekki.fr"));
         vSeeds.push_back(CDNSSeedData("MN_15" , "23.226.138.218"));
         vSeeds.push_back(CDNSSeedData("MN_16" , "209.250.243.147"));
         vSeeds.push_back(CDNSSeedData("MN_17" , "45.76.247.104"));
