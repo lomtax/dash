@@ -146,10 +146,41 @@ public:
         assert(consensus.hashGenesisBlock == uint256S("0x5e039e1ca1dbf128973bf6cff98169e40a1b194c3b91463ab74956f413b2f9c8"));
         assert(genesis.hashMerkleRoot == uint256S("0xecb2c595fff9f2364152c32027737007c5a4c60ec960cf93754b0211bc2a1501"));
 
+ 
+        vSeeds.push_back(CDNSSeedData("MN_1" , "149.28.67.135"));
+        vSeeds.push_back(CDNSSeedData("MN_2" , "136.144.202.230"));
+        vSeeds.push_back(CDNSSeedData("MN_3" , "136.144.202.234"));
+        vSeeds.push_back(CDNSSeedData("MN_4" , "45.32.243.212"));
+        vSeeds.push_back(CDNSSeedData("MN_5" , "45.76.255.143"));
+        vSeeds.push_back(CDNSSeedData("MN_6" , "104.156.254.26"));
+        vSeeds.push_back(CDNSSeedData("MN_7" , "82.165.30.169"));
+        vSeeds.push_back(CDNSSeedData("MN_8" , "149.28.199.96"));
+        vSeeds.push_back(CDNSSeedData("MN_9" , "142.134.238.189"));
+        vSeeds.push_back(CDNSSeedData("MN_10" , "136.144.202.232"));
+        vSeeds.push_back(CDNSSeedData("MN_11" , "136.144.202.237"));
+        vSeeds.push_back(CDNSSeedData("MN_12" , "195.201.174.153"));
+        vSeeds.push_back(CDNSSeedData("MN_13" , "94.130.70.219"));
+        vSeeds.push_back(CDNSSeedData("MN_14" , "23.95.0.21"));
         vSeeds.push_back(CDNSSeedData("bitnode baritus", "212.24.97.214")); 
         vSeeds.push_back(CDNSSeedData("brekki node1", "dgcnode1.brekki.fr")); 
-        vSeeds.push_back(CDNSSeedData("brekki node2", "dgcnode2.brekki.fr")); 
-        
+        vSeeds.push_back(CDNSSeedData("brekki node2", "dgcnode2.brekki.fr"));
+        vSeeds.push_back(CDNSSeedData("MN_15" , "23.226.138.218"));
+        vSeeds.push_back(CDNSSeedData("MN_16" , "209.250.243.147"));
+        vSeeds.push_back(CDNSSeedData("MN_17" , "45.76.247.104"));
+        vSeeds.push_back(CDNSSeedData("MN_18" , "138.201.205.233"));
+        vSeeds.push_back(CDNSSeedData("MN_19" , "136.144.202.235"));
+        vSeeds.push_back(CDNSSeedData("MN_20" , "144.202.68.185"));
+        vSeeds.push_back(CDNSSeedData("MN_21" , "45.76.236.92"));
+        vSeeds.push_back(CDNSSeedData("MN_22" , "46.150.48.119"));
+        vSeeds.push_back(CDNSSeedData("MN_23" , "149.28.72.163"));
+        vSeeds.push_back(CDNSSeedData("MN_24" , "45.63.86.239"));
+        vSeeds.push_back(CDNSSeedData("MN_25" , "104.207.156.207"));
+        vSeeds.push_back(CDNSSeedData("MN_26" , "81.167.109.85"));
+        vSeeds.push_back(CDNSSeedData("MN_27" , "80.240.21.233"));
+        vSeeds.push_back(CDNSSeedData("MN_28" , "136.144.202.236"));
+        vSeeds.push_back(CDNSSeedData("MN_29" , "89.40.4.49"));
+        vSeeds.push_back(CDNSSeedData("MN_30" , "149.28.114.92"));
+
         // Digitalcoin addresses start with 'X'
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,30);
         // Digitalcoin script addresses start with '7'

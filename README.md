@@ -14,7 +14,7 @@ For more information, as well as an immediately useable, binary version of
 the Digitalcoin Core software, see https://www.digitalcoin.tech.
 
 
-How to build Digitacoin V5 from source on Ubuntu : 
+How to build Digitacoin V5 from source on Ubuntu (16.04 is recommended, desktop or server, as you want) : 
 ----------------
 
 sudo apt-get install -y git
@@ -27,7 +27,7 @@ sudo add-apt-repository -y ppa:bitcoin/bitcoin
 
 sudo apt-get update
 
-sudo apt-get install -y build-essential libtool autotools-dev autoconf pkg-config libssl-dev
+sudo apt-get install -y build-essential libtool autotools-dev autoconf pkg-config libssl-dev automake
 
 sudo apt-get install -y libboost-all-dev libdb4.8-dev libdb4.8++-dev libprotobuf-dev protobuf-compiler libevent-dev
 
@@ -40,7 +40,6 @@ sudo apt-get install -y libqt5gui5 libqt5core5a libqt5dbus5 qttools5-dev qttools
 sudo make install
 
 digitalcoin-qt
-
 
 License
 -------
