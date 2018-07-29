@@ -165,9 +165,6 @@
           </item>
           <item>
            <widget class="QCheckBox" name="showAdvancedPSUI">
-	 <property name="visible">
-          <bool>false</bool>
-         </property>
             <property name="toolTip">
              <string>Show additional information and buttons for PrivateSend on overview screen.</string>
             </property>
@@ -178,9 +175,6 @@
           </item>
           <item>
            <widget class="QCheckBox" name="lowKeysWarning">
-	 <property name="visible">
-          <bool>false</bool>
-         </property>
             <property name="toolTip">
              <string>Show warning dialog when PrivateSend detects that wallet has very low number of keys left.</string>
             </property>
@@ -191,9 +185,6 @@
           </item>
           <item>
            <widget class="QCheckBox" name="privateSendMultiSession">
-	 <property name="visible">
-          <bool>false</bool>
-         </property>
             <property name="toolTip">
              <string>Whether to use experimental PrivateSend mode with multiple mixing sessions per block.&lt;br/&gt;Note: You must use this feature carefully.&lt;br/&gt;Make sure you always have recent wallet (auto)backup in a safe place!</string>
             </property>
@@ -219,9 +210,6 @@
         <layout class="QHBoxLayout" name="horizontalLayout_4_Wallet">
          <item>
           <widget class="QLabel" name="label">
-	 <property name="visible">
-          <bool>false</bool>
-         </property>
            <property name="toolTip">
             <string>This setting determines the amount of individual masternodes that an input will be anonymized through.&lt;br/&gt;More rounds of anonymization gives a higher degree of privacy, but also costs more in fees.</string>
            </property>
@@ -232,9 +220,6 @@
          </item>
          <item>
           <widget class="QSpinBox" name="privateSendRounds">
-	 <property name="visible">
-          <bool>false</bool>
-         </property>
            <property name="minimum">
             <number>2</number>
            </property>
@@ -252,9 +237,6 @@
         <layout class="QHBoxLayout" name="horizontalLayout">
          <item>
           <widget class="QLabel" name="label_2">
-	 <property name="visible">
-          <bool>false</bool>
-         </property>
            <property name="toolTip">
             <string>This amount acts as a threshold to turn off PrivateSend once it's reached.</string>
            </property>
@@ -277,9 +259,6 @@
          </item>
          <item>
           <widget class="QSpinBox" name="privateSendAmount">
-	 <property name="visible">
-          <bool>false</bool>
-         </property>
            <property name="minimum">
             <number>2</number>
            </property>

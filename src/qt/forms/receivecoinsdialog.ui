@@ -185,9 +185,6 @@
         </item>
         <item row="8" column="2">
          <widget class="QCheckBox" name="checkUseInstantSend">
-	 <property name="visible">
-          <bool>false</bool>
-         </property>
           <property name="text">
            <string>Request InstantSend</string>
           </property>

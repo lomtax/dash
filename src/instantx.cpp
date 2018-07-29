@@ -512,11 +512,11 @@ void CInstantSend::UpdateLockedTransaction(const CTxLockCandidate& txLockCandida
         // bumping this to update UI
         nCompleteTXLocks++;
         // notify an external script once threshold is reached
-       /* std::string strCmd = GetArg("-instantsendnotify", "");
+        std::string strCmd = GetArg("-instantsendnotify", "");
         if(!strCmd.empty()) {
             boost::replace_all(strCmd, "%s", txHash.GetHex());
             boost::thread t(runCommand, strCmd); // thread runs free
-        }*/
+        }
     }
 #endif
 
