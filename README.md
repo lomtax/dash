@@ -25,7 +25,7 @@ cd digitalcoin
 
 sudo apt-get install software-properties-common
 
-sudo add-apt-repository ppa:pivx/pivx
+sudo add-apt-repository -y ppa:pivx/pivx
 
 sudo add-apt-repository -y ppa:bitcoin/bitcoin
 
