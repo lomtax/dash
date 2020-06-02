@@ -14,7 +14,7 @@ For more information, as well as an immediately useable, binary version of
 the Digitalcoin Core software, see https://www.digitalcoin.tech.
 
 
-How to build Digitacoin V5 from source on Ubuntu (16.04 is recommended, desktop or server, as you want) : 
+How to build Digitacoin V5 from sources on Ubuntu (tested on 20.04LTS) : 
 ----------------
 
 sudo apt-get install -y git
@@ -22,6 +22,10 @@ sudo apt-get install -y git
 git clone https://github.com/lomtax/digitalcoin.git
 
 cd digitalcoin
+
+sudo apt-get install software-properties-common
+
+sudo add-apt-repository ppa:pivx/pivx
 
 sudo add-apt-repository -y ppa:bitcoin/bitcoin
 
