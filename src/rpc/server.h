@@ -150,7 +150,7 @@ public:
     std::vector<std::string> listCommands() const;
 };
 
-extern const CRPCTable tableRPC;
+extern CRPCTable tableRPC;
 
 /**
  * Utilities: convert hex-encoded Values

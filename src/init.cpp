@@ -87,6 +87,7 @@
 
 #if ENABLE_ZMQ
 #include "zmq/zmqnotificationinterface.h"
+#include <zmq/zmqrpc.h>
 #endif
 
 using namespace std;
@@ -105,10 +106,6 @@ static const bool DEFAULT_STOPAFTERBLOCKIMPORT = false;
 
 std::unique_ptr<CConnman> g_connman;
 std::unique_ptr<PeerLogicValidation> peerLogic;
-
-#if ENABLE_ZMQ
-static CZMQNotificationInterface* pzmqNotificationInterface = NULL;
-#endif
 
 static CDSNotificationInterface* pdsNotificationInterface = NULL;
 
@@ -282,10 +279,10 @@ void PrepareShutdown()
 #endif
 
 #if ENABLE_ZMQ
-    if (pzmqNotificationInterface) {
-        UnregisterValidationInterface(pzmqNotificationInterface);
-        delete pzmqNotificationInterface;
-        pzmqNotificationInterface = NULL;
+    if (g_zmq_notification_interface) {
+        UnregisterValidationInterface(g_zmq_notification_interface);
+        delete g_zmq_notification_interface;
+        g_zmq_notification_interface = NULL;
     }
 #endif
 
@@ -1309,6 +1306,10 @@ bool AppInit2(boost::thread_group& threadGroup, CScheduler& scheduler)
     CScheduler::Function serviceLoop = boost::bind(&CScheduler::serviceQueue, &scheduler);
     threadGroup.create_thread(boost::bind(&TraceThread<CScheduler::Function>, "scheduler", serviceLoop));
 
+#if ENABLE_ZMQ
+    RegisterZMQRPCCommands(tableRPC);
+#endif
+
     /* Start the RPC server already.  It will be started in "warmup" mode
      * and not really process calls already (but it will signify connections
      * that the server is there and will be ready later).  Warmup mode will
@@ -1495,10 +1496,10 @@ bool AppInit2(boost::thread_group& threadGroup, CScheduler& scheduler)
         connman.AddOneShot(strDest);
 
 #if ENABLE_ZMQ
-    pzmqNotificationInterface = CZMQNotificationInterface::CreateWithArguments(mapArgs);
+    g_zmq_notification_interface = CZMQNotificationInterface::CreateWithArguments(mapArgs);
 
-    if (pzmqNotificationInterface) {
-        RegisterValidationInterface(pzmqNotificationInterface);
+    if (g_zmq_notification_interface) {
+        RegisterValidationInterface(g_zmq_notification_interface);
     }
 #endif
 
