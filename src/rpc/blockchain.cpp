@@ -128,6 +128,10 @@ UniValue blockToJSON(const CBlock& block, const CBlockIndex* blockindex, bool tx
     result.push_back(Pair("size", (int)::GetSerializeSize(block, SER_NETWORK, PROTOCOL_VERSION)));
     result.push_back(Pair("height", blockindex->nHeight));
     result.push_back(Pair("version", block.nVersion));
+    int algo = block.GetAlgo();
+    result.push_back(Pair("pow_algo_id", algo));
+    result.push_back(Pair("pow_algo", GetAlgoName(algo)));
+    result.push_back(Pair("pow_hash", block.GetPoWHash(algo).GetHex()));    
     result.push_back(Pair("versionHex", strprintf("%08x", block.nVersion)));
     result.push_back(Pair("merkleroot", block.hashMerkleRoot.GetHex()));
     bool chainLock = llmq::chainLocksHandler->HasChainLock(blockindex->nHeight, blockindex->GetBlockHash());
