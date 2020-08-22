@@ -258,6 +258,8 @@ public:
         nNonce         = block.nNonce;
     }
 
+    int GetAlgo() const { return ::GetAlgo(nVersion); }    
+
     CDiskBlockPos GetBlockPos() const {
         CDiskBlockPos ret;
         if (nStatus & BLOCK_HAVE_DATA) {
