@@ -16,14 +16,14 @@ uint256 CBlockHeader::GetHash() const
     std::vector<unsigned char> vch(80);
     CVectorWriter ss(SER_NETWORK, PROTOCOL_VERSION, vch, 0);
     ss << *this;
-    return HashX11((const char *)vch.data(), (const char *)vch.data() + vch.size());
+    return Hash((const char *)vch.data(), (const char *)vch.data() + vch.size());
 }
 
 std::string CBlock::ToString() const
 {
     std::stringstream s;
     s << strprintf("CBlock(hash=%s, ver=0x%08x, hashPrevBlock=%s, hashMerkleRoot=%s, nTime=%u, nBits=%08x, nNonce=%u, vtx=%u)\n",
-        GetHash().ToString(),
+        GetPoWHash(GetAlgo()).ToString(),
         nVersion,
         hashPrevBlock.ToString(),
         hashMerkleRoot.ToString(),
