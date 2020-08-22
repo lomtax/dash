@@ -171,6 +171,7 @@ BITCOIN_CORE_H = \
   rpc/server.h \
   rpc/register.h \
   scheduler.h \
+  scrypt.h \
   script/sigcache.h \
   script/sign.h \
   script/standard.h \
@@ -424,6 +425,7 @@ libdash_common_a_SOURCES = \
   netbase.cpp \
   protocol.cpp \
   scheduler.cpp \
+  scrypt.cpp \
   script/sign.cpp \
   script/standard.cpp \
   warnings.cpp \
