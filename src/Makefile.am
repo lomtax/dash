@@ -219,6 +219,7 @@ BITCOIN_CORE_H = \
   rpc/register.h \
   saltedhasher.h \
   scheduler.h \
+  scrypt.h \
   script/sigcache.h \
   script/sign.h \
   script/standard.h \
@@ -512,6 +513,7 @@ libdash_common_a_SOURCES = \
   protocol.cpp \
   saltedhasher.cpp \
   scheduler.cpp \
+  scrypt.cpp \
   script/sign.cpp \
   script/standard.cpp \
   warnings.cpp \
