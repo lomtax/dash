@@ -15,7 +15,7 @@ enum {
     ALGO_SHA256D = 0,
     ALGO_SCRYPT  = 1,
     ALGO_X11     = 2,
-    NUM_ALGOS };
+    NUM_ALGOS 
 };
 
 enum
