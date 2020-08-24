@@ -17,6 +17,7 @@
 
 #include "masternode/masternode-payments.h"
 #include "masternode/masternode-sync.h"
+#include "masternode/masternode-util.h"
 
 #include "rpc/server.h"
 
@@ -59,6 +60,100 @@ void masternode_list_help()
             "  votingaddress  - Print the masternode voting Dash address\n"
         );
 }
+
+
+UniValue setupmasternode(const UniValue& params, bool fHelp)
+{
+    if (fHelp || params.size() != 1)
+        throw runtime_error(
+            "setupmasternode \"IPAddress\"\n"
+            "\nSetup a new masternode.\n"
+            + HelpRequiringPassphrase() +
+            "\nArguments:\n"
+            "1. \"IPAddress\" (string, required) Your external ip.\n"
+            + HelpExampleCli("setupmasternode", "\"X.X.X.X\"")
+        );
+
+
+    std::string _ip =  params[0].get_str();
+    const CChainParams& chainParams = Params();
+
+    ReadConfigFile(mapArgs,mapMultiArgs);
+    std::string strMasternode = getConfParam("-masternode");
+    std::string strExternalIp = getConfParam("-externalip");
+    std::string strMasternodeAddr = getConfParam("-masternodeaddr");
+    std::string strMasternodePrivKey = getConfParam("-masternodeprivkey");
+    std::string mnGenkey = makeGenkey();
+    std::string strIpPort= _ip+":"+to_string(chainParams.GetDefaultPort());
+
+    bool masternodeFileExist = false;
+    boost::filesystem::path pathDebug2 = GetDataDir() / "masternode.conf";
+
+    if (boost::filesystem::exists(pathDebug2.string().c_str()))
+            masternodeFileExist = true;
+
+    if(masternodeFileExist==true)
+        return "Error Masternode already exist \nPlease delete it (deletemasternode) first if you want to use the Masternode setup tool.";
+
+    if((strMasternode!="")
+        &&(strExternalIp!="")
+        &&(strMasternodeAddr!="")
+        &&(strMasternodePrivKey!="")
+        &&(masternodeFileExist==true))
+    {
+        return "Error : You already have a Masternode :) \n\nParameters you have in your digitalcoin.conf file :\n-masternode=%1\n-externalip=%2 \n-masternodeaddr=%3\n-masternodeprivkey=%4\n\nPlease delete it (deletemasternode) first if you want to use the Masternode setup tool.";
+    }
+
+    auto listOutputs = checkMasternodeOutputs();
+    
+    //Check if there is masternode output
+    if(listOutputs.size()==0)
+    {
+        UniValue transactionInfo(UniValue::VARR);
+
+        CBitcoinAddress mnAddress = GetAccountAddressForMasternode("Masternode payment",false);
+
+        std::string addr = mnAddress.ToString();
+        std::string strMnPrice = std::to_string(MASTERNODE_PRICE);
+
+        transactionInfo.push_back(addr);
+        transactionInfo.push_back(strMnPrice.c_str());
+
+        sendtoaddress(transactionInfo, false);
+        listOutputs = checkMasternodeOutputs();  
+
+        if(listOutputs.size()==0)
+            return "Error : Outputs not found";
+    }
+
+    RemoveMasternodeConfigs();
+    writeDigitalcoinMasternodeConfInfo(mnGenkey, strIpPort);
+    writeMasternodeConfFile("Masternode",strIpPort,mnGenkey,listOutputs[0].first,listOutputs[0].second);
+
+    LOCK2(cs_main, pwalletMain->cs_wallet);
+    pwalletMain->ResendWalletTransactionsBefore(GetTime()+1000, g_connman.get());
+
+
+    StartShutdown();
+    
+    return "Setup complete, please restart your wallet and wait for 1 confirmation on your collateral transaction.";
+}
+
+UniValue deletemasternode(const UniValue& params, bool fHelp)
+{
+    if (fHelp || params.size() != 0)
+        throw runtime_error(
+            "deletemasternode\n"
+            "\nDelete your masternode configuration.\n"
+        );
+
+    RemoveMasternodeConfigs();
+    StartShutdown();
+
+    return "Masternode successfuly deleted, please restart your wallet.";
+}
+
+
 
 UniValue masternode_list(const JSONRPCRequest& request)
 {
