@@ -233,11 +233,12 @@ void PrepareShutdown()
     bool fRPCInWarmup = RPCIsInWarmup(&statusmessage);
 
 #ifdef ENABLE_WALLET
+  /*
     if (privateSendClient.fEnablePrivateSend && !fRPCInWarmup) {
         // Stop PrivateSend, release keys
         privateSendClient.fPrivateSendRunning = false;
         privateSendClient.ResetPool();
-    }
+    }*/
     for (CWalletRef pwallet : vpwallets) {
         pwallet->Flush(false);
     }
@@ -604,6 +605,7 @@ std::string HelpMessage(HelpMessageMode mode)
     strUsage += HelpMessageOpt("-masternodeblsprivkey=<hex>", _("Set the masternode BLS private key and enable the client to act as a masternode"));
 
 #ifdef ENABLE_WALLET
+    /*
     strUsage += HelpMessageGroup(_("PrivateSend options:"));
     strUsage += HelpMessageOpt("-enableprivatesend", strprintf(_("Enable use of PrivateSend for funds stored in this wallet (0-1, default: %u)"), 0));
     strUsage += HelpMessageOpt("-privatesendautostart", strprintf(_("Start PrivateSend automatically (0-1, default: %u)"), DEFAULT_PRIVATESEND_AUTOSTART));
@@ -612,11 +614,12 @@ std::string HelpMessage(HelpMessageMode mode)
     strUsage += HelpMessageOpt("-privatesendrounds=<n>", strprintf(_("Use N separate masternodes for each denominated input to mix funds (%u-%u, default: %u)"), MIN_PRIVATESEND_ROUNDS, MAX_PRIVATESEND_ROUNDS, DEFAULT_PRIVATESEND_ROUNDS));
     strUsage += HelpMessageOpt("-privatesendamount=<n>", strprintf(_("Target PrivateSend balance (%u-%u, default: %u)"), MIN_PRIVATESEND_AMOUNT, MAX_PRIVATESEND_AMOUNT, DEFAULT_PRIVATESEND_AMOUNT));
     strUsage += HelpMessageOpt("-privatesenddenoms=<n>", strprintf(_("Create up to N inputs of each denominated amount (%u-%u, default: %u)"), MIN_PRIVATESEND_DENOMS, MAX_PRIVATESEND_DENOMS, DEFAULT_PRIVATESEND_DENOMS));
+*/
 #endif // ENABLE_WALLET
-
+/*
     strUsage += HelpMessageGroup(_("InstantSend options:"));
     strUsage += HelpMessageOpt("-instantsendnotify=<cmd>", _("Execute command when a wallet InstantSend transaction is successfully locked (%s in cmd is replaced by TxID)"));
-
+*/
 
     strUsage += HelpMessageGroup(_("Node relay options:"));
     if (showDebug) {
@@ -911,6 +914,19 @@ bool AppInitServers(boost::thread_group& threadGroup)
 // Parameter interaction based on rules
 void InitParameterInteraction()
 {
+
+   // Algo
+    std::string strAlgo = GetArg("-algo", "scrypt");
+    transform(strAlgo.begin(),strAlgo.end(),strAlgo.begin(),::tolower);
+    if (strAlgo == "sha" || strAlgo == "sha256" || strAlgo == "sha256d")
+        miningAlgo = ALGO_SHA256D;
+    else if (strAlgo == "scrypt")
+        miningAlgo = ALGO_SCRYPT;
+    else if (strAlgo == "x11")
+        miningAlgo = ALGO_X11;
+    else
+        miningAlgo = ALGO_SCRYPT;
+
     // when specifying an explicit binding address, you want to listen on it
     // even when -connect or -proxy is specified
     if (gArgs.IsArgSet("-bind")) {
@@ -2046,7 +2062,7 @@ bool AppInitMain(boost::thread_group& threadGroup, CScheduler& scheduler)
 
 #ifdef ENABLE_WALLET
     int nMaxRounds = MAX_PRIVATESEND_ROUNDS;
-
+/*
     if (vpwallets.empty()) {
         privateSendClient.fEnablePrivateSend = privateSendClient.fPrivateSendRunning = false;
     } else {
@@ -2066,6 +2082,7 @@ bool AppInitMain(boost::thread_group& threadGroup, CScheduler& scheduler)
             privateSendClient.nPrivateSendSessions, privateSendClient.nPrivateSendRounds,
             privateSendClient.nPrivateSendAmount, privateSendClient.nPrivateSendDenoms);
     }
+    */
 #endif // ENABLE_WALLET
 
     CPrivateSend::InitStandardDenominations();
@@ -2142,10 +2159,11 @@ bool AppInitMain(boost::thread_group& threadGroup, CScheduler& scheduler)
     if (fMasternodeMode) {
         scheduler.scheduleEvery(boost::bind(&CPrivateSendServer::DoMaintenance, boost::ref(privateSendServer), boost::ref(*g_connman)), 1 * 1000);
 #ifdef ENABLE_WALLET
-    } else if (privateSendClient.fEnablePrivateSend) {
-        scheduler.scheduleEvery(boost::bind(&CPrivateSendClientManager::DoMaintenance, boost::ref(privateSendClient), boost::ref(*g_connman)), 1 * 1000);
+    } 
+    //else if (privateSendClient.fEnablePrivateSend) {
+    //    scheduler.scheduleEvery(boost::bind(&CPrivateSendClientManager::DoMaintenance, boost::ref(privateSendClient), boost::ref(*g_connman)), 1 * 1000);
 #endif // ENABLE_WALLET
-    }
+    //}
 
     llmq::StartLLMQSystem();
 
