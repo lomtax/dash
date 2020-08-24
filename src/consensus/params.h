@@ -16,6 +16,7 @@ enum {
     ALGO_SCRYPT  = 1,
     ALGO_X11     = 2,
     NUM_ALGOS };
+};
 
 enum
 {
@@ -26,15 +27,12 @@ enum
     BLOCK_VERSION_SHA256D        = (1 << 9),
     BLOCK_VERSION_X11               = (2 << 9),
     BLOCK_VERSION_SCRYPT         = 1,
-
-    
 };
 
 inline int GetAlgo(int nVersion)
 {
     int algo = ALGO_SCRYPT;
-
-int masked = nVersion & BLOCK_VERSION_ALGO;
+    int masked = nVersion & BLOCK_VERSION_ALGO;
 
     switch (masked)
     {
@@ -49,7 +47,6 @@ int masked = nVersion & BLOCK_VERSION_ALGO;
             break;
             default : 
             break;
-
     }
     return algo;
 }
@@ -67,7 +64,6 @@ inline std::string GetAlgoName(int Algo)
     }
     return std::string("unknown");       
 }
- 
 
 namespace Consensus {
 
