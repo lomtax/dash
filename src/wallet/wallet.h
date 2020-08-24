@@ -75,6 +75,10 @@ static const unsigned int DEFAULT_TX_CONFIRM_TARGET = 6;
 static const bool DEFAULT_WALLETBROADCAST = true;
 static const bool DEFAULT_DISABLE_WALLET = false;
 
+static const CAmount MASTERNODE_PRICE = 10000;
+
+extern const char * DEFAULT_WALLET_DAT;
+
 static const int64_t TIMESTAMP_MIN = 0;
 
 //! if set, all keys will be derived by using BIP39/BIP44
