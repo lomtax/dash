@@ -56,6 +56,8 @@ static CUpdatedBlock latestblock;
 
 extern void TxToJSON(const CTransaction& tx, const uint256 hashBlock, UniValue& entry);
 
+extern const CBlockIndex* GetLastBlockIndexForAlgo(const CBlockIndex* pindex, int algo);
+
 double GetDifficulty(const CBlockIndex* blockindex, int algo)
 {
     unsigned int nBits;    
