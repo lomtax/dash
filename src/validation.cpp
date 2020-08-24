@@ -113,6 +113,8 @@ CScript COINBASE_FLAGS;
 
 const std::string strMessageMagic = "DarkCoin Signed Message:\n";
 
+int miningAlgo = ALGO_SCRYPT;
+
 // Internal stuff
 namespace {
 
@@ -968,7 +970,7 @@ bool ReadBlockFromDisk(CBlock& block, const CDiskBlockPos& pos, const Consensus:
     }
 
     // Check the header
-    if (!CheckProofOfWork(block.GetHash(), block.nBits, consensusParams))
+    if (!CheckProofOfWork(block.GetPoWHash(block.GetAlgo()), block.nBits, consensusParams))
         return error("ReadBlockFromDisk: Errors in block header at %s", pos.ToString());
 
     return true;
@@ -1011,71 +1013,82 @@ NOTE:   unlike bitcoin we are using PREVIOUS block height here,
 */
 CAmount GetBlockSubsidy(int nPrevBits, int nPrevHeight, const Consensus::Params& consensusParams, bool fSuperblockPartOnly)
 {
-    double dDiff;
-    CAmount nSubsidyBase;
+   CAmount nSubsidy = 15 *COIN;
+   int nHeight = nPrevHeight + 1;
 
-    if (nPrevHeight <= 4500 && Params().NetworkIDString() == CBaseChainParams::MAIN) {
-        /* a bug which caused diff to not be correctly calculated */
-        dDiff = (double)0x0000ffff / (double)(nPrevBits & 0x00ffffff);
-    } else {
-        dDiff = ConvertBitsToDouble(nPrevBits);
+    if(nHeight < 1080)
+    {
+        nSubsidy = 2 * COIN;
+    }
+    else if(nHeight < 2160)
+    {
+        nSubsidy = 1 * COIN;
+    }
+    else if(nHeight < 3240)
+    {
+        nSubsidy = 2 * COIN;
+    }
+    else if(nHeight < 4320)
+    {
+        nSubsidy = 5 * COIN;
+    }
+    else if(nHeight < 5400)
+    {
+        nSubsidy = 8 * COIN;
+    }
+    else if(nHeight < 6480)
+    {
+        nSubsidy = 11 * COIN;
+    }
+    else if(nHeight < 7560)
+    {
+        nSubsidy = 14 * COIN;
+    }
+    else if(nHeight < 8640)
+    {
+        nSubsidy = 17 * COIN;
+    }
+    else if(nHeight < 523800)
+    {
+        nSubsidy = 20 * COIN;
+    }
+    else if(TestNet())
+    {
+    nSubsidy = 5 * COIN;
+    }
+    else if(!TestNet() && nHeight >= V3_FORK)
+    {
+    nSubsidy = 5 * COIN;
     }
 
-    if (nPrevHeight < 5465) {
-        // Early ages...
-        // 1111/((x+1)^2)
-        nSubsidyBase = (1111.0 / (pow((dDiff+1.0),2.0)));
-        if(nSubsidyBase > 500) nSubsidyBase = 500;
-        else if(nSubsidyBase < 1) nSubsidyBase = 1;
-    } else if (nPrevHeight < 17000 || (dDiff <= 75 && nPrevHeight < 24000)) {
-        // CPU mining era
-        // 11111/(((x+51)/6)^2)
-        nSubsidyBase = (11111.0 / (pow((dDiff+51.0)/6.0,2.0)));
-        if(nSubsidyBase > 500) nSubsidyBase = 500;
-        else if(nSubsidyBase < 25) nSubsidyBase = 25;
-    } else {
-        // GPU/ASIC mining era
-        // 2222222/(((x+2600)/9)^2)
-        nSubsidyBase = (2222222.0 / (pow((dDiff+2600.0)/9.0,2.0)));
-        if(nSubsidyBase > 25) nSubsidyBase = 25;
-        else if(nSubsidyBase < 5) nSubsidyBase = 5;
-    }
+    // Subsidy is cut in half every 4730400 blocks, which will occur approximately every 3 years
+    nSubsidy >>= (nHeight / consensusParams.nSubsidyHalvingInterval);
 
-    CAmount nSubsidy = nSubsidyBase * COIN;
-
-    // yearly decline of production by ~7.1% per year, projected ~18M coins max by year 2050+.
-    for (int i = consensusParams.nSubsidyHalvingInterval; i <= nPrevHeight; i += consensusParams.nSubsidyHalvingInterval) {
-        nSubsidy -= nSubsidy/14;
-    }
-
-    // this is only active on devnets
-    if (nPrevHeight < consensusParams.nHighSubsidyBlocks) {
-        nSubsidy *= consensusParams.nHighSubsidyFactor;
-    }
-
-    // Hard fork to reduce the block reward by 10 extra percent (allowing budget/superblocks)
     CAmount nSuperblockPart = (nPrevHeight > consensusParams.nBudgetPaymentsStartBlock) ? nSubsidy/10 : 0;
+
+    if (sporkManager.IsSporkActive(SPORK_9_SUPERBLOCKS_ENABLED)==false)
+        nSuperblockPart=0;
 
     return fSuperblockPartOnly ? nSuperblockPart : nSubsidy - nSuperblockPart;
 }
 
 CAmount GetMasternodePayment(int nHeight, CAmount blockValue)
 {
-    CAmount ret = blockValue/5; // start at 20%
+    CAmount ret = blockValue * .25;
 
-    int nMNPIBlock = Params().GetConsensus().nMasternodePaymentsIncreaseBlock;
-    int nMNPIPeriod = Params().GetConsensus().nMasternodePaymentsIncreasePeriod;
+    int step = 60000;
+    int startIncrease = 3400000;
 
-                                                                      // mainnet:
-    if(nHeight > nMNPIBlock)                  ret += blockValue / 20; // 158000 - 25.0% - 2014-10-24
-    if(nHeight > nMNPIBlock+(nMNPIPeriod* 1)) ret += blockValue / 20; // 175280 - 30.0% - 2014-11-25
-    if(nHeight > nMNPIBlock+(nMNPIPeriod* 2)) ret += blockValue / 20; // 192560 - 35.0% - 2014-12-26
-    if(nHeight > nMNPIBlock+(nMNPIPeriod* 3)) ret += blockValue / 40; // 209840 - 37.5% - 2015-01-26
-    if(nHeight > nMNPIBlock+(nMNPIPeriod* 4)) ret += blockValue / 40; // 227120 - 40.0% - 2015-02-27
-    if(nHeight > nMNPIBlock+(nMNPIPeriod* 5)) ret += blockValue / 40; // 244400 - 42.5% - 2015-03-30
-    if(nHeight > nMNPIBlock+(nMNPIPeriod* 6)) ret += blockValue / 40; // 261680 - 45.0% - 2015-05-01
-    if(nHeight > nMNPIBlock+(nMNPIPeriod* 7)) ret += blockValue / 40; // 278960 - 47.5% - 2015-06-01
-    if(nHeight > nMNPIBlock+(nMNPIPeriod* 9)) ret += blockValue / 40; // 313520 - 50.0% - 2015-08-03
+    if(nHeight > startIncrease)  
+         ret = blockValue * .30;
+    if(nHeight > startIncrease + step)  
+         ret = blockValue * .35;
+    if(nHeight > startIncrease + (step * 2))  
+         ret = blockValue * .40;
+    if(nHeight > startIncrease + (step * 3))  
+         ret = blockValue * .45;
+    if(nHeight > startIncrease + (step * 4))  
+         ret = blockValue * .50;
 
     return ret;
 }
@@ -1137,7 +1150,7 @@ static void CheckForkWarningConditions()
     if (pindexBestForkTip && chainActive.Height() - pindexBestForkTip->nHeight >= 72)
         pindexBestForkTip = nullptr;
 
-    if (pindexBestForkTip || (pindexBestInvalid && pindexBestInvalid->nChainWork > chainActive.Tip()->nChainWork + (GetBlockProof(*chainActive.Tip()) * 6)))
+    if (pindexBestForkTip || (pindexBestInvalid && pindexBestInvalid->nChainWork > chainActive.Tip()->nChainWork + UintToArith256((chainActive.Tip()->GetBlockWorkAdjusted() * 6).getuint256()) && (chainActive.Height() > pindexBestInvalid->nHeight + 3 || pindexBestInvalid->nHeight > chainActive.Height() + 3)))
     {
         if (!GetfLargeWorkForkFound() && pindexBestForkBase)
         {
@@ -1195,7 +1208,7 @@ static void CheckForkWarningConditionsOnNewFork(CBlockIndex* pindexNewForkTip)
     // We define it this way because it allows us to only store the highest fork tip (+ base) which meets
     // the 7-block condition and from this always have the most-likely-to-cause-warning fork
     if (pfork && (!pindexBestForkTip || pindexNewForkTip->nHeight > pindexBestForkTip->nHeight) &&
-            pindexNewForkTip->nChainWork - pfork->nChainWork > (GetBlockProof(*pfork) * 7) &&
+            pindexNewForkTip->nChainWork - pfork->nChainWork > (UintToArith256(pfork->GetBlockWorkAdjusted().getuint256())* 20) &&
             chainActive.Height() - pindexNewForkTip->nHeight < 72)
     {
         pindexBestForkTip = pindexNewForkTip;
@@ -1705,7 +1718,7 @@ void ThreadScriptCheck() {
 // Protected by cs_main
 VersionBitsCache versionbitscache;
 
-int32_t ComputeBlockVersion(const CBlockIndex* pindexPrev, const Consensus::Params& params, bool fCheckMasternodesUpgraded)
+int32_t ComputeBlockVersion(const CBlockIndex* pindexPrev, const Consensus::Params& params, int algo, bool fCheckMasternodesUpgraded)
 {
     LOCK(cs_main);
     int32_t nVersion = VERSIONBITS_TOP_BITS;
@@ -1721,6 +1734,24 @@ int32_t ComputeBlockVersion(const CBlockIndex* pindexPrev, const Consensus::Para
             nVersion |= VersionBitsMask(params, (Consensus::DeploymentPos)i);
         }
     }
+
+    switch (algo)
+    {
+        case ALGO_SCRYPT:
+            nVersion |=  BLOCK_VERSION_SCRYPT;
+            break;
+        case ALGO_SHA256D:
+            nVersion |= BLOCK_VERSION_SHA256D;
+            break;
+        case ALGO_X11:
+            nVersion |= BLOCK_VERSION_X11;
+            break;
+        default:
+            error("CreateNewBlock: bad algo");
+            return 0;
+    }
+
+    nVersion |= 1;     
 
     return nVersion;
 }
@@ -1755,7 +1786,7 @@ public:
     {
         return ((pindex->nVersion & VERSIONBITS_TOP_MASK) == VERSIONBITS_TOP_BITS) &&
                ((pindex->nVersion >> bit) & 1) != 0 &&
-               ((ComputeBlockVersion(pindex->pprev, params) >> bit) & 1) == 0;
+               ((ComputeBlockVersion(pindex->pprev, params, pindex->GetAlgo(), true) >> bit) & 1) == 0;
     }
 };
 
@@ -2292,7 +2323,7 @@ bool static FlushStateToDisk(const CChainParams& chainparams, CValidationState &
         // The cache is large and we're within 10% and 10 MiB of the limit, but we have time now (not in the middle of a block processing).
         bool fCacheLarge = mode == FLUSH_STATE_PERIODIC && cacheSize > std::max((9 * nTotalSpace) / 10, nTotalSpace - MAX_BLOCK_COINSDB_USAGE * 1024 * 1024);
         // The cache is over the limit, we have to write now.
-        bool fCacheCritical = mode == FLUSH_STATE_IF_NEEDED && cacheSize > nCoinCacheUsage;
+        bool fCacheCritical = mode == FLUSH_STATE_IF_NEEDED && ((uint64_t)cacheSize) > nCoinCacheUsage;
         // It's been a while since we wrote the block index to disk. Do this frequently, so we don't need to redownload after a crash.
         bool fPeriodicWrite = mode == FLUSH_STATE_PERIODIC && nNow > nLastWrite + (int64_t)DATABASE_WRITE_INTERVAL * 1000000;
         // It's been very long since we flushed the cache. Do this infrequently, to optimize cache usage.
@@ -2390,6 +2421,7 @@ void static UpdateTip(CBlockIndex *pindexNew, const CChainParams& chainParams) {
 
     cvBlockChange.notify_all();
 
+/*
     std::vector<std::string> warningMessages;
     if (!IsInitialBlockDownload())
     {
@@ -2433,6 +2465,7 @@ void static UpdateTip(CBlockIndex *pindexNew, const CChainParams& chainParams) {
     if (!warningMessages.empty())
         strMessage += strprintf(" warning='%s'", boost::algorithm::join(warningMessages, ", "));
     LogPrintf("%s\n", strMessage);
+    */
 }
 
 /** Disconnect chainActive's tip.
@@ -3046,7 +3079,7 @@ static CBlockIndex* AddToBlockIndex(const CBlockHeader& block, enum BlockStatus 
         pindexNew->BuildSkip();
     }
     pindexNew->nTimeMax = (pindexNew->pprev ? std::max(pindexNew->pprev->nTimeMax, pindexNew->nTime) : pindexNew->nTime);
-    pindexNew->nChainWork = (pindexNew->pprev ? pindexNew->pprev->nChainWork : 0) + GetBlockProof(*pindexNew);
+    pindexNew->nChainWork = (pindexNew->pprev ? pindexNew->pprev->nChainWork : 0) + UintToArith256(pindexNew->GetBlockWorkAdjusted().getuint256());
     if (nStatus & BLOCK_VALID_MASK) {
         pindexNew->RaiseValidity(nStatus);
         if (pindexBestHeader == nullptr || pindexBestHeader->nChainWork < pindexNew->nChainWork)
@@ -3203,7 +3236,7 @@ static bool FindUndoPos(CValidationState &state, int nFile, CDiskBlockPos &pos, 
 static bool CheckBlockHeader(const CBlockHeader& block, CValidationState& state, const Consensus::Params& consensusParams, bool fCheckPOW = true)
 {
     // Check proof of work matches claimed amount
-    if (fCheckPOW && !CheckProofOfWork(block.GetHash(), block.nBits, consensusParams))
+    if (fCheckPOW && !CheckProofOfWork(block.GetPoWHash(block.GetAlgo()), block.nBits, consensusParams))
         return state.DoS(50, false, REJECT_INVALID, "high-hash", false, "proof of work failed");
 
     // Check DevNet
@@ -3284,6 +3317,7 @@ bool CheckBlock(const CBlock& block, CValidationState& state, const Consensus::P
  *  set; UTXO-related validity checks are done in ConnectBlock(). */
 static bool ContextualCheckBlockHeader(const CBlockHeader& block, CValidationState& state, const CChainParams& params, const CBlockIndex* pindexPrev, int64_t nAdjustedTime)
 {
+  /*
     assert(pindexPrev != nullptr);
     const int nHeight = pindexPrev->nHeight + 1;
 
@@ -3312,11 +3346,11 @@ static bool ContextualCheckBlockHeader(const CBlockHeader& block, CValidationSta
         if (pcheckpoint && nHeight < pcheckpoint->nHeight)
             return state.DoS(100, error("%s: forked chain older than last checkpoint (height %d)", __func__, nHeight), REJECT_CHECKPOINT, "bad-fork-prior-to-checkpoint");
     }
-
+*/
     // Check timestamp against prev
     if (block.GetBlockTime() <= pindexPrev->GetMedianTimePast())
         return state.Invalid(false, REJECT_INVALID, "time-too-old", strprintf("block's timestamp is too early %d %d", block.GetBlockTime(), pindexPrev->GetMedianTimePast()));
-
+/*
     // Check timestamp
     if (block.GetBlockTime() > nAdjustedTime + MAX_FUTURE_BLOCK_TIME)
         return state.Invalid(false, REJECT_INVALID, "time-too-new", strprintf("block timestamp too far in the future %d %d", block.GetBlockTime(), nAdjustedTime + 2 * 60 * 60));
@@ -3328,6 +3362,7 @@ static bool ContextualCheckBlockHeader(const CBlockHeader& block, CValidationSta
             return state.Invalid(false, REJECT_OBSOLETE, strprintf("bad-version(0x%08x)", block.nVersion),
                                  strprintf("rejected nVersion=0x%08x block", block.nVersion));
 
+*/
     return true;
 }
 
@@ -3550,6 +3585,45 @@ static bool AcceptBlock(const std::shared_ptr<const CBlock>& pblock, CValidation
     // (but if it does not build on our best tip, let the SendMessages loop relay it)
     if (!IsInitialBlockDownload() && chainActive.Tip() == pindex->pprev)
         GetMainSignals().NewPoWValidBlock(pindex, pblock);
+   
+    // Check for duplicate
+    uint256 hash = block.GetHash();
+
+    // Get prev block index
+    CBlockIndex* pindexPrev = NULL;
+    int nHeightForVerif = 0;
+    if (hash != Params().GetConsensus().hashGenesisBlock) {
+       // Check Previous Block
+        auto mi = mapBlockIndex.find(block.hashPrevBlock);
+        if (mi == mapBlockIndex.end())
+            return state.DoS(10, error("AcceptBlock() : prev block not found"), 0, "bad-prevblk");
+        pindexPrev = (*mi).second;
+        nHeightForVerif = pindexPrev->nHeight+1;
+
+        // Check count of sequence of the same algorithm
+        if (TestNet() || (nHeightForVerif > V3_FORK))
+        {
+            int nAlgo = block.GetAlgo();
+            int nAlgoCount = 1;
+            CBlockIndex* piPrev = pindexPrev;
+            while (piPrev && (nAlgoCount <= MAX_BLOCK_ALGO_COUNT))
+            {
+                if (piPrev->GetAlgo() != nAlgo)
+                    break;
+                nAlgoCount++;
+                piPrev = piPrev->pprev;
+            }
+            if (nAlgoCount > MAX_BLOCK_ALGO_COUNT)
+            {
+                return state.DoS(100, error("AcceptBlock() : Too Many Blocks From the Same Algo"), REJECT_INVALID, "algo-toomany");
+            }
+        }
+
+        LogPrintf("Checking Block %d with Algo %d \n", nHeightForVerif, block.GetAlgo());
+        if (block.GetAlgo() == ALGO_SCRYPT)  { LogPrintf("Algo is Scrypt \n ");}
+        if (block.GetAlgo() == ALGO_SHA256D) { LogPrintf("Algo is SHA256 \n");}
+        if (block.GetAlgo() == ALGO_X11)     { LogPrintf("Algo is X11 \n");}
+    }
 
     int nHeight = pindex->nHeight;
 
@@ -3884,7 +3958,8 @@ bool static LoadBlockIndexDB(const CChainParams& chainparams)
     for (const std::pair<int, CBlockIndex*>& item : vSortedByHeight)
     {
         CBlockIndex* pindex = item.second;
-        pindex->nChainWork = (pindex->pprev ? pindex->pprev->nChainWork : 0) + GetBlockProof(*pindex);
+//        pindex->nChainWork = (pindex->pprev ? pindex->pprev->nChainWork : 0) + GetBlockProof(*pindex);
+        pindex->nChainWork = (pindex->pprev ? pindex->pprev->nChainWork : 0) +  UintToArith256(pindex->GetBlockWorkAdjusted().getuint256());
         pindex->nTimeMax = (pindex->pprev ? std::max(pindex->pprev->nTimeMax, pindex->nTime) : pindex->nTime);
         // We can link the chain of blocks for which we've received transactions at some point.
         // Pruned nodes may have deleted the block.
