@@ -470,6 +470,8 @@ libdash_consensus_a_SOURCES = \
   hash.cpp \
   hash.h \
   prevector.h \
+  primitives/scrypt.h \
+  primitives/scrypt.cpp \
   primitives/block.cpp \
   primitives/block.h \
   primitives/transaction.cpp \
@@ -512,7 +514,6 @@ libdash_common_a_SOURCES = \
   protocol.cpp \
   saltedhasher.cpp \
   scheduler.cpp \
-  scrypt.cpp \
   script/sign.cpp \
   script/standard.cpp \
   warnings.cpp \

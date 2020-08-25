@@ -10,7 +10,6 @@
 #include "tinyformat.h"
 #include "utilstrencodings.h"
 #include "crypto/common.h"
-#include "scrypt.h"
 
 uint256 CBlockHeader::GetHash() const
 {
@@ -18,25 +17,6 @@ uint256 CBlockHeader::GetHash() const
     CVectorWriter ss(SER_NETWORK, PROTOCOL_VERSION, vch, 0);
     ss << *this;
     return Hash((const char *)vch.data(), (const char *)vch.data() + vch.size());
-}
-
-uint256 CBlockHeader::GetPoWHash(int algo) const
-{
-    switch (algo)
-    {
-        case ALGO_SHA256D:
-            return GetHash();
-        case ALGO_SCRYPT:
-        {
-            uint256 thash;
-            // Caution: scrypt_1024_1_1_256 assumes fixed length of 80 bytes
-            scrypt_1024_1_1_256(BEGIN(nVersion), BEGIN(thash));
-            return thash;
-        }
-        case ALGO_X11:
-            return HashX11(BEGIN(nVersion), END(nNonce));
-    }
-    return GetHash();
 }
 
 std::string CBlock::ToString() const
