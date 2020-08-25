@@ -219,7 +219,6 @@ BITCOIN_CORE_H = \
   rpc/register.h \
   saltedhasher.h \
   scheduler.h \
-  scrypt.h \
   script/sigcache.h \
   script/sign.h \
   script/standard.h \

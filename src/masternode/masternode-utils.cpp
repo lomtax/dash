@@ -9,7 +9,6 @@
 
 #include "base58.h"
 #include "netbase.h"
-#include "privatesend-server.h"
 #include "util.h"
 #include "wallet/wallet.h"
 
@@ -27,8 +26,6 @@
 #include "activemasternode.h"
 #include "masternode-payments.h"
 #include "masternode-sync.h"
-#include "masternodeconfig.h"
-#include "masternodeman.h"
 #include "rpc/server.h"
 #include "utilmoneystr.h"
 
@@ -40,6 +37,9 @@
 #include "privatesend/privatesend-client.h"
 #endif
 #include "validation.h"
+
+
+#include <boost/foreach.hpp>
 
 struct CompareScoreMN
 {
@@ -104,7 +104,7 @@ void CMasternodeUtils::DoMaintenance(CConnman& connman)
     }
 }
 
-std::string MasternodeUtils::makeGenkey()
+std::string CMasternodeUtils::makeGenkey()
 {
     //genkey
     CKey secret;
@@ -115,7 +115,7 @@ std::string MasternodeUtils::makeGenkey()
     return mnGenkey;
 }
 
-void MasternodeUtils::writeDigitalcoinConfFile(std::string  _line)
+void CMasternodeUtils::writeDigitalcoinConfFile(std::string  _line)
 {
     FILE *  fileout=NULL;
     
@@ -129,9 +129,9 @@ void MasternodeUtils::writeDigitalcoinConfFile(std::string  _line)
     fclose (fileout);
 }
 
-std::string MasternodeUtils::getConfParam(std::string _arg)
+std::string CMasternodeUtils::getConfParam(std::string _arg)
 {
-    BOOST_FOREACH(auto ar, mapArgs) 
+    BOOST_FOREACH(auto ar, gArgs.GetMapArgs()) 
     {
         if(ar.first==_arg)
             return ar.second;    
@@ -141,7 +141,7 @@ std::string MasternodeUtils::getConfParam(std::string _arg)
 
 //CBitcoinAddress GetAccountAddress( std::string  strAccount, bool bForceNew=false);
 
-void MasternodeUtils::writeMasternodeConfFile(std::string  _alias, std::string  _ipport,std::string  mnprivkey,std::string  _output,std::string  _index)
+void CMasternodeUtils::writeMasternodeConfFile(std::string  _alias, std::string  _ipport,std::string  mnprivkey,std::string  _output,std::string  _index)
 {
     FILE *  fileout=NULL;
     boost::filesystem::path pathDebug2 = GetDataDir() / "masternode.conf";
@@ -154,7 +154,7 @@ void MasternodeUtils::writeMasternodeConfFile(std::string  _alias, std::string  
     fclose (fileout); // must close after opening
 }
 
-void MasternodeUtils::writeDigitalcoinMasternodeConfInfo(std::string  mnGenkey, std::string  strIpPort)
+void CMasternodeUtils::writeDigitalcoinMasternodeConfInfo(std::string  mnGenkey, std::string  strIpPort)
 {
     writeDigitalcoinConfFile("masternode=1");
     writeDigitalcoinConfFile("masternodeprivkey="+mnGenkey);
@@ -162,12 +162,15 @@ void MasternodeUtils::writeDigitalcoinMasternodeConfInfo(std::string  mnGenkey, 
     writeDigitalcoinConfFile("masternodeaddr="+strIpPort);
 }
 
-std::vector<std::pair<std::string ,std::string >> MasternodeUtils::checkMasternodeOutputs()
+std::vector<std::pair<std::string ,std::string >> CMasternodeUtils::checkMasternodeOutputs()
 {
     std::vector<std::pair<std::string ,std::string >> result;
 
     std::vector<COutput> vPossibleCoins;
-    pwalletMain->AvailableCoins(vPossibleCoins, true, NULL, false, ONLY_1000);
+    CCoinControl coinControl;
+    coinControl.nCoinType = CoinType::ONLY_1000;
+
+    vpwallets[0]->AvailableCoins(vPossibleCoins, true, &coinControl);
 
     UniValue obj(UniValue::VOBJ);
     BOOST_FOREACH(COutput& out, vPossibleCoins) 
@@ -178,7 +181,7 @@ std::vector<std::pair<std::string ,std::string >> MasternodeUtils::checkMasterno
     return result;
 }
 
-void MasternodeUtils::cleanDigitalcoinConf()
+void CMasternodeUtils::cleanDigitalcoinConf()
 {
     boost::filesystem::path pathDebug = GetDataDir() / "digitalcoin.conf";
 
@@ -206,7 +209,7 @@ void MasternodeUtils::cleanDigitalcoinConf()
         writeDigitalcoinConfFile(key);
 }
 
-void MasternodeUtils::RemoveMasternodeConfigs()
+void CMasternodeUtils::RemoveMasternodeConfigs()
 {
     cleanDigitalcoinConf();
     boost::filesystem::path masternodeConfPath = GetDataDir() / "masternode.conf";

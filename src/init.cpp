@@ -916,7 +916,7 @@ void InitParameterInteraction()
 {
 
    // Algo
-    std::string strAlgo = GetArg("-algo", "scrypt");
+    std::string strAlgo = gArgs.GetArg("-algo", "scrypt");
     transform(strAlgo.begin(),strAlgo.end(),strAlgo.begin(),::tolower);
     if (strAlgo == "sha" || strAlgo == "sha256" || strAlgo == "sha256d")
         miningAlgo = ALGO_SHA256D;

@@ -252,6 +252,8 @@ protected:
     std::map<std::string, std::string> mapArgs;
     std::map<std::string, std::vector<std::string> > mapMultiArgs;
 public:
+    std::map<std::string, std::string> GetMapArgs(){return  mapArgs;}
+    std::map<std::string, std::vector<std::string> > GetMapMultiArgs(){return  mapMultiArgs;}
     void ParseParameters(int argc, const char*const argv[]);
     void ReadConfigFile(const std::string& confPath);
     std::vector<std::string> GetArgs(const std::string& strArg);
