@@ -11,7 +11,7 @@
  */
 
 
-static const int PROTOCOL_VERSION = 70218;
+static const int PROTOCOL_VERSION = 70208;
 
 //! initial proto version, to be increased after version/verack negotiation
 static const int INIT_PROTO_VERSION = 209;
@@ -20,7 +20,7 @@ static const int INIT_PROTO_VERSION = 209;
 static const int GETHEADERS_VERSION = 70077;
 
 //! disconnect from peers older than this proto version
-static const int MIN_PEER_PROTO_VERSION = 70213;
+static const int MIN_PEER_PROTO_VERSION = 70208;
 
 //! minimum proto version of masternode to accept in DKGs
 static const int MIN_MASTERNODE_PROTO_VERSION = 70218;
