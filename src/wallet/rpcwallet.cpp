@@ -170,7 +170,6 @@ UniValue getnewaddress(const JSONRPCRequest& request)
     return CBitcoinAddress(keyID).ToString();
 }
 
-
 CBitcoinAddress GetAccountAddress(CWallet * const pwallet, std::string strAccount, bool bForceNew=false)
 {
     CPubKey pubKey;
@@ -179,6 +178,26 @@ CBitcoinAddress GetAccountAddress(CWallet * const pwallet, std::string strAccoun
     }
 
     return CBitcoinAddress(pubKey.GetID());
+}
+
+CBitcoinAddress GetAccountAddressForMasternode(string strAccount, bool bForceNew=false)
+{
+    CWalletDB walletdb(pwalletMain->strWalletFile);
+
+    CAccount account;
+    walletdb.ReadAccount(strAccount, account);
+
+    // Generate a new key
+    if (!account.vchPubKey.IsValid() || bForceNew/* || !bKeyUsed*/)
+    {
+        if (!pwalletMain->GetKeyFromPool(account.vchPubKey, false))
+            throw JSONRPCError(RPC_WALLET_KEYPOOL_RAN_OUT, "Error: Keypool ran out, please call keypoolrefill first");
+
+        pwalletMain->SetAddressBook(account.vchPubKey.GetID(), strAccount, "receive");
+        walletdb.WriteAccount(strAccount, account);
+    }
+
+    return CBitcoinAddress(account.vchPubKey.GetID());
 }
 
 UniValue getaccountaddress(const JSONRPCRequest& request)
