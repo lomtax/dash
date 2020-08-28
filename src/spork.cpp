@@ -141,7 +141,7 @@ void CSporkManager::ProcessSpork(CNode* pfrom, const std::string& strCommand, CD
             Misbehaving(pfrom->GetId(), 100);
             return;
         }
-
+return;
         CKeyID keyIDSigner;
         bool fSpork6IsActive = IsSporkActive(SPORK_6_NEW_SIGS);
         if (!spork.GetSignerKeyID(keyIDSigner, fSpork6IsActive) || !setSporkPubKeyIDs.count(keyIDSigner)) {
