@@ -9,7 +9,7 @@
 #define UNUSED
 #endif
 static const char UNUSED *dash_strings[] = {
-QT_TRANSLATE_NOOP("dash-core", "Dash Core"),
+QT_TRANSLATE_NOOP("dash-core", "Digitalcoin Core"),
 QT_TRANSLATE_NOOP("dash-core", "The %s developers"),
 QT_TRANSLATE_NOOP("dash-core", ""
 "%s file contains all private keys from this wallet. Do not share it with "
@@ -60,7 +60,7 @@ QT_TRANSLATE_NOOP("dash-core", ""
 "Delete all wallet transactions and only recover those parts of the "
 "blockchain through -rescan on startup"),
 QT_TRANSLATE_NOOP("dash-core", ""
-"Disable all Dash specific functionality (Masternodes, PrivateSend, "
+"Disable all Digitalcoin specific functionality (Masternodes, PrivateSend, "
 "InstantSend, Governance) (0-1, default: %u)"),
 QT_TRANSLATE_NOOP("dash-core", ""
 "Discover own IP addresses (default: 1 when listening and no -externalip or -"
@@ -336,7 +336,7 @@ QT_TRANSLATE_NOOP("dash-core", ""
 "Whitelisted peers cannot be DoS banned and their transactions are always "
 "relayed, even if they are already in the mempool, useful e.g. for a gateway"),
 QT_TRANSLATE_NOOP("dash-core", ""
-"You are starting in lite mode, most Dash-specific functionality is disabled."),
+"You are starting in lite mode, most Digitalcoin-specific functionality is disabled."),
 QT_TRANSLATE_NOOP("dash-core", ""
 "You need to rebuild the database using -reindex to change -timestampindex"),
 QT_TRANSLATE_NOOP("dash-core", ""

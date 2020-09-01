@@ -26,16 +26,16 @@
   <string>????</string>
 
   <key>CFBundleExecutable</key>
-  <string>Dash-Qt</string>
+  <string>Digitalcoin-Qt</string>
 
   <key>CFBundleName</key>
-  <string>Dash-Qt</string>
+  <string>Digitalcoin-Qt</string>
 
   <key>LSHasLocalizedDisplayName</key>
   <true/>
 
   <key>CFBundleIdentifier</key>
-  <string>org.dash.Dash-Qt</string>
+  <string>org.dash.Digitalcoin-Qt</string>
 
   <key>CFBundleURLTypes</key>
   <array>
@@ -43,7 +43,7 @@
       <key>CFBundleTypeRole</key>
       <string>Editor</string>
       <key>CFBundleURLName</key>
-      <string>org.dash.DashPayment</string>
+      <string>org.dash.DigitalcoinPayment</string>
       <key>CFBundleURLSchemes</key>
       <array>
         <string>dash</string>
@@ -57,7 +57,7 @@
       <key>UTTypeIdentifier</key>
       <string>org.dash.paymentrequest</string>
       <key>UTTypeDescription</key>
-      <string>Dash payment request</string>
+      <string>Digitalcoin payment request</string>
       <key>UTTypeConformsTo</key>
       <array>
         <string>public.data</string>

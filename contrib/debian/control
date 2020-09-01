@@ -34,10 +34,10 @@ Package: dashd
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: peer-to-peer network based digital currency - daemon
- Dash is an experimental new digital currency that enables instant, private
- payments to anyone, anywhere in the world. Dash uses peer-to-peer
+ Digitalcoin is an experimental new digital currency that enables instant, private
+ payments to anyone, anywhere in the world. Digitalcoin uses peer-to-peer
  technology to operate with no central authority: managing transactions
- and issuing money are carried out collectively by the network. Dash Core
+ and issuing money are carried out collectively by the network. Digitalcoin Core
  is the name of the open source software which enables the use of this currency.
  .
  This package provides the daemon, dashd, and the CLI tool
@@ -47,22 +47,22 @@ Package: dash-qt
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: peer-to-peer network based digital currency - Qt GUI
- Dash is an experimental new digital currency that enables instant, private
- payments to anyone, anywhere in the world. Dash uses peer-to-peer
+ Digitalcoin is an experimental new digital currency that enables instant, private
+ payments to anyone, anywhere in the world. Digitalcoin uses peer-to-peer
  technology to operate with no central authority: managing transactions
- and issuing money are carried out collectively by the network. Dash Core
+ and issuing money are carried out collectively by the network. Digitalcoin Core
  is the name of the open source software which enables the use of this currency.
  .
- This package provides Dash-Qt, a GUI for Dash based on Qt.
+ This package provides Digitalcoin-Qt, a GUI for Digitalcoin based on Qt.
 
 Package: dash-tx
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: peer-to-peer digital currency - standalone transaction tool
- Dash is an experimental new digital currency that enables instant, private
- payments to anyone, anywhere in the world. Dash uses peer-to-peer
+ Digitalcoin is an experimental new digital currency that enables instant, private
+ payments to anyone, anywhere in the world. Digitalcoin uses peer-to-peer
  technology to operate with no central authority: managing transactions
- and issuing money are carried out collectively by the network. Dash Core
+ and issuing money are carried out collectively by the network. Digitalcoin Core
  is the name of the open source software which enables the use of this currency.
  .
  This package provides dash-tx, a command-line transaction creation

@@ -3,7 +3,7 @@
 - [`697d289eb`](https://github.com/dashpay/dash/commit/697d289eb) Merge #12392: Fix ignoring tx data requests when fPauseSend is set on a peer (#3225)
 - [`8c17c8163`](https://github.com/dashpay/dash/commit/8c17c8163) Remove light-hires theme as it's not required anymore
 - [`d9741fc63`](https://github.com/dashpay/dash/commit/d9741fc63) Merge #16254: qt: Set AA_EnableHighDpiScaling attribute early
-- [`df04cdcd2`](https://github.com/dashpay/dash/commit/df04cdcd2) Fix Dash specific docs and scripts
+- [`df04cdcd2`](https://github.com/dashpay/dash/commit/df04cdcd2) Fix Digitalcoin specific docs and scripts
 - [`1ef70ac9e`](https://github.com/dashpay/dash/commit/1ef70ac9e) Merge #12607: depends: Remove ccache
 - [`5107582f2`](https://github.com/dashpay/dash/commit/5107582f2) Merge #11252: [P2P] When clearing addrman clear mapInfo and mapAddr. (#3171)
 - [`cf632029b`](https://github.com/dashpay/dash/commit/cf632029b) Merge #12804: [tests] Fix intermittent rpc_net.py failure.
@@ -32,7 +32,7 @@
 - [`bdfc303d2`](https://github.com/dashpay/dash/commit/bdfc303d2) Temporarily remove arguments to BENCHMARK
 - [`2be67c760`](https://github.com/dashpay/dash/commit/2be67c760) Merge #12324: speed up Unserialize_impl for prevector
 - [`595826ad6`](https://github.com/dashpay/dash/commit/595826ad6) Merge #12549: Make prevector::resize() and other prevector operations much faster
-- [`a1bd147bc`](https://github.com/dashpay/dash/commit/a1bd147bc) Dashify
+- [`a1bd147bc`](https://github.com/dashpay/dash/commit/a1bd147bc) Digitalcoinify
 - [`f7b71f660`](https://github.com/dashpay/dash/commit/f7b71f660) Merge #13611: [bugfix] Use `__cpuid_count` for gnu C to avoid gitian build fail.
 - [`4bfc6ab30`](https://github.com/dashpay/dash/commit/4bfc6ab30) Merge #13788: Fix --disable-asm for newer assembly checks/code
 - [`1b2252c28`](https://github.com/dashpay/dash/commit/1b2252c28) Merge #13386: SHA256 implementations based on Intel SHA Extensions
@@ -81,7 +81,7 @@
 - [`58a946c6b`](https://github.com/dashpay/dash/commit/58a946c6b) [tests] do not allow assert_raises_message to be called with JSONRPCException
 - [`3602d3139`](https://github.com/dashpay/dash/commit/3602d3139) [tests] remove direct testing on JSONRPCException from individual test cases
 - [`297e9a018`](https://github.com/dashpay/dash/commit/297e9a018) Remove more SegWit related tests from script_standard_tests.cpp
-- [`f76d53d73`](https://github.com/dashpay/dash/commit/f76d53d73) Dashify a few strings in tests
+- [`f76d53d73`](https://github.com/dashpay/dash/commit/f76d53d73) Digitalcoinify a few strings in tests
 - [`4770830bb`](https://github.com/dashpay/dash/commit/4770830bb) Drop accidently added lines in release-notes.md
 - [`1c65e0859`](https://github.com/dashpay/dash/commit/1c65e0859) Fix "os" import in wallet-dump.py
 - [`f61698937`](https://github.com/dashpay/dash/commit/f61698937) Merge #11483: Fix importmulti bug when importing an already imported key
@@ -126,7 +126,7 @@
 - [`ec892d459`](https://github.com/dashpay/dash/commit/ec892d459) Merge #11234: Remove redundant testutil.cpp|h files
 - [`d643ada80`](https://github.com/dashpay/dash/commit/d643ada80) Merge #11241: [tests] Improve signmessages functional test
 - [`b9ce8480d`](https://github.com/dashpay/dash/commit/b9ce8480d) Merge #11215: [tests] fixups from set_test_params()
-- [`a304d4d47`](https://github.com/dashpay/dash/commit/a304d4d47) Fix DashTestFramework and tests depending on it
+- [`a304d4d47`](https://github.com/dashpay/dash/commit/a304d4d47) Fix DigitalcoinTestFramework and tests depending on it
 - [`ac0f483d8`](https://github.com/dashpay/dash/commit/ac0f483d8) Fix issues with set_test_params and start/stop_node
 - [`703f4c77a`](https://github.com/dashpay/dash/commit/703f4c77a) Fix stderr related issues
 - [`39a1c6452`](https://github.com/dashpay/dash/commit/39a1c6452) Allow to set self.stderr when using vanilla setup_nodes()
@@ -135,16 +135,16 @@
 - [`17bb230d7`](https://github.com/dashpay/dash/commit/17bb230d7) Merge #11121: TestNode tidyups
 - [`37250c02e`](https://github.com/dashpay/dash/commit/37250c02e) Merge #11150: [tests] Add getmininginfo test
 - [`74325db11`](https://github.com/dashpay/dash/commit/74325db11) Merge #10859: RPC: gettxout: Slightly improve doc and tests
-- [`ebfec2218`](https://github.com/dashpay/dash/commit/ebfec2218) Dashify BITCOINCLI
+- [`ebfec2218`](https://github.com/dashpay/dash/commit/ebfec2218) Digitalcoinify BITCOINCLI
 - [`1adc2001a`](https://github.com/dashpay/dash/commit/1adc2001a) Merge #10798: [tests] [utils] test bitcoin-cli
 - [`1b77cc81a`](https://github.com/dashpay/dash/commit/1b77cc81a) No need to assert wait_until
 - [`956e6bc01`](https://github.com/dashpay/dash/commit/956e6bc01) Merge #11068: qa: Move wait_until to util
 - [`d09f88d98`](https://github.com/dashpay/dash/commit/d09f88d98) Merge #11077: [tests] fix timeout issues from TestNode
 - [`0a8ad8b56`](https://github.com/dashpay/dash/commit/0a8ad8b56) Merge #11091: test: Increase initial RPC timeout to 60 seconds
 - [`1596b1dfa`](https://github.com/dashpay/dash/commit/1596b1dfa) Move -createwalletbackups=0 into test_node.py
-- [`4049754f4`](https://github.com/dashpay/dash/commit/4049754f4) Dashify test_node.py
+- [`4049754f4`](https://github.com/dashpay/dash/commit/4049754f4) Digitalcoinify test_node.py
 - [`96966e5b8`](https://github.com/dashpay/dash/commit/96966e5b8) Use TestNode.node_encrypt_wallet
-- [`cc124c99c`](https://github.com/dashpay/dash/commit/cc124c99c) Remove Dash specific leftovers of node.stop optimization
+- [`cc124c99c`](https://github.com/dashpay/dash/commit/cc124c99c) Remove Digitalcoin specific leftovers of node.stop optimization
 - [`f55da3aa5`](https://github.com/dashpay/dash/commit/f55da3aa5) Merge #10711: [tests] Introduce TestNode
 - [`f7a679062`](https://github.com/dashpay/dash/commit/f7a679062) Merge #10854: Avoid using sizes on non-fixed-width types to derive protocol constants.
 - [`3eb0e1463`](https://github.com/dashpay/dash/commit/3eb0e1463) Fix rawtransaction.py test
@@ -231,7 +231,7 @@
 - [`cd30d6b44`](https://github.com/dashpay/dash/commit/cd30d6b44) simplify `stop_node`
 - [`a67f5375f`](https://github.com/dashpay/dash/commit/a67f5375f) remove duplicate import
 - [`3980caf20`](https://github.com/dashpay/dash/commit/3980caf20) re-add import shutil
-- [`cb480af01`](https://github.com/dashpay/dash/commit/cb480af01) Dashify
+- [`cb480af01`](https://github.com/dashpay/dash/commit/cb480af01) Digitalcoinify
 - [`806da3c6e`](https://github.com/dashpay/dash/commit/806da3c6e) adjust number of parameters in sendmany
 - [`c4094c8de`](https://github.com/dashpay/dash/commit/c4094c8de) Few more tiny trivial fixes
 - [`8c2c2a1ad`](https://github.com/dashpay/dash/commit/8c2c2a1ad) s/bitcoind/dashd/ in some places

@@ -29,7 +29,7 @@ class QUrl;
 class QWidget;
 QT_END_NAMESPACE
 
-/** Utility functions used by the Dash Qt UI.
+/** Utility functions used by the Digitalcoin Qt UI.
  */
 namespace GUIUtil
 {

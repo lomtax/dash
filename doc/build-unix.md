@@ -1,12 +1,12 @@
 UNIX BUILD NOTES
 ====================
-Some notes on how to build Dash Core in Unix.
+Some notes on how to build Digitalcoin Core in Unix.
 
 (for OpenBSD specific instructions, see [build-openbsd.md](build-openbsd.md))
 
 Base build dependencies
 -----------------------
-Building the dependencies and Dash Core requires some essential build tools and libraries to be installed before.
+Building the dependencies and Digitalcoin Core requires some essential build tools and libraries to be installed before.
 
 Run the following commands to install required packages:
 
@@ -45,7 +45,7 @@ Follow the instructions in [build-generic](build-generic.md)
 
 Security
 --------
-To help make your Dash installation more secure by making certain attacks impossible to
+To help make your Digitalcoin installation more secure by making certain attacks impossible to
 exploit even if a vulnerability is found, binaries are hardened by default.
 This can be disabled with:
 
@@ -78,7 +78,7 @@ Hardening enables the following features:
 
 * Non-executable Stack
     If the stack is executable then trivial stack based buffer overflow exploits are possible if
-    vulnerable buffers are found. By default, Dash Core should be built with a non-executable stack
+    vulnerable buffers are found. By default, Digitalcoin Core should be built with a non-executable stack
     but if one of the libraries it uses asks for an executable stack or someone makes a mistake
     and uses a compiler extension which requires an executable stack, it will silently build an
     executable without the non-executable stack protection.
@@ -94,7 +94,7 @@ Hardening enables the following features:
 
 Disable-wallet mode
 --------------------
-When the intention is to run only a P2P node without a wallet, Dash Core may be compiled in
+When the intention is to run only a P2P node without a wallet, Digitalcoin Core may be compiled in
 disable-wallet mode with:
 
     ./configure --prefix=<prefix> --disable-wallet

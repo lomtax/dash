@@ -1,4 +1,4 @@
-Dash Core version 0.15
+Digitalcoin Core version 0.15
 ======================
 
 Release is now available from:
@@ -20,14 +20,14 @@ How to Upgrade
 
 If you are running an older version, shut it down. Wait until it has completely
 shut down (which might take a few minutes for older versions), then run the
-installer (on Windows) or just copy over /Applications/Dash-Qt (on Mac) or
+installer (on Windows) or just copy over /Applications/Digitalcoin-Qt (on Mac) or
 dashd/dash-qt (on Linux). If you upgrade after DIP0003 activation and you were
 using version < 0.13 you will have to reindex (start with -reindex-chainstate
 or -reindex) to make sure your wallet has all the new data synced. Upgrading from
 version 0.13 should not require any additional actions.
 
 When upgrading from a version prior to 0.14.0.3, the
-first startup of Dash Core will run a migration process which can take a few minutes
+first startup of Digitalcoin Core will run a migration process which can take a few minutes
 to finish. After the migration, a downgrade to an older version is only possible with
 a reindex (or reindex-chainstate).
 
@@ -157,7 +157,7 @@ There are a few changes in existing RPC interfaces in this release:
 - no more `instantsend` field in various RPC commands
 - `use-IS`, `use_is` and `instantsend` options are deprecated in various RPC commands and have no effect anymore
 - added new `merkleRootQuorums` field in `getblock` RPC results
-- individual Dash-specific fields which were used to display soft-fork progress in `getblockchaininfo` are replaced
+- individual Digitalcoin-specific fields which were used to display soft-fork progress in `getblockchaininfo` are replaced
  with the backported `statistics` object
 - `privatesend_balance` field is shown in all related RPC results regardless of the Lite Mode or PrivateSend state
 - added `pubKeyOperator` field for each masternode in `quorum info` RPC response
@@ -213,8 +213,8 @@ option (default is `no`). When using this option on macOS make sure to build bin
 Backports from Bitcoin Core 0.15
 --------------------------------
 
-Most of the changes between Bitcoin Core 0.14 and Bitcoin Core 0.15 have been backported into Dash Core 0.15.
-We only excluded backports which do not align with Dash, like SegWit or RBF related changes.
+Most of the changes between Bitcoin Core 0.14 and Bitcoin Core 0.15 have been backported into Digitalcoin Core 0.15.
+We only excluded backports which do not align with Digitalcoin, like SegWit or RBF related changes.
 
 You can read about changes brought by backporting from Bitcoin Core 0.15 in following docs:
 - https://github.com/bitcoin/bitcoin/blob/master/doc/release-notes/release-notes-0.15.0.md
@@ -225,7 +225,7 @@ and additional fixes in https://github.com/dashpay/dash/blob/master/doc/release-
 
 Miscellaneous
 -------------
-A lot of refactoring, backports, code cleanups and other small fixes were done in this release. Dash-specific
+A lot of refactoring, backports, code cleanups and other small fixes were done in this release. Digitalcoin-specific
 modules were reorganized in separate folders to make navigation through code a bit easier.
 
 0.15 Change log
@@ -297,7 +297,7 @@ See detailed [set of changes](https://github.com/dashpay/dash/compare/v0.14.0.5.
 - [`08f447af9`](https://github.com/dashpay/dash/commit/08f447af9) Tests: Allow specifying different cmd-line params for each masternode (#3222)
 - [`9dad60386`](https://github.com/dashpay/dash/commit/9dad60386) Tweak "Send" popup and refactor related code a bit (#3218)
 - [`bb7a32d2e`](https://github.com/dashpay/dash/commit/bb7a32d2e) Add Dark theme (#3216)
-- [`05ac4dbb4`](https://github.com/dashpay/dash/commit/05ac4dbb4) Dashify few strings (#3214)
+- [`05ac4dbb4`](https://github.com/dashpay/dash/commit/05ac4dbb4) Digitalcoinify few strings (#3214)
 - [`482a549a2`](https://github.com/dashpay/dash/commit/482a549a2) Add collateral, owner and voting addresses to masternode list table (#3207)
 - [`37f96f5a3`](https://github.com/dashpay/dash/commit/37f96f5a3) Bump version to 0.15 and update few const-s/chainparams (#3204)
 - [`9de994988`](https://github.com/dashpay/dash/commit/9de994988) Compliance changes to terminology (#3211)
@@ -352,10 +352,10 @@ See detailed [set of changes](https://github.com/dashpay/dash/compare/v0.14.0.5.
 - [`152c10bc4`](https://github.com/dashpay/dash/commit/152c10bc4) Various fixes for mixing queues (#3138)
 - [`e0c56246f`](https://github.com/dashpay/dash/commit/e0c56246f) Fixes and refactorings related to using mnsync in tests (#3136)
 - [`f8e238c5b`](https://github.com/dashpay/dash/commit/f8e238c5b) [Trivial] RPC help updates (#3134)
-- [`d49ee618f`](https://github.com/dashpay/dash/commit/d49ee618f) Add more logging to DashTestFramework (#3130)
+- [`d49ee618f`](https://github.com/dashpay/dash/commit/d49ee618f) Add more logging to DigitalcoinTestFramework (#3130)
 - [`cd6c5b4b4`](https://github.com/dashpay/dash/commit/cd6c5b4b4) Multiple fixes for ChainLock tests (#3129)
 - [`e06c116d2`](https://github.com/dashpay/dash/commit/e06c116d2) Actually pass extra_args to nodes in assumevalid.py (#3131)
-- [`737ac967f`](https://github.com/dashpay/dash/commit/737ac967f) Refactor some Dash-specific `wait_for*` functions in tests (#3122)
+- [`737ac967f`](https://github.com/dashpay/dash/commit/737ac967f) Refactor some Digitalcoin-specific `wait_for*` functions in tests (#3122)
 - [`b4aefb513`](https://github.com/dashpay/dash/commit/b4aefb513) Also consider txindex for transactions in AlreadyHave() (#3126)
 - [`d9e98e31e`](https://github.com/dashpay/dash/commit/d9e98e31e) Fix scripted diff check condition (#3128)
 - [`bad3243b8`](https://github.com/dashpay/dash/commit/bad3243b8) Bump mocktime before generating new blocks and generate a few blocks at the end of `test_mempool_doublespend` in `p2p-instantsend.py` (#3125)
@@ -410,7 +410,7 @@ See detailed [set of changes](https://github.com/dashpay/dash/compare/v0.14.0.5.
 - [`02f6188e8`](https://github.com/dashpay/dash/commit/02f6188e8) Do not count 0-fee txes for fee estimation (#3037)
 - [`f0c73f5ce`](https://github.com/dashpay/dash/commit/f0c73f5ce) Revert "Skip mempool.dat when wallet is starting in "zap" mode (#2782)"
 - [`be3bc48c9`](https://github.com/dashpay/dash/commit/be3bc48c9) Fix broken link in PrivateSend info dialog (#3031)
-- [`acab8c552`](https://github.com/dashpay/dash/commit/acab8c552) Add Dash Core Group codesign certificate (#3027)
+- [`acab8c552`](https://github.com/dashpay/dash/commit/acab8c552) Add Digitalcoin Core Group codesign certificate (#3027)
 - [`a1c4321e9`](https://github.com/dashpay/dash/commit/a1c4321e9) Fix osslsigncode compile issue in gitian-build (#3026)
 - [`2f21e5551`](https://github.com/dashpay/dash/commit/2f21e5551) Remove legacy InstantSend code (#3020)
 - [`7a440d626`](https://github.com/dashpay/dash/commit/7a440d626) Optimize on-disk deterministic masternode storage to reduce size of evodb (#3017)
@@ -462,7 +462,7 @@ See detailed [set of changes](https://github.com/dashpay/dash/compare/v0.14.0.5.
 - [`7c05aa821`](https://github.com/dashpay/dash/commit/7c05aa821) Also gracefully timeout Travis builds when building source takes >30min (#2932)
 - [`5652ea023`](https://github.com/dashpay/dash/commit/5652ea023) Show number of InstantSend locks in Debug Console (#2919)
 - [`a3f030609`](https://github.com/dashpay/dash/commit/a3f030609) Implement getmerkleblocks rpc (#2894)
-- [`32aa229c7`](https://github.com/dashpay/dash/commit/32aa229c7) Reorganize Dash Specific code into folders (#2753)
+- [`32aa229c7`](https://github.com/dashpay/dash/commit/32aa229c7) Reorganize Digitalcoin Specific code into folders (#2753)
 - [`acbf0a221`](https://github.com/dashpay/dash/commit/acbf0a221) Bump version to 0.14.1 (#2928)
 
 Credits
@@ -487,7 +487,7 @@ As well as everyone that submitted issues and reviewed pull requests.
 Older releases
 ==============
 
-Dash was previously known as Darkcoin.
+Digitalcoin was previously known as Darkcoin.
 
 Darkcoin tree 0.8.x was a fork of Litecoin tree 0.8, original name was XCoin
 which was first released on Jan/18/2014.
@@ -498,12 +498,12 @@ the 0.8.x tree and was first released on Mar/13/2014.
 Darkcoin tree 0.10.x used to be the closed source implementation of Darksend
 which was released open source on Sep/25/2014.
 
-Dash Core tree 0.11.x was a fork of Bitcoin Core tree 0.9,
-Darkcoin was rebranded to Dash.
+Digitalcoin Core tree 0.11.x was a fork of Bitcoin Core tree 0.9,
+Darkcoin was rebranded to Digitalcoin.
 
-Dash Core tree 0.12.0.x was a fork of Bitcoin Core tree 0.10.
+Digitalcoin Core tree 0.12.0.x was a fork of Bitcoin Core tree 0.10.
 
-Dash Core tree 0.12.1.x was a fork of Bitcoin Core tree 0.12.
+Digitalcoin Core tree 0.12.1.x was a fork of Bitcoin Core tree 0.12.
 
 These release are considered obsolete. Old release notes can be found here:
 

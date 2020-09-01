@@ -1,4 +1,4 @@
-Dash Core version 0.14.0.0
+Digitalcoin Core version 0.14.0.0
 ==========================
 
 Release is now available from:
@@ -20,7 +20,7 @@ How to Upgrade
 
 If you are running an older version, shut it down. Wait until it has completely
 shut down (which might take a few minutes for older versions), then run the
-installer (on Windows) or just copy over /Applications/Dash-Qt (on Mac) or
+installer (on Windows) or just copy over /Applications/Digitalcoin-Qt (on Mac) or
 dashd/dash-qt (on Linux). If you upgrade after DIP0003 activation and you were
 using version < 0.13 you will have to reindex (start with -reindex-chainstate
 or -reindex) to make sure your wallet has all the new data synced. Upgrading from
@@ -63,7 +63,7 @@ Read more: https://github.com/dashpay/dips/blob/master/dip-0008.md
 DIP0010 - LLMQ-based InstantSend
 --------------------------------
 InstantSend is a feature to allow instant confirmations of payments. It works by locking transaction
-inputs through masternode quorums. It has been present in Dash for a few years and been proven to work.
+inputs through masternode quorums. It has been present in Digitalcoin for a few years and been proven to work.
 Nevertheless, there are some limits which could theoretically be removed in the old system but doing so
 would have created risks in terms of scalability and security.
 
@@ -201,7 +201,7 @@ See detailed [set of changes](https://github.com/dashpay/dash/compare/v0.13.3.0.
 - [`3d993ee8f`](https://github.com/dashpay/dash/commit/3d993ee8f) Translations v14 (#2638)
 - [`fbd244dde`](https://github.com/dashpay/dash/commit/fbd244dde) Bail out in few more places when blockchain is not synced yet (#2888)
 - [`fd6aaae7f`](https://github.com/dashpay/dash/commit/fd6aaae7f) Add proTxHash to masternode list rpc response (#2887)
-- [`dd3977523`](https://github.com/dashpay/dash/commit/dd3977523) More "bench" log for Dash specific parts (#2884)
+- [`dd3977523`](https://github.com/dashpay/dash/commit/dd3977523) More "bench" log for Digitalcoin specific parts (#2884)
 - [`8ffdcbf99`](https://github.com/dashpay/dash/commit/8ffdcbf99) A bunch of mostly trivial tweaks/fixes (#2889)
 - [`195100161`](https://github.com/dashpay/dash/commit/195100161) New LLMQ-based IS should have no legacy IS strings in UI and no legacy restrictions (#2883)
 - [`7f419ae7f`](https://github.com/dashpay/dash/commit/7f419ae7f) Accept non-spent LLMQ IS locked outpoints from mempool in PS mixing (#2878)
@@ -211,7 +211,7 @@ See detailed [set of changes](https://github.com/dashpay/dash/compare/v0.13.3.0.
 - [`19a9e2f4c`](https://github.com/dashpay/dash/commit/19a9e2f4c) Report `instantlock: true` for transactions locked via ChainLocks (#2877)
 - [`5cfceab86`](https://github.com/dashpay/dash/commit/5cfceab86) Refactor IS-lock GUI notification and implement a similar one for ChainLocks (#2875)
 - [`ed30db713`](https://github.com/dashpay/dash/commit/ed30db713) Ensure wallet is available and unlocked for some `governance` and `evo` RPCs (#2874)
-- [`0c2fdf4da`](https://github.com/dashpay/dash/commit/0c2fdf4da) Refactor some Dash/mixing-specific wallet functions (#2850)
+- [`0c2fdf4da`](https://github.com/dashpay/dash/commit/0c2fdf4da) Refactor some Digitalcoin/mixing-specific wallet functions (#2850)
 - [`22ae0bc21`](https://github.com/dashpay/dash/commit/22ae0bc21) Archive islock hashes when removing confirmed islocks (#2872)
 - [`b322b4828`](https://github.com/dashpay/dash/commit/b322b4828) Wait longer until re-requesting recovered sigs and ISLOCKs from other peers (#2871)
 - [`2502aadd7`](https://github.com/dashpay/dash/commit/2502aadd7) Fix infinite loop in CDBTransactionIterator::SkipDeletedAndOverwritten (#2870)
@@ -310,7 +310,7 @@ See detailed [set of changes](https://github.com/dashpay/dash/compare/v0.13.3.0.
 - [`4d8ef3512`](https://github.com/dashpay/dash/commit/4d8ef3512) Reset local/static cache in LogAcceptCategory when categories change (#2804)
 - [`4a79f7a70`](https://github.com/dashpay/dash/commit/4a79f7a70) Few trivial cleanups (#2803)
 - [`5057ad511`](https://github.com/dashpay/dash/commit/5057ad511) Drop DBG macros uses from governance modules (#2802)
-- [`29a9e24b4`](https://github.com/dashpay/dash/commit/29a9e24b4) Prepare Dash-related stuff before starting ThreadImport (#2800)
+- [`29a9e24b4`](https://github.com/dashpay/dash/commit/29a9e24b4) Prepare Digitalcoin-related stuff before starting ThreadImport (#2800)
 - [`8f280f346`](https://github.com/dashpay/dash/commit/8f280f346) Split "llmq" debug category into "llmq", "llmq-dkg" and "llmq-sigs" (#2799)
 - [`15c720dd4`](https://github.com/dashpay/dash/commit/15c720dd4) Stop tracking interested/participating nodes and send/announce to MNAUTH peers (#2798)
 - [`f20620b0a`](https://github.com/dashpay/dash/commit/f20620b0a) Also handle MNAUTH on non-masternodes (#2797)
@@ -368,7 +368,7 @@ See detailed [set of changes](https://github.com/dashpay/dash/compare/v0.13.3.0.
 - [`609114a80`](https://github.com/dashpay/dash/commit/609114a80) Code review: re-add string cast in mininode.py
 - [`85ffc1d64`](https://github.com/dashpay/dash/commit/85ffc1d64) drop `swap_outputs_in_rawtx` and `DecimalEncoder` in smartfees.py
 - [`bc593c84b`](https://github.com/dashpay/dash/commit/bc593c84b) Revert "Fix use of missing self.log in blockchain.py"
-- [`0e91ebcf4`](https://github.com/dashpay/dash/commit/0e91ebcf4) Use logging framework in Dash specific tests
+- [`0e91ebcf4`](https://github.com/dashpay/dash/commit/0e91ebcf4) Use logging framework in Digitalcoin specific tests
 - [`dd1245c2a`](https://github.com/dashpay/dash/commit/dd1245c2a) Update dnsseed-policy.md (#2751)
 - [`f351145e6`](https://github.com/dashpay/dash/commit/f351145e6) Use GetVoteForId instead of maintaining votes on inputs
 - [`d4cf78fe2`](https://github.com/dashpay/dash/commit/d4cf78fe2) Add HasVotedOnId/GetVoteForId to CSigningManager
@@ -555,7 +555,7 @@ See detailed [set of changes](https://github.com/dashpay/dash/compare/v0.13.3.0.
 - [`9f211ef12`](https://github.com/dashpay/dash/commit/9f211ef12) Add listener interface to listen for recovered sigs
 - [`189cee210`](https://github.com/dashpay/dash/commit/189cee210) Don't pass poolSize to SelectQuorum and instead use consensus params
 - [`13855674d`](https://github.com/dashpay/dash/commit/13855674d) Add missing new-line character in log output
-- [`d31edf66a`](https://github.com/dashpay/dash/commit/d31edf66a) Wait for script checks to finish before messing with txes in Dash-specific way (#2652)
+- [`d31edf66a`](https://github.com/dashpay/dash/commit/d31edf66a) Wait for script checks to finish before messing with txes in Digitalcoin-specific way (#2652)
 - [`2c477b0d4`](https://github.com/dashpay/dash/commit/2c477b0d4) Fix no_wallet for rpcmasternode/rpcevo
 - [`fc00b7bae`](https://github.com/dashpay/dash/commit/fc00b7bae) add import to rpcevo fixing backport 8775
 - [`30b03863e`](https://github.com/dashpay/dash/commit/30b03863e) Apply suggestions from code review #2646
@@ -599,7 +599,7 @@ See detailed [set of changes](https://github.com/dashpay/dash/compare/v0.13.3.0.
 - [`b8d069bcd`](https://github.com/dashpay/dash/commit/b8d069bcd) fix/cleanup qt rpcnestedtests
 - [`b970c20a9`](https://github.com/dashpay/dash/commit/b970c20a9) Avoid using immature coinbase UTXOs for dummy TXins
 - [`4d25148c0`](https://github.com/dashpay/dash/commit/4d25148c0) Add llmq-signing.py tests
-- [`d020ffa00`](https://github.com/dashpay/dash/commit/d020ffa00) Add wait_for_sporks_same and mine_quorum to DashTestFramework
+- [`d020ffa00`](https://github.com/dashpay/dash/commit/d020ffa00) Add wait_for_sporks_same and mine_quorum to DigitalcoinTestFramework
 - [`0cc1cf279`](https://github.com/dashpay/dash/commit/0cc1cf279) Add receivedFinalCommitment flag to CDKGDebugSessionStatus
 - [`23d7ed80d`](https://github.com/dashpay/dash/commit/23d7ed80d) Implement "quorum sign/hasrecsig/isconflicting" RPCs
 - [`316b6bf0d`](https://github.com/dashpay/dash/commit/316b6bf0d) Faster re-requesting of recovered sigs
@@ -654,7 +654,7 @@ See detailed [set of changes](https://github.com/dashpay/dash/compare/v0.13.3.0.
 - [`968eb3fc5`](https://github.com/dashpay/dash/commit/968eb3fc5) Add real timestamp to log output when mock time is enabled (#2604)
 - [`0648496e2`](https://github.com/dashpay/dash/commit/0648496e2) Fix flaky p2p-fullblocktest (#2605)
 - [`96d4f7459`](https://github.com/dashpay/dash/commit/96d4f7459) Try to fix flaky IX tests in DIP3 tests (#2602)
-- [`896733223`](https://github.com/dashpay/dash/commit/896733223) Dashify copyright_header.py (#2598)
+- [`896733223`](https://github.com/dashpay/dash/commit/896733223) Digitalcoinify copyright_header.py (#2598)
 - [`c58f775cc`](https://github.com/dashpay/dash/commit/c58f775cc) De-dashify env vars and dashify help text in tests instead (#2603)
 - [`a49f4123e`](https://github.com/dashpay/dash/commit/a49f4123e) Backports 0.15 pr1 (#2590)
 - [`f95aae2b3`](https://github.com/dashpay/dash/commit/f95aae2b3) Remove all legacy/compatibility MN code (#2600)
@@ -715,7 +715,7 @@ As well as everyone that submitted issues and reviewed pull requests.
 Older releases
 ==============
 
-Dash was previously known as Darkcoin.
+Digitalcoin was previously known as Darkcoin.
 
 Darkcoin tree 0.8.x was a fork of Litecoin tree 0.8, original name was XCoin
 which was first released on Jan/18/2014.
@@ -726,12 +726,12 @@ the 0.8.x tree and was first released on Mar/13/2014.
 Darkcoin tree 0.10.x used to be the closed source implementation of Darksend
 which was released open source on Sep/25/2014.
 
-Dash Core tree 0.11.x was a fork of Bitcoin Core tree 0.9,
-Darkcoin was rebranded to Dash.
+Digitalcoin Core tree 0.11.x was a fork of Bitcoin Core tree 0.9,
+Darkcoin was rebranded to Digitalcoin.
 
-Dash Core tree 0.12.0.x was a fork of Bitcoin Core tree 0.10.
+Digitalcoin Core tree 0.12.0.x was a fork of Bitcoin Core tree 0.10.
 
-Dash Core tree 0.12.1.x was a fork of Bitcoin Core tree 0.12.
+Digitalcoin Core tree 0.12.1.x was a fork of Bitcoin Core tree 0.12.
 
 These release are considered obsolete. Old release notes can be found here:
 

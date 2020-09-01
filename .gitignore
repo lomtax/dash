@@ -83,7 +83,7 @@ libconftest.dylib*
 *.qm
 Makefile
 dash-qt
-Dash-Qt.app
+Digitalcoin-Qt.app
 !/depends/Makefile
 
 # Unit-tests

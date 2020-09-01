@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2019 The Dash Core developers
+// Copyright (c) 2014-2019 The Digitalcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 #ifndef DGC_HDCHAIN_H
 #define DGC_HDCHAIN_H

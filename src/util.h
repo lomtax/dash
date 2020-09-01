@@ -1,6 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2015 The Bitcoin Core developers
-// Copyright (c) 2014-2019 The Dash Core developers
+// Copyright (c) 2014-2019 The Digitalcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -43,7 +43,7 @@
 #define DBG( x )
 #endif
 
-//Dash only features
+//Digitalcoin only features
 
 extern bool fMasternodeMode;
 extern bool fLiteMode;
@@ -124,7 +124,7 @@ namespace BCLog {
         QT          = (1 << 19),
         LEVELDB     = (1 << 20),
 
-        //Start Dash
+        //Start Digitalcoin
         CHAINLOCKS  = ((uint64_t)1 << 32),
         GOBJECT     = ((uint64_t)1 << 33),
         INSTANTSEND = ((uint64_t)1 << 34),
@@ -136,7 +136,7 @@ namespace BCLog {
         MNSYNC      = ((uint64_t)1 << 40),
         PRIVATESEND = ((uint64_t)1 << 41),
         SPORK       = ((uint64_t)1 << 42),
-        //End Dash
+        //End Digitalcoin
 
         ALL         = ~(uint64_t)0,
     };
