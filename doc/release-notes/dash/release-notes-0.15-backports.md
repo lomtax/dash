@@ -346,7 +346,7 @@
 - [`7e4318dda`](https://github.com/dashpay/dash/commit/7e4318dda) Merge bitcoin#8329: Consensus: MOVEONLY: Move functions for tx verification (#3030)
 - [`a4f046cd0`](https://github.com/dashpay/dash/commit/a4f046cd0) adjust formatting from review configure.ac
 - [`0eae9ed90`](https://github.com/dashpay/dash/commit/0eae9ed90) remove witness comment/text
-- [`2b9216e98`](https://github.com/dashpay/dash/commit/2b9216e98) /s/BTC/DASH
+- [`2b9216e98`](https://github.com/dashpay/dash/commit/2b9216e98) /s/BTC/DGC
 - [`188f4a752`](https://github.com/dashpay/dash/commit/188f4a752) Merge #10735: Avoid static analyzer warnings regarding uninitialized arguments
 - [`c097ab84d`](https://github.com/dashpay/dash/commit/c097ab84d) Merge #10840: Remove duplicate include
 - [`d7057d429`](https://github.com/dashpay/dash/commit/d7057d429) Merge #10766: Building Environment: Set ARFLAGS to cr

@@ -66,7 +66,7 @@ elif [ "$BUILD_TARGET" = "linux64" ]; then
   export PACKAGES="bc python3-zmq"
   export DEP_OPTS="NO_UPNP=1 DEBUG=1"
   export BITCOIN_CONFIG="--enable-zmq --enable-glibc-back-compat --enable-reduce-exports --enable-stacktraces"
-  export CPPFLAGS="-DDEBUG_LOCKORDER -DENABLE_DASH_DEBUG"
+  export CPPFLAGS="-DDEBUG_LOCKORDER -DENABLE_DGC_DEBUG"
   export PYZMQ=true
   export RUN_UNITTESTS=true
   export RUN_INTEGRATIONTESTS=true
