@@ -1,7 +1,7 @@
 Digitalcoin Core
 ==========
 
-This is the official reference wallet for Digitalcoin digital currency and comprises the backbone of the Digitalcoin peer-to-peer network. You can [download Digitalcoin Core](https://www.dash.org/downloads/) or [build it yourself](#building) using the guides below.
+This is the official reference wallet for Digitalcoin digital currency and comprises the backbone of the Digitalcoin peer-to-peer network. You can [download Digitalcoin Core](https://www.digitalcoin.org/downloads/) or [build it yourself](#building) using the guides below.
 
 Running
 ---------------------
@@ -11,12 +11,12 @@ The following are some helpful notes on how to run Digitalcoin on your native pl
 
 Unpack the files into a directory and run:
 
-- `bin/dash-qt` (GUI) or
-- `bin/dashd` (headless)
+- `bin/digitalcoin-qt` (GUI) or
+- `bin/digitalcoind` (headless)
 
 ### Windows
 
-Unpack the files into a directory, and then run dash-qt.exe.
+Unpack the files into a directory, and then run digitalcoin-qt.exe.
 
 ### OS X
 
@@ -24,12 +24,12 @@ Drag Digitalcoin-Qt to your applications folder, and then run Digitalcoin-Qt.
 
 ### Need Help?
 
-* See the [Digitalcoin documentation](https://docs.dash.org)
+* See the [Digitalcoin documentation](https://docs.digitalcoin.org)
 for help and more information.
-* See the [Digitalcoin Developer Documentation](https://dash-docs.github.io/) 
+* See the [Digitalcoin Developer Documentation](https://digitalcoin-docs.github.io/) 
 for technical specifications and implementation details.
-* Ask for help on [Digitalcoin Nation Discord](http://dashchat.org)
-* Ask for help on the [Digitalcoin Forum](https://dash.org/forum)
+* Ask for help on [Digitalcoin Nation Discord](http://digitalcoinchat.org)
+* Ask for help on the [Digitalcoin Forum](https://digitalcoin.org/forum)
 
 Building
 ---------------------
@@ -59,8 +59,8 @@ The Digitalcoin Core repo's [root README](/README.md) contains relevant informat
 - [Benchmarking](benchmarking.md)
 
 ### Resources
-* Discuss on the [Digitalcoin Forum](https://dash.org/forum), in the Development & Technical Discussion board.
-* Discuss on [Digitalcoin Nation Discord](http://dashchat.org)
+* Discuss on the [Digitalcoin Forum](https://digitalcoin.org/forum), in the Development & Technical Discussion board.
+* Discuss on [Digitalcoin Nation Discord](http://digitalcoinchat.org)
 
 ### Miscellaneous
 - [Assets Attribution](assets-attribution.md)

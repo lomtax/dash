@@ -2,9 +2,9 @@
 
 This issue tracker is only for technical issues related to Digitalcoin Core.
 
-General Digitalcoin questions and/or support requests and are best directed to the [Digitalcoinpay Reddit](https://www.reddit.com/r/dashpay/).
+General Digitalcoin questions and/or support requests and are best directed to the [Digitalcoinpay Reddit](https://www.reddit.com/r/digitalcoinpay/).
 
-To report critical security issues, email infosec@dash.org and/or see the DGC bug bounty program on [Bugcrowd](https://bugcrowd.com/dashdigitalcash) instead of creating Github issues.
+To report critical security issues, email infosec@digitalcoin.org and/or see the DGC bug bounty program on [Bugcrowd](https://bugcrowd.com/digitalcoindigitalcash) instead of creating Github issues.
 
 ### Describe the issue
 

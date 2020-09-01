@@ -35,7 +35,7 @@ std::string GetHelpString(int nParamNum, std::string strParamName)
 {
     static const std::map<std::string, std::string> mapParamHelp = {
         {"collateralAddress",
-            "%d. \"collateralAddress\"        (string, required) The dash address to send the collateral to.\n"
+            "%d. \"collateralAddress\"        (string, required) The digitalcoin address to send the collateral to.\n"
         },
         {"collateralHash",
             "%d. \"collateralHash\"           (string, required) The collateral transaction hash.\n"
@@ -80,15 +80,15 @@ std::string GetHelpString(int nParamNum, std::string strParamName)
             "                              between 0.00 and 100.00.\n"
         },
         {"ownerAddress",
-            "%d. \"ownerAddress\"             (string, required) The dash address to use for payee updates and proposal voting.\n"
+            "%d. \"ownerAddress\"             (string, required) The digitalcoin address to use for payee updates and proposal voting.\n"
             "                              The private key belonging to this address must be known in your wallet. The address must\n"
             "                              be unused and must differ from the collateralAddress\n"
         },
         {"payoutAddress_register",
-            "%d. \"payoutAddress\"            (string, required) The dash address to use for masternode reward payments.\n"
+            "%d. \"payoutAddress\"            (string, required) The digitalcoin address to use for masternode reward payments.\n"
         },
         {"payoutAddress_update",
-            "%d. \"payoutAddress\"            (string, required) The dash address to use for masternode reward payments.\n"
+            "%d. \"payoutAddress\"            (string, required) The digitalcoin address to use for masternode reward payments.\n"
             "                              If set to an empty string, the currently active payout address is reused.\n"
         },
         {"proTxHash",

@@ -18,7 +18,7 @@ Checks LLMQs signing sessions
 
 class LLMQSigningTest(DigitalcoinTestFramework):
     def set_test_params(self):
-        self.set_dash_test_params(6, 5, fast_dip3_enforcement=True)
+        self.set_digitalcoin_test_params(6, 5, fast_dip3_enforcement=True)
 
     def run_test(self):
 

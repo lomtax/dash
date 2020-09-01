@@ -294,7 +294,7 @@
         <translation>&amp;รับ</translation>
     </message>
     <message>
-        <source>Request payments (generates QR codes and dash: URIs)</source>
+        <source>Request payments (generates QR codes and digitalcoin: URIs)</source>
         <translation>เรียกเก็บ การชำระเงิน (สร้าง QR codes และ Digitalcoin: URIs)</translation>
     </message>
     <message>
@@ -482,7 +482,7 @@
         <translation>เปิด URI</translation>
     </message>
     <message>
-        <source>Open a dash: URI or payment request</source>
+        <source>Open a digitalcoin: URI or payment request</source>
         <translation>เปิด Digitalcoin: URI หรือคำขอการชำระเงิน</translation>
     </message>
     <message>
@@ -1424,9 +1424,9 @@
     </message>
     <message>
         <source>Language missing or translation incomplete? Help contributing translations here:
-https://www.transifex.com/projects/p/dash/</source>
+https://www.transifex.com/projects/p/digitalcoin/</source>
         <translation>ภาษาขาดหายไปหรือการแปลไม่สมบูรณ์ใช่หรือไม่?  สามารถช่วยแปลเพิ่มเติมได้ที่นี่:   
-https://www.transifex.com/projects/p/dash/</translation>
+https://www.transifex.com/projects/p/digitalcoin/</translation>
     </message>
     <message>
         <source>User Interface Theme:</source>
@@ -1737,7 +1737,7 @@ https://www.transifex.com/projects/p/dash/</translation>
         <translation>คำขอการชำระเงินผิดพลาด</translation>
     </message>
     <message>
-        <source>Cannot start dash: click-to-pay handler</source>
+        <source>Cannot start digitalcoin: click-to-pay handler</source>
         <translation>ไม่สามารถเริ่มต้น Digitalcoin: คลิกเพื่อจ่ายเงิน</translation>
     </message>
     <message>
@@ -2626,7 +2626,7 @@ https://www.transifex.com/projects/p/dash/</translation>
         <translation>หากค่าธรรมเนียมที่กำหนดเองถูกตั้งค่าเป็น 1000 duffs และการทำธุรกรรมนี้มีเพียง 250 ไบต์   ซึ่ง "ต่อกิโลไบต์" จะจ่ายเพียง 250 duffs ในขณะที่ "อย่างน้อย" จ่าย 1000 duffs สำหรับธุรกรรมที่มีขนาดใหญ่กว่ากิโลไบต์จะต้องจ่ายเป็นกิโลไบต์</translation>
     </message>
     <message>
-        <source>Paying only the minimum fee is just fine as long as there is less transaction volume than space in the blocks.&lt;br /&gt;But be aware that this can end up in a never confirming transaction once there is more demand for dash transactions than the network can process.</source>
+        <source>Paying only the minimum fee is just fine as long as there is less transaction volume than space in the blocks.&lt;br /&gt;But be aware that this can end up in a never confirming transaction once there is more demand for digitalcoin transactions than the network can process.</source>
         <translation>การจ่ายเงินเพียงค่าขั้นต่ำก็ทำได้ดีตราบเท่าที่ปริมาณธุรกรรมมีน้อยกว่าพื้นที่ในบล็อก&lt;br /&gt; แต่โปรดทราบว่าการจ่ายนี้จะสิ้นสุดลงในธุรกรรมที่ไม่เคยมีการยืนยัน ความต้องการใช้การทำธุรกรรมแบบ Digitalcoin มีมากกว่าที่เครือข่ายสามารถดำเนินการได้</translation>
     </message>
     <message>
@@ -2877,7 +2877,7 @@ https://www.transifex.com/projects/p/dash/</translation>
         <translation>ข้อความ: </translation>
     </message>
     <message>
-        <source>A message that was attached to the dash: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Digitalcoin network.</source>
+        <source>A message that was attached to the digitalcoin: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Digitalcoin network.</source>
         <translation>ข้อความที่แนบมาไปยัง Digitalcoin: URI ซึ่งจะถูกเก็บไว้กับธุรกรรมเพื่อเป็นข้อมูลอ้างอิงของคุณ  หมายเหตุ: ข้อความนี้จะถูกส่งไปยังเครือข่าย Digitalcoin </translation>
     </message>
     <message>
@@ -3669,7 +3669,7 @@ https://www.transifex.com/projects/p/dash/</translation>
     </message>
 </context>
 <context>
-    <name>dash-core</name>
+    <name>digitalcoin-core</name>
     <message>
         <source>Bind to given address and always listen on it. Use [host]:port notation for IPv6</source>
         <translation>เชื่อมโยงไปยังที่อยู่ที่กำหนดและฟังเสมอ โปรดใช้รูปแบบ  [host]:port สำหรับ IPv6</translation>

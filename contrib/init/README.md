@@ -1,11 +1,11 @@
 Sample configuration files for:
 ```
-SystemD: dashd.service
-Upstart: dashd.conf
-OpenRC:  dashd.openrc
-         dashd.openrcconf
-CentOS:  dashd.init
-OS X:    org.dash.dashd.plist
+SystemD: digitalcoind.service
+Upstart: digitalcoind.conf
+OpenRC:  digitalcoind.openrc
+         digitalcoind.openrcconf
+CentOS:  digitalcoind.init
+OS X:    org.digitalcoin.digitalcoind.plist
 ```
 have been made available to assist packagers in creating node packages here.
 

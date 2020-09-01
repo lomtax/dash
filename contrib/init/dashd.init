@@ -1,36 +1,36 @@
 #!/bin/bash
 #
-#  dashd The Digitalcoin Core server.
+#  digitalcoind The Digitalcoin Core server.
 #
 #
 # chkconfig: 345 80 20
-# description: dashd
-# processname: dashd
+# description: digitalcoind
+# processname: digitalcoind
 #
 
 # Source function library.
 . /etc/init.d/functions
 
-# you can override defaults in /etc/sysconfig/dashd, see below
-if [ -f /etc/sysconfig/dashd ]; then
-        . /etc/sysconfig/dashd
+# you can override defaults in /etc/sysconfig/digitalcoind, see below
+if [ -f /etc/sysconfig/digitalcoind ]; then
+        . /etc/sysconfig/digitalcoind
 fi
 
 RETVAL=0
 
-prog=dashd
-# you can override the lockfile via BITCOIND_LOCKFILE in /etc/sysconfig/dashd
-lockfile=${BITCOIND_LOCKFILE-/var/lock/subsys/dashd}
+prog=digitalcoind
+# you can override the lockfile via BITCOIND_LOCKFILE in /etc/sysconfig/digitalcoind
+lockfile=${BITCOIND_LOCKFILE-/var/lock/subsys/digitalcoind}
 
-# dashd defaults to /usr/bin/dashd, override with BITCOIND_BIN
-dashd=${BITCOIND_BIN-/usr/bin/dashd}
+# digitalcoind defaults to /usr/bin/digitalcoind, override with BITCOIND_BIN
+digitalcoind=${BITCOIND_BIN-/usr/bin/digitalcoind}
 
-# dashd opts default to -disablewallet, override with BITCOIND_OPTS
-dashd_opts=${BITCOIND_OPTS--disablewallet}
+# digitalcoind opts default to -disablewallet, override with BITCOIND_OPTS
+digitalcoind_opts=${BITCOIND_OPTS--disablewallet}
 
 start() {
     echo -n $"Starting $prog: "
-    daemon $DAEMONOPTS $dashd $dashd_opts
+    daemon $DAEMONOPTS $digitalcoind $digitalcoind_opts
     RETVAL=$?
     echo
     [ $RETVAL -eq 0 ] && touch $lockfile

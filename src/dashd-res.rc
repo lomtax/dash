@@ -17,13 +17,13 @@ BEGIN
         BLOCK "040904E4" // U.S. English - multilingual (hex)
         BEGIN
             VALUE "CompanyName",        "Digitalcoin"
-            VALUE "FileDescription",    "dashd (Digitalcoin node with a JSON-RPC server)"
+            VALUE "FileDescription",    "digitalcoind (Digitalcoin node with a JSON-RPC server)"
             VALUE "FileVersion",        VER_FILEVERSION_STR
-            VALUE "InternalName",       "dashd"
+            VALUE "InternalName",       "digitalcoind"
             VALUE "LegalCopyright",     COPYRIGHT_STR
             VALUE "LegalTrademarks1",   "Distributed under the MIT software license, see the accompanying file COPYING or http://www.opensource.org/licenses/mit-license.php."
-            VALUE "OriginalFilename",   "dashd.exe"
-            VALUE "ProductName",        "dashd"
+            VALUE "OriginalFilename",   "digitalcoind.exe"
+            VALUE "ProductName",        "digitalcoind"
             VALUE "ProductVersion",     VER_PRODUCTVERSION_STR
         END
     END

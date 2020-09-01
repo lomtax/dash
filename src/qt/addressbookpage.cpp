@@ -4,7 +4,7 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #if defined(HAVE_CONFIG_H)
-#include "config/dash-config.h"
+#include "config/digitalcoin-config.h"
 #endif
 
 #include "addressbookpage.h"
@@ -231,7 +231,7 @@ void AddressBookPage::on_showAddressQRCode_clicked()
 
     dialog->setModel(model);
     dialog->setAttribute(Qt::WA_DeleteOnClose);
-    dialog->setInfo(tr("QR code"), "dash:"+strAddress, "", strAddress);
+    dialog->setInfo(tr("QR code"), "digitalcoin:"+strAddress, "", strAddress);
     dialog->show();
 }
 

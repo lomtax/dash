@@ -10,7 +10,7 @@
 #include "util.h"
 #include "utilstrencodings.h"
 
-#include "dash-config.h"
+#include "digitalcoin-config.h"
 
 #include <mutex>
 #include <map>

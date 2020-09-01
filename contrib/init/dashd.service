@@ -3,13 +3,13 @@ Description=Digitalcoin's distributed currency daemon
 After=network.target
 
 [Service]
-User=dashcore
-Group=dashcore
+User=digitalcoincore
+Group=digitalcoincore
 
 Type=forking
-PIDFile=/var/lib/dashd/dashd.pid
-ExecStart=/usr/bin/dashd -daemon -pid=/var/lib/dashd/dashd.pid \
--conf=/etc/dashcore/dash.conf -datadir=/var/lib/dashd -disablewallet
+PIDFile=/var/lib/digitalcoind/digitalcoind.pid
+ExecStart=/usr/bin/digitalcoind -daemon -pid=/var/lib/digitalcoind/digitalcoind.pid \
+-conf=/etc/digitalcoincore/digitalcoin.conf -datadir=/var/lib/digitalcoind -disablewallet
 
 Restart=always
 PrivateTmp=true

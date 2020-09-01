@@ -32,7 +32,7 @@ static const int MAX_URI_LENGTH = 255;
 #define SPINNER_FRAMES 36
 
 #define QAPP_ORG_NAME "Digitalcoin"
-#define QAPP_ORG_DOMAIN "dash.org"
+#define QAPP_ORG_DOMAIN "digitalcoin.org"
 #define QAPP_APP_NAME_DEFAULT "Digitalcoin-Qt"
 #define QAPP_APP_NAME_TESTNET "Digitalcoin-Qt-testnet"
 #define QAPP_APP_NAME_DEVNET "Digitalcoin-Qt-%s"

@@ -3,7 +3,7 @@
 
 Digitalcoin Core version 0.11.2 is now available from:
 
-  https://dashpay.io/downloads
+  https://digitalcoinpay.io/downloads
 
 Please report bugs using the issue tracker at github:
 
@@ -64,7 +64,7 @@ How to Upgrade
 If you are running an older version, shut it down. Wait until it has completely
 shut down (which might take a few minutes for older versions), then run the
 installer (on Windows) or just copy over /Applications/Digitalcoin-Qt (on Mac) or
-dashd/dash-qt (on Linux).
+digitalcoind/digitalcoin-qt (on Linux).
 
 
 0.11.2 changelog

@@ -82,11 +82,11 @@ class BitcoinTestFramework(object):
 
         parser = optparse.OptionParser(usage="%prog [options]")
         parser.add_option("--nocleanup", dest="nocleanup", default=False, action="store_true",
-                          help="Leave dashds and test.* datadir on exit or error")
+                          help="Leave digitalcoinds and test.* datadir on exit or error")
         parser.add_option("--noshutdown", dest="noshutdown", default=False, action="store_true",
-                          help="Don't stop dashds after the test execution")
+                          help="Don't stop digitalcoinds after the test execution")
         parser.add_option("--srcdir", dest="srcdir", default=os.path.normpath(os.path.dirname(os.path.realpath(__file__)) + "/../../../src"),
-                          help="Source directory containing dashd/dash-cli (default: %default)")
+                          help="Source directory containing digitalcoind/digitalcoin-cli (default: %default)")
         parser.add_option("--cachedir", dest="cachedir", default=os.path.normpath(os.path.dirname(os.path.realpath(__file__)) + "/../../cache"),
                           help="Directory for caching pregenerated datadirs")
         parser.add_option("--tmpdir", dest="tmpdir", help="Root directory for datadirs")
@@ -155,7 +155,7 @@ class BitcoinTestFramework(object):
                 success = False
                 self.log.exception("Unexpected exception caught during shutdown")
         else:
-            self.log.info("Note: dashds were not stopped and may still be running")
+            self.log.info("Note: digitalcoinds were not stopped and may still be running")
 
         if not self.options.nocleanup and not self.options.noshutdown and success != TestStatus.FAILED:
             self.log.info("Cleaning up")
@@ -250,7 +250,7 @@ class BitcoinTestFramework(object):
             self.nodes.append(TestNode(old_num_nodes + i, self.options.tmpdir, extra_args[i], rpchost, timewait=timewait, binary=binary[i], stderr=stderr, mocktime=self.mocktime, coverage_dir=self.options.coveragedir))
 
     def start_node(self, i, extra_args=None, stderr=None):
-        """Start a dashd"""
+        """Start a digitalcoind"""
 
         node = self.nodes[i]
 
@@ -261,7 +261,7 @@ class BitcoinTestFramework(object):
             coverage.write_all_rpc_commands(self.options.coveragedir, node.rpc)
 
     def start_nodes(self, extra_args=None, stderr=None):
-        """Start multiple dashds"""
+        """Start multiple digitalcoinds"""
 
         if extra_args is None:
             extra_args = [None] * self.num_nodes
@@ -281,12 +281,12 @@ class BitcoinTestFramework(object):
                 coverage.write_all_rpc_commands(self.options.coveragedir, node.rpc)
 
     def stop_node(self, i, wait=0):
-        """Stop a dashd test node"""
+        """Stop a digitalcoind test node"""
         self.nodes[i].stop_node(wait=wait)
         self.nodes[i].wait_until_stopped()
 
     def stop_nodes(self, wait=0):
-        """Stop multiple dashd test nodes"""
+        """Stop multiple digitalcoind test nodes"""
         for node in self.nodes:
             # Issue RPC to stop nodes
             node.stop_node(wait=wait)
@@ -301,7 +301,7 @@ class BitcoinTestFramework(object):
                 self.start_node(i, extra_args, stderr=log_stderr)
                 self.stop_node(i)
             except Exception as e:
-                assert 'dashd exited' in str(e)  # node must have shutdown
+                assert 'digitalcoind exited' in str(e)  # node must have shutdown
                 self.nodes[i].running = False
                 self.nodes[i].process = None
                 if expected_msg is not None:
@@ -311,9 +311,9 @@ class BitcoinTestFramework(object):
                         raise AssertionError("Expected error \"" + expected_msg + "\" not found in:\n" + stderr)
             else:
                 if expected_msg is None:
-                    assert_msg = "dashd should have exited with an error"
+                    assert_msg = "digitalcoind should have exited with an error"
                 else:
-                    assert_msg = "dashd should have exited with expected error " + expected_msg
+                    assert_msg = "digitalcoind should have exited with expected error " + expected_msg
                 raise AssertionError(assert_msg)
 
     def wait_for_node_exit(self, i, timeout):
@@ -371,7 +371,7 @@ class BitcoinTestFramework(object):
         # User can provide log level as a number or string (eg DEBUG). loglevel was caught as a string, so try to convert it to an int
         ll = int(self.options.loglevel) if self.options.loglevel.isdigit() else self.options.loglevel.upper()
         ch.setLevel(ll)
-        # Format logs the same as dashd's debug.log with microprecision (so log files can be concatenated and sorted)
+        # Format logs the same as digitalcoind's debug.log with microprecision (so log files can be concatenated and sorted)
         formatter = logging.Formatter(fmt='%(asctime)s.%(msecs)03d000 %(name)s (%(levelname)s): %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
         formatter.converter = time.gmtime
         fh.setFormatter(formatter)
@@ -408,11 +408,11 @@ class BitcoinTestFramework(object):
                 if os.path.isdir(os.path.join(self.options.cachedir, "node" + str(i))):
                     shutil.rmtree(os.path.join(self.options.cachedir, "node" + str(i)))
 
-            # Create cache directories, run dashds:
+            # Create cache directories, run digitalcoinds:
             self.set_genesis_mocktime()
             for i in range(MAX_NODES):
                 datadir = initialize_datadir(self.options.cachedir, i)
-                args = [os.getenv("DGCD", "dashd"), "-server", "-keypool=1", "-datadir=" + datadir, "-discover=0", "-mocktime="+str(GENESISTIME)]
+                args = [os.getenv("DGCD", "digitalcoind"), "-server", "-keypool=1", "-datadir=" + datadir, "-discover=0", "-mocktime="+str(GENESISTIME)]
                 if i > 0:
                     args.append("-connect=127.0.0.1:" + str(p2p_port(0)))
                 if extra_args is not None:
@@ -456,7 +456,7 @@ class BitcoinTestFramework(object):
             from_dir = os.path.join(self.options.cachedir, "node" + str(i))
             to_dir = os.path.join(self.options.tmpdir, "node" + str(i))
             shutil.copytree(from_dir, to_dir)
-            initialize_datadir(self.options.tmpdir, i)  # Overwrite port/rpcport in dash.conf
+            initialize_datadir(self.options.tmpdir, i)  # Overwrite port/rpcport in digitalcoin.conf
 
     def _initialize_chain_clean(self):
         """Initialize empty blockchain for use by the test.
@@ -482,7 +482,7 @@ class MasternodeInfo:
 
 
 class DigitalcoinTestFramework(BitcoinTestFramework):
-    def set_dash_test_params(self, num_nodes, masterodes_count, extra_args=None, fast_dip3_enforcement=False):
+    def set_digitalcoin_test_params(self, num_nodes, masterodes_count, extra_args=None, fast_dip3_enforcement=False):
         self.mn_count = masterodes_count
         self.num_nodes = num_nodes
         self.mninfo = []
@@ -871,7 +871,7 @@ class DigitalcoinTestFramework(BitcoinTestFramework):
 class ComparisonTestFramework(BitcoinTestFramework):
     """Test framework for doing p2p comparison testing
 
-    Sets up some dashd binaries:
+    Sets up some digitalcoind binaries:
     - 1 binary: test binary
     - 2 binaries: 1 test binary, 1 ref binary
     - n>2 binaries: 1 test binary, n-1 ref binaries"""
@@ -882,11 +882,11 @@ class ComparisonTestFramework(BitcoinTestFramework):
 
     def add_options(self, parser):
         parser.add_option("--testbinary", dest="testbinary",
-                          default=os.getenv("BITCOIND", "dashd"),
-                          help="dashd binary to test")
+                          default=os.getenv("BITCOIND", "digitalcoind"),
+                          help="digitalcoind binary to test")
         parser.add_option("--refbinary", dest="refbinary",
-                          default=os.getenv("BITCOIND", "dashd"),
-                          help="dashd binary to use for reference nodes (if any)")
+                          default=os.getenv("BITCOIND", "digitalcoind"),
+                          help="digitalcoind binary to use for reference nodes (if any)")
 
     def setup_network(self):
         extra_args = [['-whitelist=127.0.0.1']] * self.num_nodes

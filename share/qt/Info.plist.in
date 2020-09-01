@@ -35,7 +35,7 @@
   <true/>
 
   <key>CFBundleIdentifier</key>
-  <string>org.dash.Digitalcoin-Qt</string>
+  <string>org.digitalcoin.Digitalcoin-Qt</string>
 
   <key>CFBundleURLTypes</key>
   <array>
@@ -43,10 +43,10 @@
       <key>CFBundleTypeRole</key>
       <string>Editor</string>
       <key>CFBundleURLName</key>
-      <string>org.dash.DigitalcoinPayment</string>
+      <string>org.digitalcoin.DigitalcoinPayment</string>
       <key>CFBundleURLSchemes</key>
       <array>
-        <string>dash</string>
+        <string>digitalcoin</string>
       </array>
     </dict>
   </array>
@@ -55,7 +55,7 @@
   <array>
     <dict>
       <key>UTTypeIdentifier</key>
-      <string>org.dash.paymentrequest</string>
+      <string>org.digitalcoin.paymentrequest</string>
       <key>UTTypeDescription</key>
       <string>Digitalcoin payment request</string>
       <key>UTTypeConformsTo</key>
@@ -65,10 +65,10 @@
       <key>UTTypeTagSpecification</key>
       <dict>
         <key>public.mime-type</key>
-        <string>application/x-dash-payment-request</string>
+        <string>application/x-digitalcoin-payment-request</string>
         <key>public.filename-extension</key>
         <array>
-          <string>dashpaymentrequest</string>
+          <string>digitalcoinpaymentrequest</string>
         </array>
       </dict>
     </dict>
@@ -81,7 +81,7 @@
       <string>Editor</string>
       <key>LSItemContentTypes</key>
       <array>
-        <string>org.dash.paymentrequest</string>
+        <string>org.digitalcoin.paymentrequest</string>
       </array>
       <key>LSHandlerRank</key>
       <string>Owner</string>

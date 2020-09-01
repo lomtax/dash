@@ -6,14 +6,14 @@ reset-files.bash
 *.tar.gz
 
 *.exe
-src/dash
-src/dashd
-src/dash-cli
-src/dash-tx
-src/test/test_dash
-src/test/test_dash_fuzzy
-src/qt/test/test_dash-qt
-src/bench/bench_dash
+src/digitalcoin
+src/digitalcoind
+src/digitalcoin-cli
+src/digitalcoin-tx
+src/test/test_digitalcoin
+src/test/test_digitalcoin_fuzzy
+src/qt/test/test_digitalcoin-qt
+src/bench/bench_digitalcoin
 
 # autoreconf
 Makefile.in
@@ -36,8 +36,8 @@ config.log
 config.status
 configure
 libtool
-src/config/dash-config.h
-src/config/dash-config.h.in
+src/config/digitalcoin-config.h
+src/config/digitalcoin-config.h.in
 src/config/stamp-h1
 share/setup.nsi
 share/qt/Info.plist
@@ -82,13 +82,13 @@ libconftest.dylib*
 # Compilation and Qt preprocessor part
 *.qm
 Makefile
-dash-qt
+digitalcoin-qt
 Digitalcoin-Qt.app
 !/depends/Makefile
 
 # Unit-tests
 Makefile.test
-dash-qt_test
+digitalcoin-qt_test
 
 # Resources cpp
 qrc_*.cpp
@@ -101,7 +101,7 @@ build
 *.gcno
 *.gcda
 /*.info
-test_dash.coverage/
+test_digitalcoin.coverage/
 total.coverage/
 coverage_percent.txt
 
@@ -119,15 +119,15 @@ test/cache/*
 .autotools
 /doc/doxygen/
 
-libdashconsensus.pc
+libdigitalcoinconsensus.pc
 contrib/devtools/split-debug.sh
-src/qt/dash-qt.bash
+src/qt/digitalcoin-qt.bash
 qa/pull-tester/tests-config.sh
 
 #development symlinks
-dash-cli
-dashd
-dash-qt
+digitalcoin-cli
+digitalcoind
+digitalcoin-qt
 make
 
 /docker/bin

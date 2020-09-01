@@ -50,4 +50,4 @@ situations but should be discussed in public in advance.
 
 See also
 ----------
-- [dash-seeder](https://github.com/nightlydash/dash-seeder) is a reference implementation of a DNS seed.
+- [digitalcoin-seeder](https://github.com/nightlydigitalcoin/digitalcoin-seeder) is a reference implementation of a DNS seed.
