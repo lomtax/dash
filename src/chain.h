@@ -11,7 +11,7 @@
 #include <pow.h>
 #include <tinyformat.h>
 #include <uint256.h>
-
+#include <chainparams.h>
 #include <vector>
 
 /**
