@@ -19,6 +19,7 @@
 #include <chainparamsseeds.h>
 #include "uint256.h"
 
+
 static CBlock CreateGenesisBlock(const char* pszTimestamp, const CScript& genesisOutputScript, uint32_t nTime, uint32_t nNonce, uint32_t nBits, int32_t nVersion, const CAmount& genesisReward)
 {
     CMutableTransaction txNew;
@@ -362,18 +363,10 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_REALLOC].nThresholdMin = 2420; // 60% of 4032
         consensus.vDeployments[Consensus::DEPLOYMENT_REALLOC].nFalloffCoeff = 5; // this corresponds to 10 periods
 
-        // The best chain should have at least this much work.
-<<<<<<< HEAD
-        consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000000044f363f417890207722e"); // 1364585
-
-        // By default assume that the signatures in ancestors of this block are valid.
-        consensus.defaultAssumeValid = uint256S("0x00000000000000022f355c52417fca9b73306958f7c0832b3a7bce006ca369ef"); // 1364585
-=======
         consensus.nMinimumChainWork = uint256S("0x00001000000000000000000000000000000000000000026b9922da36f58a838c"); // 4318035
 
         // By default assume that the signatures in ancestors of this block are valid.
         consensus.defaultAssumeValid = uint256S("0x765014f54734311f8bb3ee55146e7c92885048e277fb40dd5e61681450d78559"); // 4318035
->>>>>>> b8514d15e... update chainparams
 
         /**
          * The message start string is designed to be unlikely to occur in normal data.
@@ -387,73 +380,59 @@ public:
         nDefaultPort = 7999;
         nPruneAfterHeight = 100000;
 
-<<<<<<< HEAD
-        genesis = CreateGenesisBlock(1390095618, 28917698, 0x1e0ffff0, 1, 50 * COIN);
-        consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock == uint256S("0x00000ffd590b1485b3caadc19b22e6379c733355108f107a430458cdf3407ab6"));
-        assert(genesis.hashMerkleRoot == uint256S("0xe0028eb9648db56b1ac77cf090b99048a8007e2bb64b68f092c03c7f56a662c7"));
-
-        // Note that of those which support the service bits prefix, most only support a subset of
-        // possible options.
-        // This is fine at runtime as we'll fall back to using them as a oneshot if they dont support the
-        // service bits we want, but we should get them updated to support all service bits wanted by any
-        // release ASAP to avoid it where possible.
-        vSeeds.emplace_back("dnsseed.dash.org");
-        vSeeds.emplace_back("dnsseed.dashdot.io");
-=======
         genesis = CreateGenesisBlock(1367867384, 672176, 0x1e0ffff0, 1, 50 * COIN);        consensus.hashGenesisBlock = genesis.GetHash();
         assert(consensus.hashGenesisBlock == uint256S("0x5e039e1ca1dbf128973bf6cff98169e40a1b194c3b91463ab74956f413b2f9c8"));
         assert(genesis.hashMerkleRoot == uint256S("0xecb2c595fff9f2364152c32027737007c5a4c60ec960cf93754b0211bc2a1501"));
 
-        vSeeds.push_back(CDNSSeedData("Node_01" , "102.132.44.161"));
-        vSeeds.push_back(CDNSSeedData("Node_02" , "104.131.140.204"));
-        vSeeds.push_back(CDNSSeedData("Node_03" , "107.170.196.135"));
-        vSeeds.push_back(CDNSSeedData("Node_04" , "108.60.201.19"));
-        vSeeds.push_back(CDNSSeedData("Node_05" , "136.24.44.38"));
-        vSeeds.push_back(CDNSSeedData("Node_06" , "148.251.15.254"));
-        vSeeds.push_back(CDNSSeedData("Node_07" , "148.74.128.245"));
-        vSeeds.push_back(CDNSSeedData("Node_08" , "149.28.113.69"));
-        vSeeds.push_back(CDNSSeedData("Node_09" , "149.28.75.107"));
-        vSeeds.push_back(CDNSSeedData("Node_10" , "176.38.243.94"));
-        vSeeds.push_back(CDNSSeedData("Node_11" , "18.184.3.45"));
-        vSeeds.push_back(CDNSSeedData("Node_12" , "18.196.100.115"));
-        vSeeds.push_back(CDNSSeedData("Node_13" , "184.181.123.82"));
-        vSeeds.push_back(CDNSSeedData("Node_14" , "185.180.231.177"));
-        vSeeds.push_back(CDNSSeedData("Node_15" , "185.189.13.80"));
-        vSeeds.push_back(CDNSSeedData("Node_16" , "185.244.217.189"));
-        vSeeds.push_back(CDNSSeedData("Node_17" , "185.61.77.21"));
-        vSeeds.push_back(CDNSSeedData("Node_18" , "188.165.235.208"));
-        vSeeds.push_back(CDNSSeedData("Node_19" , "188.194.92.21"));
-        vSeeds.push_back(CDNSSeedData("Node_20" , "207.148.6.119"));
-        vSeeds.push_back(CDNSSeedData("Node_21" , "212.90.60.69"));
-        vSeeds.push_back(CDNSSeedData("Node_22" , "217.103.221.7"));
-        vSeeds.push_back(CDNSSeedData("Node_23" , "31.211.254.249"));
-        vSeeds.push_back(CDNSSeedData("Node_24" , "45.228.188.227"));
-        vSeeds.push_back(CDNSSeedData("Node_25" , "45.76.242.130"));
-        vSeeds.push_back(CDNSSeedData("Node_26" , "45.76.245.88"));
-        vSeeds.push_back(CDNSSeedData("Node_27" , "46.101.235.143"));
-        vSeeds.push_back(CDNSSeedData("Node_28" , "51.38.57.53"));
-        vSeeds.push_back(CDNSSeedData("Node_29" , "52.58.28.158"));
-        vSeeds.push_back(CDNSSeedData("Node_30" , "54.93.96.172"));
-        vSeeds.push_back(CDNSSeedData("Node_31" , "62.20.125.66"));
-        vSeeds.push_back(CDNSSeedData("Node_32" , "67.60.21.29"));
-        vSeeds.push_back(CDNSSeedData("Node_33" , "75.138.192.59"));
-        vSeeds.push_back(CDNSSeedData("Node_34" , "78.99.180.176"));
-        vSeeds.push_back(CDNSSeedData("Node_35" , "81.166.43.51"));
-        vSeeds.push_back(CDNSSeedData("Node_36" , "81.169.156.181"));
-        vSeeds.push_back(CDNSSeedData("Node_37" , "82.165.29.36"));
-        vSeeds.push_back(CDNSSeedData("Node_38" , "84.197.20.137"));
-        vSeeds.push_back(CDNSSeedData("Node_39" , "85.15.179.171"));
-        vSeeds.push_back(CDNSSeedData("Node_40" , "85.214.213.171"));
-        vSeeds.push_back(CDNSSeedData("Node_41" , "86.81.219.110"));
-        vSeeds.push_back(CDNSSeedData("Node_42" , "86.84.135.132"));
-        vSeeds.push_back(CDNSSeedData("Node_43" , "88.99.68.228"));
-        vSeeds.push_back(CDNSSeedData("Node_44" , "89.40.4.49"));
-        vSeeds.push_back(CDNSSeedData("Node_45" , "91.211.251.11"));
-        vSeeds.push_back(CDNSSeedData("Node_46" , "91.211.251.42"));
-        vSeeds.push_back(CDNSSeedData("Node_47" , "92.170.245.43"));
-        vSeeds.push_back(CDNSSeedData("Node_48" , "95.179.140.120"));
->>>>>>> b8514d15e... update chainparams
+        vSeeds.emplace_back("102.132.44.161");
+        vSeeds.emplace_back("104.131.140.204");
+        vSeeds.emplace_back("107.170.196.135");
+        vSeeds.emplace_back("108.60.201.19");
+        vSeeds.emplace_back("136.24.44.38");
+        vSeeds.emplace_back("148.251.15.254");
+        vSeeds.emplace_back("148.74.128.245");
+        vSeeds.emplace_back("149.28.113.69");
+        vSeeds.emplace_back("149.28.75.107");
+        vSeeds.emplace_back("176.38.243.94");
+        vSeeds.emplace_back("18.184.3.45");
+        vSeeds.emplace_back("18.196.100.115");
+        vSeeds.emplace_back("184.181.123.82");
+        vSeeds.emplace_back("185.180.231.177");
+        vSeeds.emplace_back("185.189.13.80");
+        vSeeds.emplace_back("185.244.217.189");
+        vSeeds.emplace_back("185.61.77.21");
+        vSeeds.emplace_back("188.165.235.208");
+        vSeeds.emplace_back("188.194.92.21");
+        vSeeds.emplace_back("207.148.6.119");
+        vSeeds.emplace_back("212.90.60.69");
+        vSeeds.emplace_back("217.103.221.7");
+        vSeeds.emplace_back("31.211.254.249");
+        vSeeds.emplace_back("45.228.188.227");
+        vSeeds.emplace_back("45.76.242.130");
+        vSeeds.emplace_back("45.76.245.88");
+        vSeeds.emplace_back("46.101.235.143");
+        vSeeds.emplace_back("51.38.57.53");
+        vSeeds.emplace_back("52.58.28.158");
+        vSeeds.emplace_back("54.93.96.172");
+        vSeeds.emplace_back("62.20.125.66");
+        vSeeds.emplace_back("67.60.21.29");
+        vSeeds.emplace_back("75.138.192.59");
+        vSeeds.emplace_back("78.99.180.176");
+        vSeeds.emplace_back("81.166.43.51");
+        vSeeds.emplace_back("81.169.156.181");
+        vSeeds.emplace_back("82.165.29.36");
+        vSeeds.emplace_back("84.197.20.137");
+        vSeeds.emplace_back("85.15.179.171");
+        vSeeds.emplace_back("85.214.213.171");
+        vSeeds.emplace_back("86.81.219.110");
+        vSeeds.emplace_back("86.84.135.132");
+        vSeeds.emplace_back("88.99.68.228");
+        vSeeds.emplace_back("89.40.4.49");
+        vSeeds.emplace_back("91.211.251.11");
+        vSeeds.emplace_back("91.211.251.42");
+        vSeeds.emplace_back("92.170.245.43");
+        vSeeds.emplace_back("95.179.140.120");
+
 
         // Dash addresses start with 'X'
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,30);
@@ -498,34 +477,6 @@ public:
 
         checkpointData = {
             {
-<<<<<<< HEAD
-                {1500, uint256S("0x000000aaf0300f59f49bc3e970bad15c11f961fe2347accffff19d96ec9778e3")},
-                {4991, uint256S("0x000000003b01809551952460744d5dbb8fcbd6cbae3c220267bf7fa43f837367")},
-                {9918, uint256S("0x00000000213e229f332c0ffbe34defdaa9e74de87f2d8d1f01af8d121c3c170b")},
-                {16912, uint256S("0x00000000075c0d10371d55a60634da70f197548dbbfa4123e12abfcbc5738af9")},
-                {23912, uint256S("0x0000000000335eac6703f3b1732ec8b2f89c3ba3a7889e5767b090556bb9a276")},
-                {35457, uint256S("0x0000000000b0ae211be59b048df14820475ad0dd53b9ff83b010f71a77342d9f")},
-                {45479, uint256S("0x000000000063d411655d590590e16960f15ceea4257122ac430c6fbe39fbf02d")},
-                {55895, uint256S("0x0000000000ae4c53a43639a4ca027282f69da9c67ba951768a20415b6439a2d7")},
-                {68899, uint256S("0x0000000000194ab4d3d9eeb1f2f792f21bb39ff767cb547fe977640f969d77b7")},
-                {74619, uint256S("0x000000000011d28f38f05d01650a502cc3f4d0e793fbc26e2a2ca71f07dc3842")},
-                {75095, uint256S("0x0000000000193d12f6ad352a9996ee58ef8bdc4946818a5fec5ce99c11b87f0d")},
-                {88805, uint256S("0x00000000001392f1652e9bf45cd8bc79dc60fe935277cd11538565b4a94fa85f")},
-                {107996, uint256S("0x00000000000a23840ac16115407488267aa3da2b9bc843e301185b7d17e4dc40")},
-                {137993, uint256S("0x00000000000cf69ce152b1bffdeddc59188d7a80879210d6e5c9503011929c3c")},
-                {167996, uint256S("0x000000000009486020a80f7f2cc065342b0c2fb59af5e090cd813dba68ab0fed")},
-                {207992, uint256S("0x00000000000d85c22be098f74576ef00b7aa00c05777e966aff68a270f1e01a5")},
-                {312645, uint256S("0x0000000000059dcb71ad35a9e40526c44e7aae6c99169a9e7017b7d84b1c2daf")},
-                {407452, uint256S("0x000000000003c6a87e73623b9d70af7cd908ae22fee466063e4ffc20be1d2dbc")},
-                {523412, uint256S("0x000000000000e54f036576a10597e0e42cc22a5159ce572f999c33975e121d4d")},
-                {523930, uint256S("0x0000000000000bccdb11c2b1cfb0ecab452abf267d89b7f46eaf2d54ce6e652c")},
-                {750000, uint256S("0x00000000000000b4181bbbdddbae464ce11fede5d0292fb63fdede1e7c8ab21c")},
-                {888900, uint256S("0x0000000000000026c29d576073ab51ebd1d3c938de02e9a44c7ee9e16f82db28")},
-                {967800, uint256S("0x0000000000000024e26c7df7e46d673724d223cf4ca2b2adc21297cc095600f4")},
-                {1067570, uint256S("0x000000000000001e09926bcf5fa4513d23e870a34f74e38200db99eb3f5b7a70")},
-                {1167570, uint256S("0x000000000000000fb7b1e9b81700283dff0f7d87cf458e5edfdae00c669de661")},
-                {1364585, uint256S("0x00000000000000022f355c52417fca9b73306958f7c0832b3a7bce006ca369ef")},
-=======
                 { 0,       uint256S("0x5e039e1ca1dbf128973bf6cff98169e40a1b194c3b91463ab74956f413b2f9c8")},
                 { 1,       uint256S("0x45b2559dbe5e5772498e4170f3f1561448179fa90dd349e60e891766878dea2e")},
                 { 20,      uint256S("0x59436aad777d285d52a3fb61b4176c7ca30a1254b7fc1480b2c7320913953fe3")},
@@ -556,22 +507,15 @@ public:
                 { 1023013, uint256S("0xc328d2a8f8b976769a6b0488cbf6dc641902b6eb7db0995befd58e69679af4f8")},
                 { 3301439, uint256S("0x91e893e7d89086c092d634ad7075f8b6373588d6001cc44435710bea0c6e7512")},
                 { 4318035, uint256S("0x765014f54734311f8bb3ee55146e7c92885048e277fb40dd5e61681450d78559")},
->>>>>>> b8514d15e... update chainparams
             }
         };
 
         chainTxData = ChainTxData{
-<<<<<<< HEAD
-            1601017518, // * UNIX timestamp of last known number of transactions (Block 1344000)
-            28914483,   // * total number of transactions between genesis and that timestamp
-                        //   (the tx=... number in the SetBestChain debug.log lines)
-            0.3         // * estimated number of transactions per second after that timestamp
-=======
+
             1576373504, // * UNIX timestamp of last known number of transactions (Block 1173619)
             5615553,   // * total number of transactions between genesis and that timestamp
                         //   (the tx=... number in the SetBestChain debug.log lines)
             0.5         // * estimated number of transactions per second after that timestamp
->>>>>>> b8514d15e... update chainparams
         };
     }
 };
@@ -664,18 +608,12 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_REALLOC].nThresholdMin = 60; // 60% of 100
         consensus.vDeployments[Consensus::DEPLOYMENT_REALLOC].nFalloffCoeff = 5; // this corresponds to 10 periods
 
-        // The best chain should have at least this much work.
-<<<<<<< HEAD
-        consensus.nMinimumChainWork = uint256S("0x000000000000000000000000000000000000000000000000022f13324cfe06a3"); // 395750
 
-        // By default assume that the signatures in ancestors of this block are valid.
-        consensus.defaultAssumeValid = uint256S("0x000008b78b6aef3fd05ab78db8b76c02163e885305545144420cb08704dce538"); // 395750
-=======
         consensus.nMinimumChainWork = uint256S("0x00"); // 260000
 
         // By default assume that the signatures in ancestors of this block are valid.
         consensus.defaultAssumeValid = uint256S("0x00"); // 260000
->>>>>>> b8514d15e... update chainparams
+
 
         pchMessageStart[0] = 0xfb;
         pchMessageStart[1] = 0xc0;
@@ -737,31 +675,15 @@ public:
 
         checkpointData = {
             {
-<<<<<<< HEAD
-                {261, uint256S("0x00000c26026d0815a7e2ce4fa270775f61403c040647ff2c3091f99e894a4618")},
-                {1999, uint256S("0x00000052e538d27fa53693efe6fb6892a0c1d26c0235f599171c48a3cce553b1")},
-                {2999, uint256S("0x0000024bc3f4f4cb30d29827c13d921ad77d2c6072e586c7f60d83c2722cdcc5")},
-                {96090, uint256S("0x00000000033df4b94d17ab43e999caaf6c4735095cc77703685da81254d09bba")},
-                {200000, uint256S("0x000000001015eb5ef86a8fe2b3074d947bc972c5befe32b28dd5ce915dc0d029")},
-                {395750, uint256S("0x000008b78b6aef3fd05ab78db8b76c02163e885305545144420cb08704dce538")},
-=======
                 {0, uint256S("0x9dc0f1255caf75497a73dd0183d06b45dbe23bdfc90f67a2fb124a19be1a4cde")},
->>>>>>> b8514d15e... update chainparams
             }
         };
 
         chainTxData = ChainTxData{
-<<<<<<< HEAD
-            1601053246, // * UNIX timestamp of last known number of transactions (Block 387900)
-            3326586,    // * total number of transactions between genesis and that timestamp
-                        //   (the tx=... number in the SetBestChain debug.log lines)
-            0.02        // * estimated number of transactions per second after that timestamp
-=======
             1524863865, // * UNIX timestamp of last known number of transactions (Block 213054)
             0,    // * total number of transactions between genesis and that timestamp
                         //   (the tx=... number in the SetBestChain debug.log lines)
             0.025        // * estimated number of transactions per second after that timestamp
->>>>>>> b8514d15e... update chainparams
         };
 
     }
@@ -874,7 +796,7 @@ public:
 
         vFixedSeeds.clear();
         vSeeds.clear();
-        //vSeeds.push_back(CDNSSeedData("dashevo.org",  "devnet-seed.dashevo.org"));
+        //vSeeds.emplace_back(CDNSSeedData("dashevo.org",  "devnet-seed.dashevo.org"));
 
         // Testnet Dash addresses start with 'y'
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,140);

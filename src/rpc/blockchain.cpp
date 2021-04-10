@@ -100,11 +100,6 @@ double GetDifficulty(const CBlockIndex* blockindex, int algo)
     return dDiff;
 }
 
-double GetDifficulty(const CBlockIndex* blockindex)
-{
-    return GetDifficulty(chainActive, blockindex);
-}
-
 UniValue blockheaderToJSON(const CBlockIndex* blockindex)
 {
     AssertLockHeld(cs_main);

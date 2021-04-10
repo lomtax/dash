@@ -9,6 +9,7 @@
 #include <primitives/transaction.h>
 #include <serialize.h>
 #include <uint256.h>
+
 #include "scrypt.h"
 #include "hash.h"
 #include "consensus/params.h"
