@@ -10,7 +10,6 @@
 #include <serialize.h>
 #include <uint256.h>
 
-#include "scrypt.h"
 #include "hash.h"
 #include "consensus/params.h"
 
@@ -85,27 +84,8 @@ public:
 
     uint256 GetHash() const;
 
-  // Note: we use explicitly provided algo instead of the one returned by GetAlgo(), because this can be a block
-    // from foreign chain (parent block in merged mining) which does not encode algo in its nVersion field.
-    uint256 GetPoWHash(int algo) const
-    {
-        switch (algo)
-        {
-            case ALGO_SHA256D:
-                return GetHash();
-            case ALGO_SCRYPT:
-            {
-                uint256 thash;
-                // Caution: scrypt_1024_1_1_256 assumes fixed length of 80 bytes
-                scrypt_1024_1_1_256(BEGIN(nVersion), BEGIN(thash));
-                return thash;
-            }
-            case ALGO_X11:
-                return HashX11(BEGIN(nVersion), END(nNonce));
-        }
-        return GetHash();
-    }
-
+    uint256 GetPoWHash(int algo) const;
+    
     int64_t GetBlockTime() const
     {
         return (int64_t)nTime;
