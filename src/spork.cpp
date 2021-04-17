@@ -78,6 +78,8 @@ void CSporkManager::CheckAndRemove()
         while (itSignerPair != itActive->second.end()) {
             if (setSporkPubKeyIDs.find(itSignerPair->first) == setSporkPubKeyIDs.end()) {
                 mapSporksByHash.erase(itSignerPair->second.GetHash());
+                 LogPrintf("ERROR active spork not found %d \n", itActive->first);
+                 ++itSignerPair;
                 continue;
             }
             if (!itSignerPair->second.CheckSignature(itSignerPair->first)) {
