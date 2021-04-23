@@ -355,6 +355,8 @@ libdash_consensus_a_SOURCES = \
   hash.cpp \
   hash.h \
   prevector.h \
+  primitives/scrypt.cpp \
+  primitives/scrypt.h \
   primitives/block.cpp \
   primitives/block.h \
   primitives/transaction.cpp \
