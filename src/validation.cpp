@@ -3650,7 +3650,41 @@ static bool AcceptBlock(const std::shared_ptr<const CBlock>& pblock, CValidation
     if (!IsInitialBlockDownload() && chainActive.Tip() == pindex->pprev)
         GetMainSignals().NewPoWValidBlock(pindex, pblock);
 
-    int nHeight = pindex->nHeight;
+// Check for duplicate
+    uint256 hash = block.GetHash();
+
+    // Get prev block index
+    CBlockIndex* pindexPrev = NULL;    
+    int nHeightForVerif = 0;
+    
+    if (hash != Params().GetConsensus().hashGenesisBlock) 
+    {
+       // Check Previous Block
+        auto mi = mapBlockIndex.find(block.hashPrevBlock);
+        if (mi == mapBlockIndex.end())
+            return state.DoS(10, error("AcceptBlock() : prev block not found"), 0, "bad-prevblk");
+        pindexPrev = (*mi).second;
+        nHeightForVerif = pindexPrev->nHeight+1;
+
+        // Check count of sequence of the same algorithm
+        if (TestNet() || (nHeightForVerif > V3_FORK))
+        {
+            int nAlgo = block.GetAlgo();
+            int nAlgoCount = 1;
+            CBlockIndex* piPrev = pindexPrev;
+            while (piPrev && (nAlgoCount <= MAX_BLOCK_ALGO_COUNT))
+            {
+                if (piPrev->GetAlgo() != nAlgo)
+                    break;
+                nAlgoCount++;
+                piPrev = piPrev->pprev;
+            }
+            if (nAlgoCount > MAX_BLOCK_ALGO_COUNT)
+            {
+                return state.DoS(100, error("AcceptBlock() : Too Many Blocks From the Same Algo"), REJECT_INVALID, "algo-toomany");
+            }
+        }
+    }
 
     // Write block to history file
     try {
@@ -3658,7 +3692,7 @@ static bool AcceptBlock(const std::shared_ptr<const CBlock>& pblock, CValidation
         CDiskBlockPos blockPos;
         if (dbp != NULL)
             blockPos = *dbp;
-        if (!FindBlockPos(state, blockPos, nBlockSize+8, nHeight, block.GetBlockTime(), dbp != NULL))
+        if (!FindBlockPos(state, blockPos, nBlockSize+8, pindex->nHeight, block.GetBlockTime(), dbp != NULL))
             return error("AcceptBlock(): FindBlockPos failed");
         if (dbp == NULL)
             if (!WriteBlockToDisk(block, blockPos, chainparams.MessageStart()))
