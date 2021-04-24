@@ -9,6 +9,12 @@
 #include "primitives/transaction.h"
 #include "serialize.h"
 #include "uint256.h"
+#include "hash.h"
+#include "consensus/params.h"
+
+#define BEGIN(a)            ((char*)&(a))
+#define END(a)              ((char*)&((&(a))[1]))
+
 
 /** Nodes collect new transactions into a block, hash them into a hash tree,
  * and scan through nonce values to make the block's hash satisfy proof-of-work
@@ -32,6 +38,23 @@ public:
     {
         SetNull();
     }
+
+    int GetAlgo() const { return ::GetAlgo(nVersion); }
+
+    inline int GetAlgo(int nVersion)//dgc CETTE FONCTION EST DOUBLé, c'est degeu ...
+    {
+        switch (nVersion & BLOCK_VERSION_ALGO)
+        {
+            case 1:
+                return ALGO_SCRYPT;
+            case BLOCK_VERSION_SHA256D:
+                return ALGO_SHA256D;
+            case BLOCK_VERSION_X11:
+                return ALGO_X11;
+        }
+        return ALGO_SCRYPT;
+    }
+    
 
     ADD_SERIALIZE_METHODS;
 
@@ -61,6 +84,8 @@ public:
     }
 
     uint256 GetHash() const;
+
+    uint256 GetPoWHash(int algo) const;    
 
     int64_t GetBlockTime() const
     {
