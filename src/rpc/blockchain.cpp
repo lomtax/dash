@@ -45,6 +45,8 @@ static CUpdatedBlock latestblock;
 extern void TxToJSON(const CTransaction& tx, const uint256 hashBlock, UniValue& entry);
 void ScriptPubKeyToJSON(const CScript& scriptPubKey, UniValue& out, bool fIncludeHex);
 
+extern const CBlockIndex* GetLastBlockIndexForAlgo(const CBlockIndex* pindex, int algo);
+
 double GetDifficulty(const CBlockIndex* blockindex, int algo)
 {
     // Floating point number that is a multiple of the minimum difficulty,
