@@ -57,13 +57,13 @@ void CSporkManager::ProcessSpork(CNode* pfrom, const std::string& strCommand, CD
         } else {
             LogPrintf("%s new\n", strLogMsg);
         }
-
+/*
         if(!spork.CheckSignature(sporkPubKeyID)) {
             LOCK(cs_main);
             LogPrintf("CSporkManager::ProcessSpork -- ERROR: invalid signature\n");
             Misbehaving(pfrom->GetId(), 100);
             return;
-        }
+        }*/
 
         mapSporks[hash] = spork;
         mapSporksActive[spork.nSporkID] = spork;
