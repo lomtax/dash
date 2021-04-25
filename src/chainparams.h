@@ -13,6 +13,16 @@
 
 #include <vector>
 
+
+/** DGC V3 Hard Fork Block */
+static const int V3_FORK = 1028000;
+static const int MAX_BLOCK_ALGO_COUNT = 3;
+
+/* Other DGC Fork Blocks */
+static const int DIFF_SWITCH_HEIGHT = 476280;
+static const int INFLATION_FIX_HEIGHT = 523800;
+static const int DIFF2_SWITCH_HEIGHT = 625800;
+
 struct CDNSSeedData {
     std::string name, host;
     bool supportsServiceBitsFiltering;
