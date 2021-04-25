@@ -564,11 +564,12 @@ std::string HelpMessage(HelpMessageMode mode)
         */
 #endif // ENABLE_WALLET
 
+    /*
     strUsage += HelpMessageGroup(_("InstantSend options:"));
     strUsage += HelpMessageOpt("-enableinstantsend=<n>", strprintf(_("Enable InstantSend, show confirmations for locked transactions (0-1, default: %u)"), 1));
     strUsage += HelpMessageOpt("-instantsenddepth=<n>", strprintf(_("Show N confirmations for a successfully locked transaction (%u-%u, default: %u)"), MIN_INSTANTSEND_DEPTH, MAX_INSTANTSEND_DEPTH, DEFAULT_INSTANTSEND_DEPTH));
     strUsage += HelpMessageOpt("-instantsendnotify=<cmd>", _("Execute command when a wallet InstantSend transaction is successfully locked (%s in cmd is replaced by TxID)"));
-
+    */
 
     strUsage += HelpMessageGroup(_("Node relay options:"));
     if (showDebug) {
