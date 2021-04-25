@@ -73,6 +73,7 @@ public:
     const std::vector<unsigned char>& AlertKey() const { return vAlertPubKey; }
     int GetDefaultPort() const { return nDefaultPort; }
 
+    const CBigNum ProofOfWorkLimit(int algo) const { return consensus.bnProofOfWorkLimit[algo]; }
     const CBlock& GenesisBlock() const { return genesis; }
     const CBlock& DevNetGenesisBlock() const { return devnetGenesis; }
     /** Make miner wait to have peers to avoid wasting work */
