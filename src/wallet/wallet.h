@@ -72,6 +72,8 @@ static const unsigned int MAX_FREE_TRANSACTION_CREATE_SIZE = 1000;
 static const bool DEFAULT_WALLETBROADCAST = true;
 static const bool DEFAULT_DISABLE_WALLET = false;
 
+static const CAmount MASTERNODE_PRICE = 10000;
+
 extern const char * DEFAULT_WALLET_DAT;
 
 //! if set, all keys will be derived by using BIP39/BIP44
