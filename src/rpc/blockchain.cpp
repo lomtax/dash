@@ -49,6 +49,7 @@ extern const CBlockIndex* GetLastBlockIndexForAlgo(const CBlockIndex* pindex, in
 
 double GetDifficulty(const CBlockIndex* blockindex, int algo)
 {
+    unsigned int nBits;
     // Floating point number that is a multiple of the minimum difficulty,
     // minimum difficulty = 1.0.
     if (blockindex == NULL)
