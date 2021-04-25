@@ -818,6 +818,18 @@ bool AppInitServers(boost::thread_group& threadGroup)
 // Parameter interaction based on rules
 void InitParameterInteraction()
 {
+   // Algo
+    std::string strAlgo = GetArg("-algo", "scrypt");
+    transform(strAlgo.begin(),strAlgo.end(),strAlgo.begin(),::tolower);
+    if (strAlgo == "sha" || strAlgo == "sha256" || strAlgo == "sha256d")
+        miningAlgo = ALGO_SHA256D;
+    else if (strAlgo == "scrypt")
+        miningAlgo = ALGO_SCRYPT;
+    else if (strAlgo == "x11")
+        miningAlgo = ALGO_X11;
+    else
+        miningAlgo = ALGO_SCRYPT;
+
     // when specifying an explicit binding address, you want to listen on it
     // even when -connect or -proxy is specified
     if (IsArgSet("-bind")) {
