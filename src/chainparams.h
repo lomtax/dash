@@ -151,4 +151,13 @@ void SelectParams(const std::string& chain);
  */
 void UpdateRegtestBIP9Parameters(Consensus::DeploymentPos d, int64_t nStartTime, int64_t nTimeout);
 
+inline bool TestNet() {
+    // Note: it's deliberate that this returns "false" for regression test mode.
+    return false;//Params().NetworkIDString() == CBaseChainParams::TESTNET;
+}
+
+inline bool RegTest() {
+    return Params().NetworkIDString() == CBaseChainParams::REGTEST;
+}
+
 #endif // BITCOIN_CHAINPARAMS_H
