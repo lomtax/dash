@@ -2555,7 +2555,6 @@ void static UpdateTip(CBlockIndex *pindexNew, const CChainParams& chainParams) {
     cvBlockChange.notify_all();
 
     static bool fWarned = false;
-    /*
     std::vector<std::string> warningMessages;
     if (!IsInitialBlockDownload())
     {
@@ -2606,7 +2605,6 @@ void static UpdateTip(CBlockIndex *pindexNew, const CChainParams& chainParams) {
     if (!warningMessages.empty())
         LogPrintf(" warning='%s'", boost::algorithm::join(warningMessages, ", "));
     LogPrintf("\n");
-    */
 }
 
 /** Disconnect chainActive's tip. You probably want to call mempool.removeForReorg and manually re-limit mempool size after this, with cs_main held. */
