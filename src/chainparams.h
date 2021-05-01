@@ -67,7 +67,7 @@ public:
     const CMessageHeader::MessageStartChars& MessageStart() const { return pchMessageStart; }
     const std::vector<unsigned char>& AlertKey() const { return vAlertPubKey; }
     int GetDefaultPort() const { return nDefaultPort; }
-    const CBigNum ProofOfWorkLimit(int algo) const { return consensus.bnProofOfWorkLimit[algo]; }   
+    const uint256 ProofOfWorkLimit(int algo) const { return consensus.bnProofOfWorkLimit[algo]; }   
     const CBlock& GenesisBlock() const { return genesis; }
     /** Make miner wait to have peers to avoid wasting work */
     bool MiningRequiresPeers() const { return fMiningRequiresPeers; }

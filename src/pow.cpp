@@ -231,7 +231,7 @@ static const int64_t nMaxActualTimespan = nAveragingTargetTimespan * (100 + nMax
 
 unsigned int GetNextWorkRequiredV1(const CBlockIndex* pindexLast, const CBlockHeader *pblock, int algo)
 {
-   unsigned int nProofOfWorkLimit = Params().ProofOfWorkLimit(algo).GetCompact();
+   unsigned int nProofOfWorkLimit = UintToArith256(Params().ProofOfWorkLimit(algo)).GetCompact();
    int nHeight = pindexLast->nHeight + 1;
 
    bool fNewDifficultyProtocol = (nHeight >= DIFF_SWITCH_HEIGHT);
@@ -284,18 +284,18 @@ unsigned int GetNextWorkRequiredV1(const CBlockIndex* pindexLast, const CBlockHe
         nActualTimespan = nActualTimespanMax;
 
     // Retarget
-    CBigNum bnNew;
+    arith_uint256 bnNew;
     bnNew.SetCompact(pindexLast->nBits);
     bnNew *= nActualTimespan;
     bnNew /= nTargetTimespanCurrent;
 
-    if (bnNew > Params().ProofOfWorkLimit(algo))
-        bnNew = Params().ProofOfWorkLimit(algo);
+    if (bnNew > UintToArith256(Params().ProofOfWorkLimit(algo)))
+        bnNew = UintToArith256(Params().ProofOfWorkLimit(algo));
 
     /// debug print
     LogPrintf("GetNextWorkRequired V1 RETARGET\n");
-    LogPrintf("Before: %08x %s\n", pindexLast->nBits, CBigNum().SetCompact(pindexLast->nBits).getuint256().ToString().c_str());
-    LogPrintf("After: %08x %s\n", bnNew.GetCompact(), bnNew.getuint256().ToString().c_str());
+    //LogPrintf("Before: %08x %s\n", pindexLast->nBits, CBigNum().SetCompact(pindexLast->nBits).getuint256().ToString().c_str());
+    //LogPrintf("After: %08x %s\n", bnNew.GetCompact(), bnNew.getuint256().ToString().c_str());
     return bnNew.GetCompact();
 }
 
@@ -313,7 +313,7 @@ const CBlockIndex* GetLastBlockIndexForAlgo(const CBlockIndex* pindex, int algo)
 
 unsigned int GetNextWorkRequiredV2(const CBlockIndex* pindexLast, const CBlockHeader *pblock, int algo)
 {
-    unsigned int nProofOfWorkLimit = Params().ProofOfWorkLimit(algo).GetCompact();
+    unsigned int nProofOfWorkLimit = UintToArith256(Params().ProofOfWorkLimit(algo)).GetCompact();
     LogPrintf("Proof Of Work Limit For Algo %i, is % i", algo, nProofOfWorkLimit);
 
     // Genesis block
@@ -342,7 +342,7 @@ unsigned int GetNextWorkRequiredV2(const CBlockIndex* pindexLast, const CBlockHe
         nActualTimespan = nMaxActualTimespan;
 
     // Global retarget
-    CBigNum bnNew;
+    arith_uint256 bnNew;
     bnNew.SetCompact(pindexPrevAlgo->nBits);
     bnNew *= nActualTimespan;
     bnNew /= nAveragingTargetTimespan;
@@ -366,14 +366,14 @@ unsigned int GetNextWorkRequiredV2(const CBlockIndex* pindexLast, const CBlockHe
         }
     }
 
-    if (bnNew > Params().ProofOfWorkLimit(algo))
-        bnNew = Params().ProofOfWorkLimit(algo);
+    if (bnNew > UintToArith256(Params().ProofOfWorkLimit(algo)))
+        bnNew = UintToArith256(Params().ProofOfWorkLimit(algo));
 
     /// debug print
     LogPrintf("GetNextWorkRequired RETARGET\n");
     LogPrintf("nTargetTimespan = %d    nActualTimespan = %d\n", nTargetTimespan, nActualTimespan);
-    LogPrintf("Before: %08x  %s\n", pindexLast->nBits, CBigNum().SetCompact(pindexLast->nBits).getuint256().ToString());
-    LogPrintf("After:  %08x  %s\n", bnNew.GetCompact(), bnNew.getuint256().ToString());
+  //  LogPrintf("Before: %08x  %s\n", pindexLast->nBits, CBigNum().SetCompact(pindexLast->nBits).getuint256().ToString());
+//    LogPrintf("After:  %08x  %s\n", bnNew.GetCompact(), bnNew.getuint256().ToString());
 
     return bnNew.GetCompact();
 }

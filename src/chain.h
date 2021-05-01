@@ -285,9 +285,9 @@ public:
     {
         return *phashBlock;
     }
-    CBigNum GetPrevWorkForAlgo(int algo) const
+    arith_uint256 GetPrevWorkForAlgo(int algo) const
     {
-        CBigNum nWork;
+        arith_uint256 nWork;
         CBlockIndex* pindex = this->pprev;
         while (pindex)
         {
@@ -301,13 +301,13 @@ public:
        return Params().ProofOfWorkLimit(algo);
     }
 
-    CBigNum GetBlockWork() const
+    arith_uint256 GetBlockWork() const
     {
-        CBigNum bnTarget;
+        arith_uint256 bnTarget;
         bnTarget.SetCompact(nBits);
         if (bnTarget <= 0)
             return 0;
-        return (CBigNum(1)<<256) / (bnTarget+1);
+        return (arith_uint256(1)<<256) / (bnTarget+1);
     }
 
     int GetAlgoWorkFactor() const 
@@ -334,13 +334,13 @@ public:
         }
     }
 
-    CBigNum GetBlockWorkAdjusted() const
+    arith_uint256 GetBlockWorkAdjusted() const
     {
-        CBigNum bnRes;
+        arith_uint256 bnRes;
         if ((TestNet() && (nHeight >= 1)) || (!TestNet() && nHeight >= V3_FORK)) 
         {
             // Adjusted Block Work is the Sum of work of this block and the most recent work of one block of each algo
-            CBigNum nBlockWork = GetBlockWork();
+            arith_uint256 nBlockWork = GetBlockWork();
             int nAlgo = GetAlgo();
             for (int algo = 0; algo < NUM_ALGOS; algo++)
             {
