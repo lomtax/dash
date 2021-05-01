@@ -298,7 +298,7 @@ public:
             pindex = pindex->pprev;
         }
        
-       return Params().ProofOfWorkLimit(algo);
+       return UintToArith256(Params().ProofOfWorkLimit(algo));
     }
 
     arith_uint256 GetBlockWork() const
