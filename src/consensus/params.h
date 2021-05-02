@@ -9,7 +9,6 @@
 #include "uint256.h"
 #include <map>
 #include <string>
-#include "bignum.h"
 
 enum {
     ALGO_SHA256D = 0,
@@ -137,7 +136,7 @@ struct Params {
     uint256 powLimit;
 
     //Array added for DGC, original type CBigNum
-    CBigNum bnProofOfWorkLimit[NUM_ALGOS];
+    uint256 bnProofOfWorkLimit[NUM_ALGOS];
 
     bool fPowAllowMinDifficultyBlocks;
     bool fPowNoRetargeting;

@@ -228,7 +228,7 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHead
 
 unsigned int GetNextWorkRequiredV1(const CBlockIndex* pindexLast, const CBlockHeader *pblock, int algo)
 {
-   unsigned int nProofOfWorkLimit = Params().ProofOfWorkLimit(algo).GetCompact();
+   unsigned int nProofOfWorkLimit = UintToArith256(Params().ProofOfWorkLimit(algo)).GetCompact();
    int nHeight = pindexLast->nHeight + 1;
 
    bool fNewDifficultyProtocol = (nHeight >= DIFF_SWITCH_HEIGHT);
@@ -281,13 +281,13 @@ unsigned int GetNextWorkRequiredV1(const CBlockIndex* pindexLast, const CBlockHe
         nActualTimespan = nActualTimespanMax;
 
     // Retarget
-    CBigNum bnNew;
+    arith_uint256 bnNew;
     bnNew.SetCompact(pindexLast->nBits);
     bnNew *= nActualTimespan;
     bnNew /= nTargetTimespanCurrent;
 
-    if (bnNew > Params().ProofOfWorkLimit(algo))
-        bnNew = Params().ProofOfWorkLimit(algo);
+    if (bnNew > UintToArith256(Params().ProofOfWorkLimit(algo)))
+        bnNew = UintToArith256(Params().ProofOfWorkLimit(algo));
 
     return bnNew.GetCompact();
 }
@@ -306,7 +306,7 @@ const CBlockIndex* GetLastBlockIndexForAlgo(const CBlockIndex* pindex, int algo)
 
 unsigned int GetNextWorkRequiredV2(const CBlockIndex* pindexLast, const CBlockHeader *pblock, int algo)
 {
-    unsigned int nProofOfWorkLimit = Params().ProofOfWorkLimit(algo).GetCompact();
+    unsigned int nProofOfWorkLimit = UintToArith256(Params().ProofOfWorkLimit(algo)).GetCompact();
 
     // Genesis block
     if (pindexLast == NULL)
@@ -333,7 +333,7 @@ unsigned int GetNextWorkRequiredV2(const CBlockIndex* pindexLast, const CBlockHe
         nActualTimespan = nMaxActualTimespan;
 
     // Global retarget
-    CBigNum bnNew;
+    arith_uint256 bnNew;
     bnNew.SetCompact(pindexPrevAlgo->nBits);
     bnNew *= nActualTimespan;
     bnNew /= nAveragingTargetTimespan;
@@ -357,8 +357,8 @@ unsigned int GetNextWorkRequiredV2(const CBlockIndex* pindexLast, const CBlockHe
         }
     }
 
-    if (bnNew > Params().ProofOfWorkLimit(algo))
-        bnNew = Params().ProofOfWorkLimit(algo);
+    if (bnNew > UintToArith256(Params().ProofOfWorkLimit(algo)))
+        bnNew = UintToArith256(Params().ProofOfWorkLimit(algo));
 
     return bnNew.GetCompact();
 }

@@ -150,9 +150,9 @@ public:
         consensus.fPowNoRetargeting = false;
         consensus.nPowKGWHeight = 15200;
         consensus.nPowDGWHeight = 34140;
-        consensus.bnProofOfWorkLimit[ALGO_SHA256D] = CBigNum(uint256S("0000100000000000000000000000000000000000000000000000000000000000"));
-        consensus.bnProofOfWorkLimit[ALGO_SCRYPT]  = CBigNum(uint256S("0000100000000000000000000000000000000000000000000000000000000000"));
-        consensus.bnProofOfWorkLimit[ALGO_X11] = CBigNum(uint256S("0000100000000000000000000000000000000000000000000000000000000000"));
+        consensus.bnProofOfWorkLimit[ALGO_SHA256D] = uint256S("0000100000000000000000000000000000000000000000000000000000000000");
+        consensus.bnProofOfWorkLimit[ALGO_SCRYPT]  = uint256S("0000100000000000000000000000000000000000000000000000000000000000");
+        consensus.bnProofOfWorkLimit[ALGO_X11] = uint256S("0000100000000000000000000000000000000000000000000000000000000000");
         consensus.nRuleChangeActivationThreshold = 1916; // 95% of 2016
         consensus.nMinerConfirmationWindow = 2016; // nPowTargetTimespan / nPowTargetSpacing
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].bit = 28;
