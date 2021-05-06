@@ -37,7 +37,7 @@
 #include "validationinterface.h"
 #include "versionbits.h"
 #include "warnings.h"
-#include "algoProofOfWork.h"
+#include "dgc/dgc_algo_pow.h"
 
 #include "instantx.h"
 #include "masternodeman.h"

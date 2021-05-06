@@ -41,7 +41,6 @@ int GetAlgoWorkFactor(const CBlockIndex& blockIndex)
     {
         case ALGO_SHA256D:
             return 1;
-            // work factor = absolute work ratio * optimisation factor
         case ALGO_SCRYPT:
             return 1024 * 4;
         case ALGO_X11:

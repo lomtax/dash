@@ -11,6 +11,7 @@
 #include "uint256.h"
 #include "hash.h"
 #include "consensus/params.h"
+#include "dgc/dgc_multi_algo.h"
 
 #define BEGIN(a)            ((char*)&(a))
 #define END(a)              ((char*)&((&(a))[1]))
@@ -39,22 +40,7 @@ public:
         SetNull();
     }
 
-    int GetAlgo() const { return ::GetAlgo(nVersion); }
-
-    inline int GetAlgo(int nVersion)//dgc CETTE FONCTION EST DOUBLé, c'est degeu ...
-    {
-        switch (nVersion & BLOCK_VERSION_ALGO)
-        {
-            case 1:
-                return ALGO_SCRYPT;
-            case BLOCK_VERSION_SHA256D:
-                return ALGO_SHA256D;
-            case BLOCK_VERSION_X11:
-                return ALGO_X11;
-        }
-        return ALGO_SCRYPT;
-    }
-    
+    int GetAlgo() const { return ::GetAlgo(nVersion); }    
 
     ADD_SERIALIZE_METHODS;
 
