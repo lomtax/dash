@@ -63,34 +63,3 @@ arith_uint256 GetBlockWorkAdjusted(const CBlockIndex& blockIndex)
     }
     return bnRes;
 }
-
-uint256 GetHash_Sha(int32_t nVersion, uint32_t nNonce)
-{
-    return Hash(BEGIN(nVersion), END(nNonce));
-}
-
-uint256 GetHash_X11(int32_t nVersion, uint32_t nNonce)
-{
-    return HashX11(BEGIN(nVersion), END(nNonce));
-}
-
-uint256 GetHash_Scrypt(int32_t nVersion)
-{
-    uint256 result;
-    scrypt_1024_1_1_256(BEGIN(nVersion), BEGIN(result));
-    return result;
-}
-
-uint256 GetPowHash(int32_t nVersion, uint32_t nNonce, int algo)
-{
-    uint256 result = GetHash_Sha(nVersion, nNonce);
-
-    switch (algo)
-    {
-        case ALGO_SHA256D : result = GetHash_Sha(nVersion, nNonce); break;
-        case ALGO_SCRYPT: result = GetHash_Scrypt(nVersion); break;
-        case ALGO_X11: result = GetHash_X11(nVersion, nNonce); break;
-    }
-
-    return result;
-}

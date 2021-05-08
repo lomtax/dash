@@ -9,7 +9,6 @@
 #include "tinyformat.h"
 #include "utilstrencodings.h"
 #include "crypto/common.h"
-#include "dgc/dgc_algo_pow.h"
 
 uint256 CBlockHeader::GetHash() const
 {
