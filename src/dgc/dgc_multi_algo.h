@@ -24,7 +24,7 @@ enum
 
 int GetAlgo(int nVersion);
 std::string GetAlgoName(int Algo);
-uint256 GetHash_Sha(int32_t nVersion, uint32_t nNonce);
-uint256 GetHash_X11(int32_t nVersion, uint32_t nNonce);
-uint256 GetHash_Scrypt(int32_t nVersion);
-uint256 GetPowHash(int32_t nVersion, uint32_t nNonce, int algo);
+uint256 GetHash_Sha(const int32_t& nVersion, const uint32_t& nNonce);
+uint256 GetHash_X11(const int32_t& nVersion, const uint32_t& nNonce);
+uint256 GetHash_Scrypt(const int32_t& nVersion);
+uint256 GetPowHash(const int32_t& nVersion, const uint32_t& nNonce, int algo);

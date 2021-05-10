@@ -38,24 +38,24 @@ std::string GetAlgoName(int Algo)
     return std::string("unknown");       
 }
 
-uint256 GetHash_Sha(int32_t nVersion, uint32_t nNonce)
+uint256 GetHash_Sha(const int32_t& nVersion, const uint32_t& nNonce)
 {
     return Hash(BEGIN(nVersion), END(nNonce));
 }
 
-uint256 GetHash_X11(int32_t nVersion, uint32_t nNonce)
+uint256 GetHash_X11(const int32_t& nVersion, const uint32_t& nNonce)
 {
     return HashX11(BEGIN(nVersion), END(nNonce));
 }
 
-uint256 GetHash_Scrypt(int32_t nVersion)
+uint256 GetHash_Scrypt(const int32_t& nVersion)
 {
     uint256 result;
     scrypt_1024_1_1_256(BEGIN(nVersion), BEGIN(result));
     return result;
 }
 
-uint256 GetPowHash(int32_t nVersion, uint32_t nNonce, int algo)
+uint256 GetPowHash(const int32_t& nVersion, const uint32_t& nNonce, int algo)
 {
     uint256 result = GetHash_Sha(nVersion, nNonce);
 
