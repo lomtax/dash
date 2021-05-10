@@ -12,6 +12,11 @@ uint256 CBlockHeader::GetHash() const
     return GetHash_Sha(nVersion, nNonce);
 }
 
+uint256 CBlockHeader::GetPoWHash() const
+{
+    return GetPowHash(nVersion, nNonce, GetAlgo());
+}
+
 uint256 CBlockHeader::GetPoWHash(int algo) const
 {
     return GetPowHash(nVersion, nNonce, algo);
@@ -22,7 +27,7 @@ std::string CBlock::ToString() const
     std::stringstream s;
     s << strprintf("CBlock(hash=%s, powHash=%s, ver=0x%08x, hashPrevBlock=%s, hashMerkleRoot=%s, nTime=%u, nBits=%08x, nNonce=%u, vtx=%u)\n",
         GetHash().ToString(),
-        GetPoWHash(GetAlgo()).ToString(),
+        GetPoWHash().ToString(),
         nVersion,
         hashPrevBlock.ToString(),
         hashMerkleRoot.ToString(),
