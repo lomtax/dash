@@ -1352,7 +1352,7 @@ void CheckForkWarningConditions()
         pindexBestForkTip = NULL;
 
 //    if (pindexBestForkTip || (pindexBestInvalid && pindexBestInvalid->nChainWork > chainActive.Tip()->nChainWork + (GetBlockProof(*chainActive.Tip()) * 6)))
-    if (pindexBestForkTip || (pindexBestInvalid && pindexBestInvalid->nChainWork > chainActive.Tip()->nChainWork + UintToArith256((chainActive.Tip()->GetBlockWorkAdjusted() * 6).getuint256()) && (chainActive.Height() > pindexBestInvalid->nHeight + 3 || pindexBestInvalid->nHeight > chainActive.Height() + 3)))
+    if (pindexBestForkTip || (pindexBestInvalid && pindexBestInvalid->nChainWork > chainActive.Tip()->nChainWork + (chainActive.Tip()->GetBlockWorkAdjusted() * 6) && (chainActive.Height() > pindexBestInvalid->nHeight + 3 || pindexBestInvalid->nHeight > chainActive.Height() + 3)))
     {
         if (!fLargeWorkForkFound && pindexBestForkBase)
         {
@@ -1410,7 +1410,7 @@ void CheckForkWarningConditionsOnNewFork(CBlockIndex* pindexNewForkTip)
     // We define it this way because it allows us to only store the highest fork tip (+ base) which meets
     // the 7-block condition and from this always have the most-likely-to-cause-warning fork
     if (pfork && (!pindexBestForkTip || (pindexBestForkTip && pindexNewForkTip->nHeight > pindexBestForkTip->nHeight)) &&
-            pindexNewForkTip->nChainWork - pfork->nChainWork > (UintToArith256(pfork->GetBlockWorkAdjusted().getuint256())* 20) &&
+            pindexNewForkTip->nChainWork - pfork->nChainWork > (pfork->GetBlockWorkAdjusted()* 20) &&
             chainActive.Height() - pindexNewForkTip->nHeight < 72)
     {
         pindexBestForkTip = pindexNewForkTip;
@@ -3012,7 +3012,7 @@ CBlockIndex* AddToBlockIndex(const CBlockHeader& block)
         pindexNew->BuildSkip();
     }
 //    pindexNew->nChainWork = (pindexNew->pprev ? pindexNew->pprev->nChainWork : 0) + GetBlockProof(*pindexNew);
-    pindexNew->nChainWork = (pindexNew->pprev ? pindexNew->pprev->nChainWork : 0) + UintToArith256(pindexNew->GetBlockWorkAdjusted().getuint256());
+    pindexNew->nChainWork = (pindexNew->pprev ? pindexNew->pprev->nChainWork : 0) + pindexNew->GetBlockWorkAdjusted();
     pindexNew->RaiseValidity(BLOCK_VALID_TREE);
     if (pindexBestHeader == NULL || pindexBestHeader->nChainWork < pindexNew->nChainWork)
         pindexBestHeader = pindexNew;
@@ -3836,7 +3836,7 @@ bool static LoadBlockIndexDB()
     {
         CBlockIndex* pindex = item.second;
 //        pindex->nChainWork = (pindex->pprev ? pindex->pprev->nChainWork : 0) + GetBlockProof(*pindex); for DASH
-        pindex->nChainWork = (pindex->pprev ? pindex->pprev->nChainWork : 0) +  UintToArith256(pindex->GetBlockWorkAdjusted().getuint256());
+        pindex->nChainWork = (pindex->pprev ? pindex->pprev->nChainWork : 0) + pindex->GetBlockWorkAdjusted();
 
         // We can link the chain of blocks for which we've received transactions at some point.
         // Pruned nodes may have deleted the block.
