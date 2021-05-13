@@ -264,15 +264,6 @@ public:
 
     int GetAlgo() const { return ::GetAlgo(nVersion); }
 
-    bool CheckIndex(const Consensus::Params& consensus) const
-    {
-        int algo = GetAlgo();
-        if (algo == ALGO_SHA256D)
-           return CheckProofOfWork(GetBlockHash(), nBits,consensus);
-        else
-           return true;
-    }
-
     CBlockHeader GetBlockHeader() const
     {
         CBlockHeader block;

@@ -11,6 +11,7 @@
 #include "uint256.h"
 #include "ui_interface.h"
 #include "init.h"
+#include "dgc/dgc_multi_algo.h"
 
 #include <stdint.h>
 
@@ -372,7 +373,7 @@ bool CBlockTreeDB::LoadBlockIndexGuts(boost::function<CBlockIndex*(const uint256
                 pindexNew->nStatus        = diskindex.nStatus;
                 pindexNew->nTx            = diskindex.nTx;
 
-                if (!pindexNew->CheckIndex(Params().GetConsensus()))
+                if (!CheckProofOfWork(GetPowHash(pindexNew->nVersion, pindexNew->nNonce, GetAlgo(pindexNew->nVersion)), pindexNew->nBits, GetAlgo(pindexNew->nVersion), Params().GetConsensus()))
                     return error("%s: CheckProofOfWork failed: %s", __func__, pindexNew->ToString());
 
                 pcursor->Next();
