@@ -2035,7 +2035,7 @@ public:
     {
         return ((pindex->nVersion & VERSIONBITS_TOP_MASK) == VERSIONBITS_TOP_BITS) &&
                ((pindex->nVersion >> bit) & 1) != 0 &&
-               ((ComputeBlockVersion(pindex->pprev, params, pindex->GetAlgo(), true) >> bit) & 1) == 0;
+               ((ComputeBlockVersion(pindex->pprev, params, GetAlgo(pindex->nVersion), true) >> bit) & 1) == 0;
     }
 };
 
@@ -2580,7 +2580,7 @@ void static UpdateTip(CBlockIndex *pindexNew, const CChainParams& chainParams) {
         // Check the version of the last 100 blocks to see if we need to upgrade:
         for (int i = 0; i < 100 && pindex != NULL; i++)
         {
-            int32_t nExpectedVersion = ComputeBlockVersion(pindex->pprev, chainParams.GetConsensus(), pindex->GetAlgo(),true);
+            int32_t nExpectedVersion = ComputeBlockVersion(pindex->pprev, chainParams.GetConsensus(), GetAlgo(pindex->nVersion),true);
             if (pindex->nVersion > VERSIONBITS_LAST_OLD_BLOCK_VERSION && (pindex->nVersion & ~nExpectedVersion) != 0)
                 ++nUpgraded;
             pindex = pindex->pprev;
@@ -3675,7 +3675,7 @@ static bool AcceptBlock(const std::shared_ptr<const CBlock>& pblock, CValidation
             CBlockIndex* piPrev = pindexPrev;
             while (piPrev && (nAlgoCount <= MAX_BLOCK_ALGO_COUNT))
             {
-                if (piPrev->GetAlgo() != nAlgo)
+                if (GetAlgo(piPrev->nVersion) != nAlgo)
                     break;
                 nAlgoCount++;
                 piPrev = piPrev->pprev;

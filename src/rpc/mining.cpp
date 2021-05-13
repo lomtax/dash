@@ -39,7 +39,7 @@
 
 const CBlockIndex* GetLastBlockIndex(const CBlockIndex* pindex, int algo)
 {
-    while (pindex && pindex->pprev && (pindex->GetAlgo() != algo))
+    while (pindex && pindex->pprev && (GetAlgo(pindex->nVersion) != algo))
         pindex = pindex->pprev;
     return pindex;
 }
@@ -52,7 +52,7 @@ const CBlockIndex* GetLastBlockIndex(const CBlockIndex* pindex, int algo)
 UniValue GetNetworkHashPS(int lookup, int height) {
     const CBlockIndex *pb = chainActive.Tip();
 
-    if(pb->GetAlgo() != miningAlgo)
+    if(GetAlgo(pb->nVersion) != miningAlgo)
         pb = GetLastBlockIndex(pb, miningAlgo); // Get last block of current algo
 
     if (pb == NULL || !pb->nHeight)

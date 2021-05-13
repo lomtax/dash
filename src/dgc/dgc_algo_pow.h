@@ -2,6 +2,7 @@
 
 #include "arith_uint256.h"
 #include "chain.h"
+#include "chainparams.h"
 
 
 arith_uint256 GetPrevWorkForAlgo(const CBlockIndex& blockIndex, int algo);

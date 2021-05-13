@@ -11,9 +11,7 @@
 #include "pow.h"
 #include "tinyformat.h"
 #include "uint256.h"
-#include "util.h"
 
-#include <chainparams.h>
 #include <vector>
 
 class CBlockFileInfo
@@ -261,8 +259,6 @@ public:
         }
         return ret;
     }
-
-    int GetAlgo() const { return ::GetAlgo(nVersion); }
 
     CBlockHeader GetBlockHeader() const
     {

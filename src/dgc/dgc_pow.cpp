@@ -72,7 +72,7 @@ const CBlockIndex* GetLastBlockIndexForAlgo(const CBlockIndex* pindex, int algo)
     {
         if (!pindex)
             return NULL;
-        if (pindex->GetAlgo() == algo)
+        if (GetAlgo(pindex->nVersion) == algo)
             return pindex;
         pindex = pindex->pprev;
     }

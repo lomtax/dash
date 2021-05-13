@@ -1,5 +1,4 @@
 #include "dgc_algo_pow.h"
-#include "chain.h"
 
 arith_uint256 GetPrevWorkForAlgo(const CBlockIndex& blockIndex, int algo)
 {
@@ -7,7 +6,7 @@ arith_uint256 GetPrevWorkForAlgo(const CBlockIndex& blockIndex, int algo)
     CBlockIndex* pindex = blockIndex.pprev;
     while (pindex)
     {
-        if (pindex->GetAlgo() == algo)
+        if (GetAlgo(pindex->nVersion) == algo)
         {
             return GetBlockProof(*pindex);
         }
