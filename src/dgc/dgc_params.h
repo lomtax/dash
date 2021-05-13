@@ -2,6 +2,8 @@
 
 #include "chain.h"
 
+static const CAmount MASTERNODE_PRICE = 10000;
+
 /** DGC V3 Hard Fork Block */
 static const int V3_FORK = 1028000;
 static const int MAX_BLOCK_ALGO_COUNT = 3;
