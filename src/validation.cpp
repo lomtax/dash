@@ -106,8 +106,6 @@ CScript COINBASE_FLAGS;
 
 const std::string strMessageMagic = "Digitalcoin Signed Message:\n";
 
-int miningAlgo = ALGO_SCRYPT;
-
 // Internal stuff
 namespace {
 
