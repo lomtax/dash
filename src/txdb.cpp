@@ -373,12 +373,15 @@ bool CBlockTreeDB::LoadBlockIndexGuts(boost::function<CBlockIndex*(const uint256
                 pindexNew->nStatus        = diskindex.nStatus;
                 pindexNew->nTx            = diskindex.nTx;
 /*
-uint256 x = GetPowHash(pindexNew->nVersion, pindexNew->nNonce, GetAlgo(pindexNew->nVersion));
-CBlock xxx = CBlock(pindexNew->GetBlockHeader());
-
-//                if (!CheckProofOfWork(GetPowHash(pindexNew->nVersion, pindexNew->nNonce, GetAlgo(pindexNew->nVersion)), pindexNew->nBits, GetAlgo(pindexNew->nVersion), Params().GetConsensus()))
-                if (!CheckProofOfWork(xxx.GetPoWHash(), xxx.nBits, xxx.GetAlgo(), Params().GetConsensus()))
-                    return error("%s: CheckProofOfWork failed: %s \n(algo %d) \nHex : %s \nnVersion %d \nnNonce %d", __func__, pindexNew->ToString(), GetAlgo(pindexNew->nVersion), x.GetHex(), pindexNew->nVersion, pindexNew->nNonce);
+                // Digitalcoin: Disable PoW Sanity check while loading block index from disk.
+                // We use the sha256 hash for the block index for performance reasons, which is recorded for later use.
+                // CheckProofOfWork() uses the sha/scrypt/x11 hash which is discarded after a block is accepted.
+                // While it is technically feasible to verify the PoW, doing so takes several minutes as it
+                // requires recomputing every PoW hash during every Litecoin startup.
+                // We opt instead to simply trust the data that is on your local disk.
+                CBlockHeader header = pindexNew->GetBlockHeader();
+                if (!CheckProofOfWork(GetPowHash(header.nVersion, header.nNonce, GetAlgo(header.nVersion)), header.nBits, GetAlgo(header.nVersion), Params().GetConsensus()))
+                    return error("%s: CheckProofOfWork failed: %s", __func__, pindexNew->ToString());
 */
                 pcursor->Next();
             } else {

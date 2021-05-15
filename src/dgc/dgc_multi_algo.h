@@ -22,6 +22,8 @@ enum
     BLOCK_VERSION_SCRYPT         = 1,
 };
 
+extern int miningAlgo;
+
 int GetAlgo(int nVersion);
 int GetAlgo(std::string name);
 std::string GetAlgoName(int Algo);

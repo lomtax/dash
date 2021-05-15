@@ -2,8 +2,6 @@
 
 #include "chain.h"
 
-static int miningAlgo = ALGO_SCRYPT;
-
 static const CAmount MASTERNODE_PRICE = 10000;
 
 /** DGC V3 Hard Fork Block */

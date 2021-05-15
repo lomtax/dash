@@ -2,6 +2,8 @@
 #include "scrypt.h"
 #include "hash.h"
 
+int miningAlgo = ALGO_SCRYPT;
+
 int GetAlgo(int nVersion)
 {
     int algo = ALGO_SCRYPT;
