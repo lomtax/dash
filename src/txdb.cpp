@@ -372,10 +372,14 @@ bool CBlockTreeDB::LoadBlockIndexGuts(boost::function<CBlockIndex*(const uint256
                 pindexNew->nNonce         = diskindex.nNonce;
                 pindexNew->nStatus        = diskindex.nStatus;
                 pindexNew->nTx            = diskindex.nTx;
+/*
+uint256 x = GetPowHash(pindexNew->nVersion, pindexNew->nNonce, GetAlgo(pindexNew->nVersion));
+CBlock xxx = CBlock(pindexNew->GetBlockHeader());
 
-                if (!CheckProofOfWork(GetPowHash(pindexNew->nVersion, pindexNew->nNonce, GetAlgo(pindexNew->nVersion)), pindexNew->nBits, GetAlgo(pindexNew->nVersion), Params().GetConsensus()))
-                    return error("%s: CheckProofOfWork failed: %s", __func__, pindexNew->ToString());
-
+//                if (!CheckProofOfWork(GetPowHash(pindexNew->nVersion, pindexNew->nNonce, GetAlgo(pindexNew->nVersion)), pindexNew->nBits, GetAlgo(pindexNew->nVersion), Params().GetConsensus()))
+                if (!CheckProofOfWork(xxx.GetPoWHash(), xxx.nBits, xxx.GetAlgo(), Params().GetConsensus()))
+                    return error("%s: CheckProofOfWork failed: %s \n(algo %d) \nHex : %s \nnVersion %d \nnNonce %d", __func__, pindexNew->ToString(), GetAlgo(pindexNew->nVersion), x.GetHex(), pindexNew->nVersion, pindexNew->nNonce);
+*/
                 pcursor->Next();
             } else {
                 return error("%s: failed to read value", __func__);

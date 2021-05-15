@@ -24,6 +24,22 @@ int GetAlgo(int nVersion)
     return algo;
 }
 
+int GetAlgo(std::string name)
+{
+    transform(name.begin(),name.end(),name.begin(),::tolower);
+
+    int algo = ALGO_SCRYPT; 
+
+    if (name == "sha" || name == "sha256" || name == "sha256d")
+        algo = ALGO_SHA256D;
+    else if (name == "scrypt")
+        algo = ALGO_SCRYPT;
+    else if (name == "x11")
+        algo = ALGO_X11;
+
+    return algo;
+}
+
 std::string GetAlgoName(int Algo)
 {
     switch (Algo)

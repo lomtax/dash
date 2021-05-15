@@ -106,8 +106,6 @@ CScript COINBASE_FLAGS;
 
 const std::string strMessageMagic = "Digitalcoin Signed Message:\n";
 
-int miningAlgo = ALGO_SCRYPT;
-
 // Internal stuff
 namespace {
 
@@ -3737,8 +3735,8 @@ bool ProcessNewBlock(const CChainParams& chainparams, const std::shared_ptr<cons
 
     CValidationState state; // Only used to report errors, not invalidity - ignore it
     if (!ActivateBestChain(state, chainparams, pblock))
-        return error("%s: ActivateBestChain failed", __func__);
-
+         return error("%s: ActivateBestChain failed: %s", __func__, FormatStateMessage(state));
+    
     LogPrintf("%s : ACCEPTED\n", __func__);
     return true;
 }
