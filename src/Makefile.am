@@ -355,6 +355,15 @@ libdash_consensus_a_SOURCES = \
   hash.cpp \
   hash.h \
   prevector.h \
+  dgc/scrypt.cpp \
+  dgc/scrypt.h \
+  dgc/dgc_params.h \
+  dgc/dgc_multi_algo.h \
+  dgc/dgc_multi_algo.cpp \
+  dgc/dgc_algo_pow.h \
+  dgc/dgc_algo_pow.cpp \
+  dgc/dgc_pow.h \
+  dgc/dgc_pow.cpp \
   primitives/block.cpp \
   primitives/block.h \
   primitives/transaction.cpp \
