@@ -184,7 +184,7 @@ unsigned int GetNextWorkRequiredBTC(const CBlockIndex* pindexLast, const CBlockH
    return CalculateNextWorkRequired(pindexLast, pindexFirst->GetBlockTime(), params);
 }
 
-unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHeader *pblock, int algo, const Consensus::Params& params)
+unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHeader *pblock, const Consensus::Params& params)
 {
    int nHeight = pindexLast->nHeight;
    if (TestNet())
@@ -195,11 +195,11 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHead
    {
         if (nHeight < V3_FORK)
         {
-            return GetNextWorkRequiredV1(pindexLast, pblock, algo);
+            return GetNextWorkRequiredV1(pindexLast, pblock, pblock->GetAlgo());
         }
         else
         {
-            return GetNextWorkRequiredV2(pindexLast, pblock, algo);
+            return GetNextWorkRequiredV2(pindexLast, pblock, pblock->GetAlgo());
         }
    }
 }

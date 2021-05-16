@@ -55,7 +55,7 @@ unsigned int GetNextWorkRequiredV1(const CBlockIndex* pindexLast, const CBlockHe
         nActualTimespan = nActualTimespanMax;
 
     // Retarget
-    arith_uint256 bnNew;
+    arith_uint256 bnNew = arith_uint256();
     bnNew.SetCompact(pindexLast->nBits);
     bnNew *= nActualTimespan;
     bnNew /= nTargetTimespanCurrent;
@@ -107,7 +107,7 @@ unsigned int GetNextWorkRequiredV2(const CBlockIndex* pindexLast, const CBlockHe
         nActualTimespan = nMaxActualTimespan;
 
     // Global retarget
-    arith_uint256 bnNew;
+    arith_uint256 bnNew = arith_uint256();
     bnNew.SetCompact(pindexPrevAlgo->nBits);
     bnNew *= nActualTimespan;
     bnNew /= nAveragingTargetTimespan;

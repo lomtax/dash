@@ -2,7 +2,6 @@
 
 arith_uint256 GetPrevWorkForAlgo(const CBlockIndex& blockIndex, int algo)
 {
-    arith_uint256 nWork;
     CBlockIndex* pindex = blockIndex.pprev;
     while (pindex)
     {
@@ -41,7 +40,7 @@ int GetAlgoWorkFactor(const CBlockIndex& blockIndex)
 
 arith_uint256 GetBlockWorkAdjusted(const CBlockIndex& blockIndex)
 {
-    arith_uint256 bnRes;
+    arith_uint256 bnRes = NULL;
     if ((TestNet() && (blockIndex.nHeight >= 1)) || (!TestNet() && blockIndex.nHeight >= V3_FORK))
     {
         // Adjusted Block Work is the Sum of work of this block and the most recent work of one block of each algo
