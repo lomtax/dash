@@ -7,6 +7,7 @@
 #define BITCOIN_CONSENSUS_PARAMS_H
 
 #include "uint256.h"
+#include "dgc/dgc_multi_algo.h"
 #include <map>
 #include <string>
 
@@ -80,6 +81,7 @@ struct Params {
     BIP9Deployment vDeployments[MAX_VERSION_BITS_DEPLOYMENTS];
     /** Proof of work parameters */
     uint256 powLimit;
+    uint256 bnProofOfWorkLimit[NUM_ALGOS];
     bool fPowAllowMinDifficultyBlocks;
     bool fPowNoRetargeting;
     int64_t nPowTargetSpacing;
