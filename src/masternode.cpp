@@ -14,6 +14,7 @@
 #include "messagesigner.h"
 #include "script/standard.h"
 #include "util.h"
+#include "dgc/dgc_params.h"
 #ifdef ENABLE_WALLET
 #include "wallet/wallet.h"
 #endif // ENABLE_WALLET
@@ -116,7 +117,7 @@ CMasternode::CollateralStatus CMasternode::CheckCollateral(const COutPoint& outp
         return COLLATERAL_UTXO_NOT_FOUND;
     }
 
-    if(coin.out.nValue != 1000 * COIN) {
+    if(coin.out.nValue != MASTERNODE_PRICE * COIN) {
         return COLLATERAL_INVALID_AMOUNT;
     }
 
